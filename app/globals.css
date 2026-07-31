@@ -2,7 +2,8 @@
 
 /* ============================================
    URBAN SPAZIO — Design System
-   Palette: Neutral Canvas + Champagne Accent
+   100% Warm Light Minimalist Luxury Palette (No Black, No Dark Brown)
+   Typography: Running Handwriting (Heading Accent) + Helvetica Light
    ============================================ */
 
 @layer base {
@@ -10,15 +11,16 @@
     --color-brass: #B8975A;
     --color-brass-light: #CBAB72;
     --color-brass-dark: #9A7D48;
-    --color-charcoal: #2C2C2C;
-    --color-warm-white: #FAF9F6;
-    --color-off-white: #F3F1ED;
-    --color-stone: #E8E4DE;
-    --color-warm-grey: #9B9B93;
+    --color-charcoal: #2A2725;
+    --color-warm-white: #FAF8F5;
+    --color-off-white: #F3EFEA;
+    --color-stone: #E9E3DB;
+    --color-warm-grey: #7D766D;
     --color-sage: #8B9D83;
     --color-sage-light: #A8B8A0;
-    --color-espresso: #3C2F27;
-    --color-espresso-light: #5A4A3F;
+    /* 100% Warm Light Sandstone/Greige replacement for dark sections */
+    --color-espresso: #E2DDD5;
+    --color-espresso-light: #D6CFB5;
   }
 
   html {
@@ -29,7 +31,8 @@
   body {
     background-color: var(--color-warm-white);
     color: var(--color-charcoal);
-    font-family: var(--font-inter, 'Inter', system-ui, -apple-system, sans-serif);
+    font-family: var(--font-inter, 'Helvetica Neue', Helvetica, system-ui, sans-serif);
+    font-weight: 300;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -54,20 +57,33 @@
     contain: paint;
   }
 
-  /* Headings use serif font */
+  /* Headings use serif or running handwriting accent */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-playfair, 'Playfair Display', Georgia, serif);
   }
 }
 
 /* ============================================
-   Custom Utilities
+   Typography & Custom Utilities
    ============================================ */
 
-/* Section with dark espresso background */
+/* Running handwriting font for artistic heading accents */
+.font-handwriting {
+  font-family: var(--font-handwriting, 'Great Vibes', cursive);
+  font-weight: 400;
+}
+
+/* Crisp Helvetica Light styling for subheadings & body */
+.font-helvetica {
+  font-family: var(--font-inter, 'Helvetica Neue', Helvetica, Arial, sans-serif);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+/* Section with warm light sandstone background */
 @utility section-dark {
   background-color: var(--color-espresso);
-  color: var(--color-warm-white);
+  color: var(--color-charcoal);
 }
 
 /* Section with stone background */

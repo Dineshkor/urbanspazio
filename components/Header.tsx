@@ -13,7 +13,7 @@ export default function Header() {
   useEffect(() => {
     setMounted(true);
     const onScroll = () => {
-      const isScrolled = window.scrollY > 50;
+      const isScrolled = window.scrollY > 30;
       setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev));
     };
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -50,30 +50,20 @@ export default function Header() {
     'Hi Urban Spazio! I would like to inquire about your interior design services.'
   )}`;
 
-  const isHeaderScrolled = mounted && scrolled;
-
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-        isHeaderScrolled
-          ? 'bg-white shadow-sm py-3 border-b border-stone-200/60'
-          : 'bg-gradient-to-b from-black/70 via-black/30 to-transparent py-5'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#FAF8F5]/95 border-b border-stone-200/80 ${
+        scrolled ? 'py-3 shadow-xs' : 'py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between">
         {/* ── Logo ── */}
         <a href="#hero" className="flex flex-col group">
-          <span
-            className="text-xl sm:text-2xl font-serif font-bold tracking-wide transition-colors duration-300"
-            style={{ color: isHeaderScrolled ? 'var(--color-charcoal)' : 'white' }}
-          >
+          <span className="text-xl sm:text-2xl font-serif font-bold tracking-wide text-[var(--color-charcoal)]">
             URBAN{' '}
             <span style={{ color: 'var(--color-brass)' }}>SPAZIO</span>
           </span>
-          <span
-            className="text-[9px] tracking-[0.35em] uppercase font-medium -mt-0.5 transition-colors duration-300"
-            style={{ color: isHeaderScrolled ? 'var(--color-warm-grey)' : 'rgba(255,255,255,0.7)' }}
-          >
+          <span className="text-[9px] tracking-[0.35em] uppercase font-medium -mt-0.5 text-[var(--color-warm-grey)]">
             {BRAND.tagline}
           </span>
         </a>
@@ -86,14 +76,11 @@ export default function Header() {
               <a
                 key={link.name}
                 href={link.href}
-                className="relative px-4 py-2 text-[13px] font-medium tracking-wide uppercase transition-colors duration-300"
-                style={{
-                  color: isActive
-                    ? 'var(--color-brass)'
-                    : isHeaderScrolled
-                      ? 'var(--color-charcoal)'
-                      : 'rgba(255,255,255,0.85)',
-                }}
+                className={`relative px-4 py-2 text-[13px] font-medium tracking-wide uppercase transition-colors duration-200 ${
+                  isActive
+                    ? 'text-[var(--color-brass-dark)] font-semibold'
+                    : 'text-[var(--color-charcoal)] hover:text-[var(--color-brass)]'
+                }`}
               >
                 {link.name}
                 {isActive && (
@@ -111,7 +98,7 @@ export default function Header() {
         <div className="hidden lg:flex items-center gap-3">
           <a
             href="#consultation"
-            className="px-5 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-full transition-all duration-300 hover:opacity-90"
+            className="px-5 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-full transition-all duration-300 hover:opacity-90 shadow-xs"
             style={{
               backgroundColor: 'var(--color-brass)',
               color: 'white',
@@ -123,11 +110,7 @@ export default function Header() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-full transition-colors duration-300"
-            style={{
-              backgroundColor: isHeaderScrolled ? '#dcfce7' : 'rgba(255,255,255,0.15)',
-              color: isHeaderScrolled ? '#16a34a' : 'white',
-            }}
+            className="p-2.5 rounded-full transition-colors duration-300 bg-emerald-50 text-emerald-600 border border-emerald-200 hover:bg-emerald-100"
             aria-label="WhatsApp"
           >
             <MessageCircle className="w-4.5 h-4.5" />
@@ -140,15 +123,14 @@ export default function Header() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 rounded-full bg-green-600 text-white"
+            className="p-2 rounded-full bg-emerald-600 text-white"
             aria-label="WhatsApp"
           >
             <MessageCircle className="w-5 h-5" />
           </a>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="p-2 transition-colors"
-            style={{ color: isHeaderScrolled ? 'var(--color-charcoal)' : 'white' }}
+            className="p-2 text-[var(--color-charcoal)]"
             aria-label="Toggle navigation"
           >
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -158,7 +140,7 @@ export default function Header() {
 
       {/* ── Mobile Drawer ── */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 px-5 py-4 space-y-1 shadow-lg">
+        <div className="lg:hidden bg-[#FAF8F5] border-t border-stone-200 px-5 py-4 space-y-1 shadow-lg">
           <nav className="space-y-1">
             {NAV_LINKS.map((link) => (
               <a
@@ -169,7 +151,7 @@ export default function Header() {
                 style={{
                   color:
                     activeSection === link.href
-                      ? 'var(--color-brass)'
+                      ? 'var(--color-brass-dark)'
                       : 'var(--color-charcoal)',
                   backgroundColor:
                     activeSection === link.href ? 'var(--color-stone)' : 'transparent',
