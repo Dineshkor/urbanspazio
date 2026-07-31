@@ -36,6 +36,10 @@ export const metadata: Metadata = {
     locale: "en_IN",
     siteName: "Urban Spazio",
   },
+  icons: {
+    icon: "/images/logo.jpg",
+    apple: "/images/logo.jpg",
+  },
 };
 
 export default function RootLayout({
