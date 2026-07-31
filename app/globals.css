@@ -2,8 +2,7 @@
 
 /* ============================================
    URBAN SPAZIO — Design System
-   100% Warm Light Minimalist Luxury Palette (No Black, No Dark Brown)
-   Typography: Running Handwriting (Heading Accent) + Helvetica Light
+   Minimalist Luxury & Editorial Aesthetics
    ============================================ */
 
 @layer base {
@@ -18,7 +17,6 @@
     --color-warm-grey: #7D766D;
     --color-sage: #8B9D83;
     --color-sage-light: #A8B8A0;
-    /* 100% Warm Light Sandstone/Greige replacement for dark sections */
     --color-espresso: #E2DDD5;
     --color-espresso-light: #D6CFB5;
   }
@@ -57,9 +55,9 @@
     contain: paint;
   }
 
-  /* Headings use serif or running handwriting accent */
+  /* Standard headings across the site use Playfair Display */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-playfair, 'Playfair Display', Georgia, serif);
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
   }
 }
 
@@ -67,10 +65,14 @@
    Typography & Custom Utilities
    ============================================ */
 
-/* Running handwriting font for artistic heading accents */
-.font-handwriting {
-  font-family: var(--font-handwriting, 'Great Vibes', cursive);
-  font-weight: 400;
+/* Bodoni Moda Italic font — used exclusively for URBAN SPAZIO in the Hero Section */
+.font-bodoni-italic {
+  font-family: var(--font-bodoni), 'Bodoni Moda', 'Didot', 'Bodoni MT', serif;
+  font-style: italic;
+}
+
+.font-bodoni {
+  font-family: var(--font-bodoni), 'Bodoni Moda', 'Didot', 'Bodoni MT', serif;
 }
 
 /* Crisp Helvetica Light styling for subheadings & body */

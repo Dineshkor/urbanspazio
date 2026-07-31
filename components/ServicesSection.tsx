@@ -1,18 +1,17 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { SERVICES } from "@/lib/site-data";
-import { 
-  Video, 
-  PenTool, 
-  Hammer, 
-  ClipboardCheck, 
-  Armchair, 
+import React from 'react';
+import { SERVICES } from '@/lib/site-data';
+import { BRAND } from '@/lib/constants';
+import {
+  Video,
+  PenTool,
+  Hammer,
+  ClipboardCheck,
+  Armchair,
   ArrowRight,
-  ChevronDown
-} from "lucide-react";
+} from 'lucide-react';
 
-// Map string icon names from data to actual Lucide components
 const iconMap: Record<string, React.ElementType> = {
   Video,
   PenTool,
@@ -22,153 +21,167 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 export default function ServicesSection() {
+  // Split: hero service (Quick Consultation) vs the rest
+  const heroService = SERVICES[0];
+  const coreServices = SERVICES.slice(1);
+  const HeroIcon = iconMap[heroService.icon] || Video;
+
   return (
-    <section id="services" className="py-24 bg-[var(--color-warm-white)] text-[var(--color-charcoal)] relative overflow-hidden">
-      <div className="container mx-auto px-6 lg:px-12">
+    <section id="services" className="py-20 lg:py-28 bg-[#FAF8F5] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8">
+
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16 lg:mb-24">
-          <span className="inline-block uppercase tracking-[0.15em] text-sm font-semibold text-[var(--color-brass)] mb-4">
+        <div className="max-w-3xl mx-auto text-center mb-14 lg:mb-20">
+          <span className="inline-block uppercase tracking-[0.2em] text-xs font-semibold text-[var(--color-brass-dark)] mb-2">
             What We Do
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[var(--color-charcoal)] leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[var(--color-charcoal)] leading-tight mb-4">
             Services Crafted Around You
           </h2>
+          <p className="text-sm font-helvetica text-[var(--color-warm-grey)] max-w-lg mx-auto">
+            From a quick expert session to a complete home transformation — every engagement is designed to feel effortless and personal.
+          </p>
         </div>
 
-        {/* Staggered Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
-          {SERVICES.map((service, index) => {
-            const IconComponent = iconMap[service.icon] || PenTool;
-            const isFirst = index === 0;
-            const stepNumber = `0${index + 1}`;
+        {/* ── HERO SERVICE: Quick Consultation — Full-Width Editorial Card ── */}
+        <div className="mb-12">
+          <div className="relative bg-[#1E1C1A] rounded-3xl overflow-hidden shadow-2xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              {/* Left: Image */}
+              <div className="relative aspect-[4/3] lg:aspect-auto">
+                <img
+                  src="/images/projects/signature-kitchen-1.jpg"
+                  alt="Quick Design Consultation"
+                  className="w-full h-full object-cover opacity-80"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#1E1C1A] hidden lg:block" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1E1C1A] to-transparent lg:hidden" />
+              </div>
 
-            // Stagger effect for standard grid (columns 2 and 3 shifted down on desktop)
-            let staggerClass = "";
-            if (!isFirst) {
-              if (index % 3 === 1) staggerClass = "lg:mt-16";
-              if (index % 3 === 2) staggerClass = "lg:mt-32";
-              // On tablet (2 cols), shift even items
-              if (index % 2 === 1) staggerClass += " md:mt-12 lg:mt-[inherit]"; 
-            }
+              {/* Right: Content */}
+              <div className="relative p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
+                {/* Badge */}
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-11 h-11 rounded-xl bg-[var(--color-brass)] flex items-center justify-center">
+                    <HeroIcon className="w-5 h-5 text-white" strokeWidth={1.5} />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-3 py-1 rounded-full bg-[var(--color-brass)] text-white text-sm font-bold">
+                      {heroService.price}
+                    </span>
+                    <span className="text-[10px] font-helvetica text-white/50 uppercase tracking-widest">
+                      Most Popular
+                    </span>
+                  </div>
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-white font-bold mb-2 leading-snug">
+                  {heroService.title}
+                </h3>
+                <p className="text-xs font-helvetica text-[var(--color-brass-light)] uppercase tracking-widest font-semibold mb-4">
+                  {heroService.subtitle}
+                </p>
+                <p className="text-sm font-helvetica text-stone-300 font-light leading-relaxed mb-6 max-w-md">
+                  {heroService.description}
+                </p>
+
+                {/* Deliverables — 2 column */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mb-8">
+                  {heroService.deliverables.map((item, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <span className="w-1 h-1 rounded-full bg-[var(--color-brass)] shrink-0" />
+                      <span className="text-xs font-helvetica text-stone-400">{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <a
+                  href="#consultation"
+                  className="self-start px-8 py-4 rounded-full bg-[var(--color-brass)] text-white text-xs font-helvetica font-semibold uppercase tracking-wider flex items-center gap-2.5 hover:bg-[var(--color-brass-light)] transition-colors shadow-lg"
+                >
+                  <span>{heroService.cta.label}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── CORE SERVICES: 2×2 Grid — Clean, Elevated Cards ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
+          {coreServices.map((service, index) => {
+            const Icon = iconMap[service.icon] || PenTool;
+            const stepNum = `0${index + 2}`;
 
             return (
-              <ServiceCard 
-                key={service.id} 
-                service={service} 
-                IconComponent={IconComponent} 
-                isFirst={isFirst} 
-                stepNumber={stepNumber}
-                className={staggerClass}
-              />
+              <div
+                key={service.id}
+                className="group relative bg-white rounded-2xl p-7 sm:p-8 border border-stone-200/80 shadow-sm hover:shadow-xl hover:border-[var(--color-brass)]/30 transition-all duration-300 flex flex-col"
+              >
+                {/* Top Row */}
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-11 h-11 rounded-xl bg-[#F3EFEA] flex items-center justify-center group-hover:bg-[var(--color-brass)] group-hover:text-white transition-colors">
+                    <Icon className="w-5 h-5 text-[var(--color-brass-dark)] group-hover:text-white" strokeWidth={1.5} />
+                  </div>
+                  <span className="text-3xl font-serif font-bold text-stone-200 group-hover:text-[var(--color-brass)]/30 transition-colors">
+                    {stepNum}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-[var(--color-charcoal)] mb-1 leading-snug">
+                  {service.title}
+                </h3>
+                <p className="text-[10px] font-helvetica text-[var(--color-brass-dark)] uppercase tracking-widest font-semibold mb-3">
+                  {service.subtitle}
+                </p>
+
+                {/* Description */}
+                <p className="text-xs font-helvetica text-[var(--color-warm-grey)] leading-relaxed mb-5 flex-grow">
+                  {service.description}
+                </p>
+
+                {/* Key Deliverables — compact */}
+                <div className="border-t border-stone-100 pt-4 mb-5">
+                  <div className="flex flex-wrap gap-1.5">
+                    {service.deliverables.slice(0, 3).map((item, i) => (
+                      <span
+                        key={i}
+                        className="px-2.5 py-1 rounded-full text-[10px] font-helvetica text-[var(--color-charcoal)] bg-[#F3EFEA] border border-stone-200/60"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                    {service.deliverables.length > 3 && (
+                      <span className="px-2.5 py-1 rounded-full text-[10px] font-helvetica text-[var(--color-brass-dark)] bg-[#F3EFEA] border border-stone-200/60 font-semibold">
+                        +{service.deliverables.length - 3} more
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <a
+                  href={
+                    service.cta.action === 'whatsapp'
+                      ? `https://wa.me/${BRAND.whatsapp}?text=Hi Urban Spazio! I want to inquire about ${encodeURIComponent(service.title)}.`
+                      : '#consultation'
+                  }
+                  target={service.cta.action === 'whatsapp' ? '_blank' : '_self'}
+                  rel={service.cta.action === 'whatsapp' ? 'noopener noreferrer' : undefined}
+                  className="self-start px-6 py-3 rounded-full text-xs font-helvetica font-semibold uppercase tracking-wider text-[var(--color-charcoal)] border border-stone-300 hover:bg-[var(--color-brass)] hover:text-white hover:border-[var(--color-brass)] transition-all flex items-center gap-2"
+                >
+                  <span>{service.cta.label}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
             );
           })}
         </div>
+
       </div>
     </section>
-  );
-}
-
-function ServiceCard({ 
-  service, 
-  IconComponent, 
-  isFirst, 
-  stepNumber,
-  className 
-}: { 
-  service: any, 
-  IconComponent: any, 
-  isFirst: boolean, 
-  stepNumber: string,
-  className: string 
-}) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  return (
-    <div 
-      className={`group relative p-8 md:p-10 rounded-2xl transition-all duration-500 hover:-translate-y-2
-        ${isFirst 
-          ? "bg-[var(--color-espresso)] text-[var(--color-warm-white)] md:col-span-2 lg:col-span-1 border border-[var(--color-brass)]/20 shadow-xl" 
-          : "bg-[var(--color-stone)] text-[var(--color-charcoal)] hover:shadow-xl"
-        }
-        ${className}
-      `}
-    >
-      {/* Step Number Background */}
-      <div className={`absolute top-4 right-6 text-7xl font-serif opacity-10 select-none pointer-events-none transition-opacity group-hover:opacity-20
-        ${isFirst ? "text-[var(--color-brass)]" : "text-[var(--color-warm-grey)]"}
-      `}>
-        {stepNumber}
-      </div>
-
-      {/* Header & Icon */}
-      <div className={`w-14 h-14 rounded-full flex items-center justify-center mb-8
-        ${isFirst ? "bg-[var(--color-brass)] text-[var(--color-espresso)]" : "bg-white text-[var(--color-brass)]"}
-      `}>
-        <IconComponent size={26} strokeWidth={1.5} />
-      </div>
-
-      <h3 className="text-2xl md:text-3xl font-serif mb-2 pr-12">{service.title}</h3>
-      <p className={`text-sm font-medium tracking-wide uppercase mb-6 
-        ${isFirst ? "text-[var(--color-brass)]" : "text-[var(--color-sage)]"}
-      `}>
-        {service.subtitle}
-      </p>
-
-      {/* Description */}
-      <p className={`mb-8 leading-relaxed
-        ${isFirst ? "text-gray-300" : "text-[var(--color-warm-grey)]"}
-      `}>
-        {service.description}
-      </p>
-
-      {/* Deliverables Toggle (Mobile & Desktop) */}
-      <div className="mb-8">
-        <button 
-          onClick={() => setIsExpanded(!isExpanded)}
-          className={`flex items-center gap-2 text-sm font-medium tracking-wide transition-colors
-            ${isFirst ? "text-white hover:text-[var(--color-brass)]" : "text-[var(--color-charcoal)] hover:text-[var(--color-brass)]"}
-          `}
-        >
-          View Deliverables
-          <ChevronDown size={16} className={`transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`} />
-        </button>
-        
-        <div className={`grid transition-all duration-300 ease-in-out ${isExpanded ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0"}`}>
-          <ul className={`overflow-hidden space-y-3 text-sm
-            ${isFirst ? "text-gray-300" : "text-[var(--color-warm-grey)]"}
-          `}>
-            {service.deliverables.map((item: string, i: number) => (
-              <li key={i} className="flex items-start gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brass)] mt-1.5 shrink-0" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      {/* Price Badge (if first/quick consultation) */}
-      {service.price && (
-        <div className="mb-8">
-          <span className="inline-block px-4 py-2 border border-[var(--color-brass)] text-[var(--color-brass)] rounded-full text-lg font-serif">
-            {service.price}
-          </span>
-        </div>
-      )}
-
-      {/* CTA Button */}
-      <a 
-        href={service.cta.action === 'whatsapp' ? 'https://wa.me/919876543210' : '#consultation'}
-        className={`inline-flex items-center gap-3 px-6 py-3.5 rounded-full font-medium transition-all group/btn
-          ${isFirst 
-            ? "bg-[var(--color-brass)] text-[var(--color-espresso)] hover:bg-white" 
-            : "bg-transparent border border-[var(--color-charcoal)] text-[var(--color-charcoal)] hover:bg-[var(--color-charcoal)] hover:text-white"
-          }
-        `}
-      >
-        {service.cta.label}
-        <ArrowRight size={18} className="transition-transform group-hover/btn:translate-x-1" />
-      </a>
-    </div>
   );
 }

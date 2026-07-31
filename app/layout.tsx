@@ -1,12 +1,27 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter, Great_Vibes } from "next/font/google";
+import { Bodoni_Moda, Cinzel, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+});
+
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const inter = Inter({
@@ -16,13 +31,6 @@ const inter = Inter({
   weight: ["300", "400", "500", "600"],
 });
 
-const handwriting = Great_Vibes({
-  variable: "--font-handwriting",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400"],
-});
-
 export const metadata: Metadata = {
   title: "Urban Spazio | Defining Spaces, Defining Lifestyles",
   description:
@@ -30,7 +38,7 @@ export const metadata: Metadata = {
   keywords: [
     "interior design",
     "minimalist interiors",
-    "signature interiors",
+    "Fragilita font",
     "Japandi design",
     "biophilic design",
     "modular furniture",
@@ -58,7 +66,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${inter.variable} ${handwriting.variable}`}
+      className={`${bodoni.variable} ${cinzel.variable} ${playfair.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-dvh antialiased font-helvetica">
