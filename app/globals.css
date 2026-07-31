@@ -1,29 +1,97 @@
 @import "tailwindcss";
 
+/* ============================================
+   URBAN SPAZIO — Design System
+   Palette: Neutral Canvas + Champagne Accent
+   ============================================ */
+
 @layer base {
+  :root {
+    --color-brass: #B8975A;
+    --color-brass-light: #CBAB72;
+    --color-brass-dark: #9A7D48;
+    --color-charcoal: #2C2C2C;
+    --color-warm-white: #FAF9F6;
+    --color-off-white: #F3F1ED;
+    --color-stone: #E8E4DE;
+    --color-warm-grey: #9B9B93;
+    --color-sage: #8B9D83;
+    --color-sage-light: #A8B8A0;
+    --color-espresso: #3C2F27;
+    --color-espresso-light: #5A4A3F;
+  }
+
   html {
     scroll-behavior: smooth;
-    color-scheme: dark;
+    background-color: var(--color-warm-white);
   }
 
   body {
-    background-color: #0D0D0E;
-    color: #F5F5F4;
-    font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+    background-color: var(--color-warm-white);
+    color: var(--color-charcoal);
+    font-family: var(--font-inter, 'Inter', system-ui, -apple-system, sans-serif);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Selection color */
+  ::selection {
+    background-color: var(--color-brass);
+    color: white;
+  }
+
+  /* Smooth focus rings */
+  :focus-visible {
+    outline: 2px solid var(--color-brass);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Prevent image flicker */
+  img {
+    background-color: var(--color-stone);
+    contain: paint;
+  }
+
+  /* Headings use serif font */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair, 'Playfair Display', Georgia, serif);
   }
 }
 
-/* Custom Utilities for Signature Glow and Aesthetics */
-@utility glow-amber {
-  box-shadow: 0 0 25px rgba(251, 191, 36, 0.25);
+/* ============================================
+   Custom Utilities
+   ============================================ */
+
+/* Section with dark espresso background */
+@utility section-dark {
+  background-color: var(--color-espresso);
+  color: var(--color-warm-white);
 }
 
-@utility glow-amber-strong {
-  box-shadow: 0 0 40px rgba(251, 191, 36, 0.45);
+/* Section with stone background */
+@utility section-stone {
+  background-color: var(--color-stone);
 }
 
-/* Smooth drag cursor utility */
+/* Gold/brass gradient text */
+@utility text-gradient-brass {
+  background: linear-gradient(135deg, var(--color-brass-dark), var(--color-brass), var(--color-brass-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Brass accent underline */
+@utility underline-brass {
+  text-decoration: underline;
+  text-decoration-color: var(--color-brass);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+/* Smooth drag cursor */
 .cursor-ew-resize {
   cursor: ew-resize;
 }
