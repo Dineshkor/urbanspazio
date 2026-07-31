@@ -8,16 +8,22 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#hero');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    setMounted(true);
+    const onScroll = () => {
+      const isScrolled = window.scrollY > 50;
+      setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev));
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Track active section via IntersectionObserver
+  // Track active section via IntersectionObserver safely
   useEffect(() => {
+    if (!mounted) return;
     const sections = NAV_LINKS.map((l) =>
       document.querySelector(l.href)
     ).filter(Boolean) as Element[];
@@ -28,7 +34,8 @@ export default function Header() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveSection(`#${entry.target.id}`);
+            const targetId = `#${entry.target.id}`;
+            setActiveSection((prev) => (prev !== targetId ? targetId : prev));
           }
         });
       },
@@ -37,18 +44,20 @@ export default function Header() {
 
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
-  }, []);
+  }, [mounted]);
 
   const whatsappUrl = `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(
     'Hi Urban Spazio! I would like to inquire about your interior design services.'
   )}`;
 
+  const isHeaderScrolled = mounted && scrolled;
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-white/95 backdrop-blur-sm shadow-[0_1px_20px_rgba(0,0,0,0.06)] py-3'
-          : 'bg-transparent py-5'
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+        isHeaderScrolled
+          ? 'bg-white shadow-sm py-3 border-b border-stone-200/60'
+          : 'bg-gradient-to-b from-black/70 via-black/30 to-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between">
@@ -56,14 +65,14 @@ export default function Header() {
         <a href="#hero" className="flex flex-col group">
           <span
             className="text-xl sm:text-2xl font-serif font-bold tracking-wide transition-colors duration-300"
-            style={{ color: scrolled ? 'var(--color-charcoal)' : 'white' }}
+            style={{ color: isHeaderScrolled ? 'var(--color-charcoal)' : 'white' }}
           >
             URBAN{' '}
             <span style={{ color: 'var(--color-brass)' }}>SPAZIO</span>
           </span>
           <span
             className="text-[9px] tracking-[0.35em] uppercase font-medium -mt-0.5 transition-colors duration-300"
-            style={{ color: scrolled ? 'var(--color-warm-grey)' : 'rgba(255,255,255,0.7)' }}
+            style={{ color: isHeaderScrolled ? 'var(--color-warm-grey)' : 'rgba(255,255,255,0.7)' }}
           >
             {BRAND.tagline}
           </span>
@@ -81,7 +90,7 @@ export default function Header() {
                 style={{
                   color: isActive
                     ? 'var(--color-brass)'
-                    : scrolled
+                    : isHeaderScrolled
                       ? 'var(--color-charcoal)'
                       : 'rgba(255,255,255,0.85)',
                 }}
@@ -102,18 +111,10 @@ export default function Header() {
         <div className="hidden lg:flex items-center gap-3">
           <a
             href="#consultation"
-            className="px-5 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-full transition-all duration-300"
+            className="px-5 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-full transition-all duration-300 hover:opacity-90"
             style={{
               backgroundColor: 'var(--color-brass)',
               color: 'white',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--color-brass-dark)';
-              e.currentTarget.style.transform = 'translateY(-1px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--color-brass)';
-              e.currentTarget.style.transform = 'translateY(0)';
             }}
           >
             Book Consultation
@@ -124,8 +125,8 @@ export default function Header() {
             rel="noopener noreferrer"
             className="p-2.5 rounded-full transition-colors duration-300"
             style={{
-              backgroundColor: scrolled ? '#dcfce7' : 'rgba(255,255,255,0.15)',
-              color: scrolled ? '#16a34a' : 'white',
+              backgroundColor: isHeaderScrolled ? '#dcfce7' : 'rgba(255,255,255,0.15)',
+              color: isHeaderScrolled ? '#16a34a' : 'white',
             }}
             aria-label="WhatsApp"
           >
@@ -147,7 +148,7 @@ export default function Header() {
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="p-2 transition-colors"
-            style={{ color: scrolled ? 'var(--color-charcoal)' : 'white' }}
+            style={{ color: isHeaderScrolled ? 'var(--color-charcoal)' : 'white' }}
             aria-label="Toggle navigation"
           >
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -156,40 +157,38 @@ export default function Header() {
       </div>
 
       {/* ── Mobile Drawer ── */}
-      <div
-        className={`lg:hidden overflow-hidden transition-all duration-400 ${
-          mobileOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <nav className="bg-white border-t border-gray-100 px-5 py-4 space-y-1 shadow-lg">
-          {NAV_LINKS.map((link) => (
+      {mobileOpen && (
+        <div className="lg:hidden bg-white border-t border-gray-100 px-5 py-4 space-y-1 shadow-lg">
+          <nav className="space-y-1">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="block px-4 py-3 text-sm font-medium rounded-lg transition-colors"
+                style={{
+                  color:
+                    activeSection === link.href
+                      ? 'var(--color-brass)'
+                      : 'var(--color-charcoal)',
+                  backgroundColor:
+                    activeSection === link.href ? 'var(--color-stone)' : 'transparent',
+                }}
+              >
+                {link.name}
+              </a>
+            ))}
             <a
-              key={link.name}
-              href={link.href}
+              href="#consultation"
               onClick={() => setMobileOpen(false)}
-              className="block px-4 py-3 text-sm font-medium rounded-lg transition-colors"
-              style={{
-                color:
-                  activeSection === link.href
-                    ? 'var(--color-brass)'
-                    : 'var(--color-charcoal)',
-                backgroundColor:
-                  activeSection === link.href ? 'var(--color-stone)' : 'transparent',
-              }}
+              className="block w-full text-center py-3 mt-3 text-sm font-semibold uppercase tracking-wider rounded-full text-white"
+              style={{ backgroundColor: 'var(--color-brass)' }}
             >
-              {link.name}
+              Book Consultation — ₹999
             </a>
-          ))}
-          <a
-            href="#consultation"
-            onClick={() => setMobileOpen(false)}
-            className="block w-full text-center py-3 mt-3 text-sm font-semibold uppercase tracking-wider rounded-full text-white"
-            style={{ backgroundColor: 'var(--color-brass)' }}
-          >
-            Book Consultation — ₹999
-          </a>
-        </nav>
-      </div>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
