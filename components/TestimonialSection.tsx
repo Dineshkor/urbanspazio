@@ -1,65 +1,73 @@
-import { TESTIMONIALS } from '@/lib/site-data';
-import { Star } from 'lucide-react';
+"use client";
+
+import { useState, useEffect } from "react";
+import { TESTIMONIALS } from "@/lib/site-data";
+import { Star } from "lucide-react";
 
 export default function TestimonialSection() {
-  return (
-    <section id="testimonials" className="py-24 bg-[var(--color-warm-white)] px-6 md:px-12 lg:px-24 relative overflow-hidden">
-      {/* Decorative Quote */}
-      <div className="absolute top-10 left-10 md:top-20 md:left-24 text-[20rem] font-serif text-[var(--color-brass)] opacity-10 leading-none select-none">
-        &ldquo;
-      </div>
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="mb-16 md:mb-24 text-center md:text-left">
-          <h2 className="text-sm tracking-[0.2em] font-sans text-[var(--color-brass)] uppercase mb-4 font-semibold">
-            Client Love
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const current = TESTIMONIALS[currentIndex];
+
+  return (
+    <section id="testimonials" className="py-24 md:py-32 bg-[var(--color-linen)]">
+      <div className="container mx-auto px-6 max-w-4xl text-center">
+        <div className="mb-12">
+          <span className="font-script text-2xl text-[var(--color-brass)] block mb-2">kind words</span>
+          <h2 className="font-serif text-3xl md:text-4xl text-[var(--color-charcoal)] uppercase tracking-wide">
+            Reviews
           </h2>
-          <h3 className="text-4xl md:text-5xl font-serif text-[var(--color-charcoal)] max-w-2xl">
-            Words That Inspire Us
-          </h3>
         </div>
 
-        {/* Responsive Grid/Scroll */}
-        <div className="flex overflow-x-auto md:grid md:grid-cols-2 gap-8 pb-8 snap-x snap-mandatory hide-scrollbar">
-          {TESTIMONIALS.map((testimonial, idx) => (
-            <div 
-              key={idx}
-              className="min-w-[85vw] sm:min-w-[400px] md:min-w-0 snap-center bg-white p-8 md:p-10 rounded-lg shadow-sm border-t-[3px] border-[var(--color-brass)] flex flex-col justify-between hover:shadow-md transition-shadow duration-300"
-            >
-              <div>
-                <div className="flex gap-1 mb-6">
-                  {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-[var(--color-brass)] text-[var(--color-brass)]" />
-                  ))}
-                </div>
-                
-                <p className="font-serif italic text-lg md:text-xl text-[var(--color-charcoal)] leading-relaxed mb-8">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </p>
-              </div>
+        <div className="divider-gold divider-gold--center mb-16" />
 
-              <div className="mt-auto">
-                <h4 className="font-sans font-bold text-[var(--color-charcoal)] text-lg">
-                  {testimonial.author}
-                </h4>
-                <p className="font-sans text-[var(--color-warm-grey)] text-sm mt-1">
-                  {testimonial.project} &middot; {testimonial.location}
-                </p>
-              </div>
-            </div>
+        <div className="relative min-h-[300px] flex flex-col items-center justify-center transition-opacity duration-500">
+          <span className="font-serif text-[var(--color-brass)] text-8xl leading-none absolute -top-12 opacity-20 select-none">
+            &ldquo;
+          </span>
+          
+          <p className="font-serif italic text-2xl md:text-4xl text-[var(--color-charcoal)] leading-relaxed mb-12 relative z-10">
+            {current.quote}
+          </p>
+
+          <div className="flex space-x-1 mb-6 text-[var(--color-brass)]">
+            {[...Array(current.rating)].map((_, i) => (
+              <Star key={i} size={16} fill="currentColor" strokeWidth={0} />
+            ))}
+          </div>
+
+          <div className="uppercase tracking-wider font-helvetica">
+            <p className="text-sm font-bold text-[var(--color-charcoal)] mb-1">
+              {current.author}
+            </p>
+            <p className="text-xs text-[var(--color-charcoal)] opacity-60">
+              {current.project} &mdash; {current.location}
+            </p>
+          </div>
+        </div>
+
+        <div className="divider-gold divider-gold--center mt-12 mb-8" />
+
+        <div className="flex justify-center space-x-3">
+          {TESTIMONIALS.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentIndex(idx)}
+              className={`w-2 h-2 transition-colors duration-300 ${
+                idx === currentIndex ? "bg-[var(--color-brass)]" : "bg-[var(--color-charcoal)] opacity-20"
+              }`}
+              aria-label={`Go to testimonial ${idx + 1}`}
+            />
           ))}
         </div>
       </div>
-      
-      <style dangerouslySetInnerHTML={{__html: `
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}} />
     </section>
   );
 }

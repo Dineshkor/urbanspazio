@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda, Cinzel, Inter, Playfair_Display } from "next/font/google";
+import { Bodoni_Moda, Dancing_Script, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const bodoni = Bodoni_Moda({
@@ -10,8 +10,8 @@ const bodoni = Bodoni_Moda({
   style: ["normal", "italic"],
 });
 
-const cinzel = Cinzel({
-  variable: "--font-cinzel",
+const script = Dancing_Script({
+  variable: "--font-script",
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
@@ -22,6 +22,7 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 const inter = Inter({
@@ -37,12 +38,12 @@ export const metadata: Metadata = {
     "Premium minimalist interior design studio offering consultation, turnkey execution, and bespoke luxury furniture. Specializing in Japandi, Neo Classical, Modern Contemporary, and Biophilic design.",
   keywords: [
     "interior design",
-    "minimalist interiors",
-    "Fragilita font",
+    "luxury interiors",
     "Japandi design",
     "biophilic design",
     "modular furniture",
     "Urban Spazio",
+    "Delhi NCR interior designer",
   ],
   openGraph: {
     title: "Urban Spazio | Defining Spaces, Defining Lifestyles",
@@ -66,10 +67,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bodoni.variable} ${cinzel.variable} ${playfair.variable} ${inter.variable}`}
+      className={`${bodoni.variable} ${script.variable} ${playfair.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-dvh antialiased font-helvetica">
+      <body className="min-h-dvh antialiased">
         <script
           dangerouslySetInnerHTML={{
             __html: `

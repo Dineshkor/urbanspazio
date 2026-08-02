@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle, Phone, ArrowRight, MessageCircle, Download, Copy, Check, QrCode } from "lucide-react";
-import { BRAND, QUICK_CONSULTATION_PRICE, QUICK_CONSULTATION_DURATION } from "../lib/constants";
+import { CheckCircle, ArrowRight, MessageCircle, Download, Copy, Check, QrCode } from "lucide-react";
+import { BRAND, QUICK_CONSULTATION_PRICE, QUICK_CONSULTATION_DURATION } from "@/lib/constants";
 
 export default function ConsultationSection() {
   const [step, setStep] = useState(1);
@@ -44,42 +44,47 @@ export default function ConsultationSection() {
   });
 
   return (
-    <section id="consultation" className="py-24 section-dark relative">
+    <section id="consultation" className="py-24 bg-[var(--color-dark)] text-[var(--color-cream)] relative">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center mb-12">
-          <span className="text-xs uppercase tracking-[0.3em] font-semibold text-[var(--color-brass)] mb-3 block">
-            BOOK A SESSION
+        <div className="section-header section-header--dark mb-16">
+          <span className="font-script text-2xl text-[var(--color-brass)] mb-2 block">
+            let&apos;s begin
           </span>
-          <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] mb-4">
-            Quick Design Consultation
+          <h2 className="serif-heading text-3xl sm:text-5xl mb-4">
+            BOOK YOUR CONSULTATION
           </h2>
-          <p className="text-[var(--color-warm-grey)] max-w-xl mx-auto text-sm sm:text-base">
+          <div className="divider-gold divider-gold--center" />
+          <p className="text-[var(--color-cream)]/70 max-w-xl mx-auto text-sm sm:text-base font-helvetica mt-6">
             ₹{QUICK_CONSULTATION_PRICE} · {QUICK_CONSULTATION_DURATION} · Online Video Call
           </p>
         </div>
 
-        {/* Progress Bar */}
-        <div className="w-full bg-stone-300 h-1.5 mb-12 rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-[var(--color-brass)] transition-all duration-500 ease-in-out"
-            style={{ width: `${(step / 4) * 100}%` }}
-          />
+        {/* Step Indicators */}
+        <div className="flex justify-center items-center mb-12 gap-4">
+          {[1, 2, 3, 4].map((s) => (
+            <div key={s} className="flex items-center gap-4">
+              <div className={`w-8 h-8 flex items-center justify-center border ${step >= s ? 'border-[var(--color-brass)] text-[var(--color-brass)]' : 'border-white/20 text-white/50'} text-sm font-serif`}>
+                {s}
+              </div>
+              {s < 4 && <div className={`w-8 h-px ${step > s ? 'bg-[var(--color-brass)]' : 'bg-white/20'}`} />}
+            </div>
+          ))}
         </div>
 
         {/* Steps Container */}
-        <div className="bg-[#FAF8F5] p-6 sm:p-10 md:p-12 rounded-2xl border border-stone-300/70 shadow-xl min-h-[400px] flex flex-col justify-center">
+        <div className="bg-[var(--color-cream)] p-6 sm:p-10 md:p-12 border border-[var(--color-brass)]/30 min-h-[400px] flex flex-col justify-center text-[var(--color-charcoal)] relative z-10">
           
           {/* STEP 1: Details */}
           {step === 1 && (
-            <form onSubmit={handleNextStep} className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <form onSubmit={handleNextStep} className="space-y-6 animate-in fade-in duration-500">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <input 
                   type="text" 
                   required
                   placeholder="Your Name *"
-                  className="w-full bg-transparent border-b border-stone-400 text-[var(--color-charcoal)] placeholder:text-stone-500 focus:border-[var(--color-brass)] focus:outline-none pb-2 transition-colors"
+                  className="w-full bg-transparent border-b border-[var(--color-charcoal)]/30 text-[var(--color-charcoal)] placeholder:text-[var(--color-charcoal)]/50 focus:border-[var(--color-brass)] focus:outline-none pb-2 transition-colors rounded-none"
                   value={formData.name}
                   onChange={e => setFormData({ ...formData, name: e.target.value })}
                 />
@@ -87,7 +92,7 @@ export default function ConsultationSection() {
                   type="email" 
                   required
                   placeholder="Email Address *"
-                  className="w-full bg-transparent border-b border-stone-400 text-[var(--color-charcoal)] placeholder:text-stone-500 focus:border-[var(--color-brass)] focus:outline-none pb-2 transition-colors"
+                  className="w-full bg-transparent border-b border-[var(--color-charcoal)]/30 text-[var(--color-charcoal)] placeholder:text-[var(--color-charcoal)]/50 focus:border-[var(--color-brass)] focus:outline-none pb-2 transition-colors rounded-none"
                   value={formData.email}
                   onChange={e => setFormData({ ...formData, email: e.target.value })}
                 />
@@ -98,13 +103,13 @@ export default function ConsultationSection() {
                   type="tel" 
                   required
                   placeholder="Phone Number *"
-                  className="w-full bg-transparent border-b border-stone-400 text-[var(--color-charcoal)] placeholder:text-stone-500 focus:border-[var(--color-brass)] focus:outline-none pb-2 transition-colors"
+                  className="w-full bg-transparent border-b border-[var(--color-charcoal)]/30 text-[var(--color-charcoal)] placeholder:text-[var(--color-charcoal)]/50 focus:border-[var(--color-brass)] focus:outline-none pb-2 transition-colors rounded-none"
                   value={formData.phone}
                   onChange={e => setFormData({ ...formData, phone: e.target.value })}
                 />
                 <select 
                   required
-                  className="w-full bg-transparent border-b border-stone-400 text-[var(--color-charcoal)] focus:border-[var(--color-brass)] focus:outline-none pb-2 transition-colors [&>option]:bg-[#FAF8F5]"
+                  className="w-full bg-transparent border-b border-[var(--color-charcoal)]/30 text-[var(--color-charcoal)] focus:border-[var(--color-brass)] focus:outline-none pb-2 transition-colors rounded-none"
                   value={formData.projectType}
                   onChange={e => setFormData({ ...formData, projectType: e.target.value })}
                 >
@@ -117,7 +122,7 @@ export default function ConsultationSection() {
               <div className="grid grid-cols-1 gap-8">
                 <select 
                   required
-                  className="w-full bg-transparent border-b border-stone-400 text-[var(--color-charcoal)] focus:border-[var(--color-brass)] focus:outline-none pb-2 transition-colors [&>option]:bg-[#FAF8F5]"
+                  className="w-full bg-transparent border-b border-[var(--color-charcoal)]/30 text-[var(--color-charcoal)] focus:border-[var(--color-brass)] focus:outline-none pb-2 transition-colors rounded-none"
                   value={formData.spaceType}
                   onChange={e => setFormData({ ...formData, spaceType: e.target.value })}
                 >
@@ -133,7 +138,7 @@ export default function ConsultationSection() {
                   required
                   placeholder="Briefly describe your requirements..."
                   rows={3}
-                  className="w-full bg-transparent border-b border-stone-400 text-[var(--color-charcoal)] placeholder:text-stone-500 focus:border-[var(--color-brass)] focus:outline-none pb-2 transition-colors resize-none"
+                  className="w-full bg-transparent border-b border-[var(--color-charcoal)]/30 text-[var(--color-charcoal)] placeholder:text-[var(--color-charcoal)]/50 focus:border-[var(--color-brass)] focus:outline-none pb-2 transition-colors resize-none rounded-none"
                   value={formData.description}
                   onChange={e => setFormData({ ...formData, description: e.target.value })}
                 ></textarea>
@@ -142,9 +147,9 @@ export default function ConsultationSection() {
               <div className="pt-6 flex justify-end">
                 <button 
                   type="submit"
-                  className="flex items-center gap-2 px-8 py-3 bg-[var(--color-brass)] text-white hover:bg-[var(--color-brass-dark)] transition-colors rounded-sm shadow-md"
+                  className="btn-filled"
                 >
-                  Proceed to Payment <ArrowRight size={18} />
+                  Proceed to Payment <ArrowRight size={16} />
                 </button>
               </div>
             </form>
@@ -152,76 +157,76 @@ export default function ConsultationSection() {
 
           {/* STEP 2: UPI Scanner & Payment */}
           {step === 2 && (
-            <div className="flex flex-col items-center justify-center animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div className="bg-white border border-stone-300 rounded-2xl p-6 sm:p-8 max-w-md w-full text-center shadow-lg">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-brass)]/10 text-[var(--color-brass-dark)] text-xs font-medium uppercase tracking-wider mb-4 border border-[var(--color-brass)]/30">
+            <div className="flex flex-col items-center justify-center animate-in fade-in duration-500">
+              <div className="bg-white border border-[var(--color-charcoal)]/10 p-6 sm:p-8 max-w-md w-full text-center">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[var(--color-brass)]/10 text-[var(--color-brass-dark)] text-xs font-medium uppercase tracking-wider mb-4 border border-[var(--color-brass)]/30">
                   <QrCode className="w-3.5 h-3.5" />
                   Scan to Pay ₹{QUICK_CONSULTATION_PRICE}
                 </div>
 
-                <h3 className="font-serif text-2xl text-[var(--color-charcoal)] mb-1">
-                  Quick Consultation Fee
+                <h3 className="font-serif text-2xl text-[var(--color-charcoal)] mb-1 uppercase tracking-wider">
+                  Consultation Fee
                 </h3>
-                <p className="text-[var(--color-warm-grey)] text-xs mb-5">
+                <p className="text-[var(--color-warm-grey)] text-xs mb-5 font-helvetica">
                   Scan using Google Pay, PhonePe, Paytm, CRED or any UPI app
                 </p>
 
                 {/* QR Image Container */}
-                <div className="relative bg-stone-50 rounded-xl p-4 border border-stone-200 mb-5 shadow-inner flex flex-col items-center">
+                <div className="relative bg-[var(--color-linen)] p-4 border border-[var(--color-charcoal)]/10 mb-5 flex flex-col items-center">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/images/payment-qr.jpg"
-                    alt="UPI Payment QR Code - Sonali Bachkheti"
-                    className="w-full max-w-[260px] h-auto rounded-lg object-contain border border-stone-300"
+                    alt="UPI Payment QR Code"
+                    className="w-full max-w-[220px] h-auto object-contain border border-[var(--color-charcoal)]/10"
                   />
                   
                   {/* Download Button */}
                   <a
                     href="/images/payment-qr.jpg"
                     download="urban-spazio-upi-qr.jpg"
-                    className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-stone-100 hover:bg-stone-200 text-xs font-semibold text-[var(--color-brass-dark)] border border-[var(--color-brass)]/40 rounded-lg transition-colors"
+                    className="mt-4 text-xs font-medium text-[var(--color-brass-dark)] uppercase tracking-widest hover:text-[var(--color-charcoal)] transition-colors flex items-center gap-2"
                   >
-                    <Download className="w-4 h-4" />
-                    Download Scanner Image
+                    <Download className="w-3 h-3" />
+                    Download QR
                   </a>
                 </div>
 
                 {/* Payee Info & Copy UPI */}
-                <div className="bg-stone-50 p-3.5 rounded-xl border border-stone-200 text-left space-y-2 mb-6">
+                <div className="bg-[var(--color-linen)] p-4 border border-[var(--color-charcoal)]/10 text-left space-y-3 mb-6">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="text-[var(--color-warm-grey)]">Account Holder:</span>
-                    <span className="text-[var(--color-charcoal)] font-semibold">{payeeName}</span>
+                    <span className="text-[var(--color-warm-grey)] uppercase tracking-wider">Account</span>
+                    <span className="text-[var(--color-charcoal)] font-medium">{payeeName}</span>
                   </div>
-                  <div className="flex justify-between items-center text-xs pt-1 border-t border-stone-200">
-                    <span className="text-[var(--color-warm-grey)]">UPI ID:</span>
-                    <div className="flex items-center gap-1.5 font-mono text-[var(--color-brass-dark)] font-semibold">
+                  <div className="flex justify-between items-center text-xs pt-2 border-t border-[var(--color-charcoal)]/10">
+                    <span className="text-[var(--color-warm-grey)] uppercase tracking-wider">UPI ID</span>
+                    <div className="flex items-center gap-2 font-mono text-[var(--color-brass-dark)] font-medium">
                       <span>{upiId}</span>
                       <button
                         onClick={copyUpi}
-                        className="p-1 text-stone-500 hover:text-[var(--color-charcoal)] transition-colors"
+                        className="p-1 text-[var(--color-warm-grey)] hover:text-[var(--color-charcoal)] transition-colors"
                         title="Copy UPI ID"
                       >
-                        {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                        {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                       </button>
                     </div>
                   </div>
                 </div>
 
                 {/* UTR Input / Confirmation */}
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <input
                     type="text"
-                    placeholder="Enter UTR / Transaction Ref No. (Optional)"
+                    placeholder="ENTER UTR / REF NO. (OPTIONAL)"
                     value={utrNumber}
                     onChange={(e) => setUtrNumber(e.target.value)}
-                    className="w-full bg-stone-50 border border-stone-300 text-xs text-[var(--color-charcoal)] placeholder:text-stone-400 rounded-lg px-3.5 py-2.5 focus:border-[var(--color-brass)] focus:outline-none"
+                    className="w-full bg-transparent border-b border-[var(--color-charcoal)]/30 text-xs text-[var(--color-charcoal)] placeholder:text-[var(--color-charcoal)]/50 pb-2 focus:border-[var(--color-brass)] focus:outline-none rounded-none text-center tracking-widest"
                   />
 
                   <button 
                     onClick={() => setStep(3)}
-                    className="w-full py-3.5 text-white font-semibold text-sm rounded-lg bg-[var(--color-brass)] hover:bg-[var(--color-brass-dark)] transition-colors shadow-md flex items-center justify-center gap-2"
+                    className="btn-filled w-full justify-center"
                   >
-                    <span>I Have Paid ₹{QUICK_CONSULTATION_PRICE} — Select Slot</span>
+                    <span>Paid ₹{QUICK_CONSULTATION_PRICE} — Next</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -229,7 +234,7 @@ export default function ConsultationSection() {
 
               <button 
                 onClick={() => setStep(1)}
-                className="mt-6 text-[var(--color-warm-grey)] hover:text-[var(--color-charcoal)] text-sm"
+                className="mt-6 text-[var(--color-warm-grey)] hover:text-[var(--color-charcoal)] text-xs uppercase tracking-widest transition-colors"
               >
                 Go Back
               </button>
@@ -238,21 +243,21 @@ export default function ConsultationSection() {
 
           {/* STEP 3: Pick a Time */}
           {step === 3 && (
-            <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-8">
+            <div className="animate-in fade-in duration-500 space-y-8">
               <div>
-                <h3 className="text-xl text-[var(--color-charcoal)] font-serif mb-4">Select a Date</h3>
-                <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
+                <h3 className="text-xl text-[var(--color-charcoal)] font-serif mb-6 uppercase tracking-wider text-center">Select a Date</h3>
+                <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide justify-center">
                   {dates.map((date, idx) => (
                     <button
                       key={idx}
                       onClick={() => setSelectedDate(date.full)}
-                      className={`flex-shrink-0 px-6 py-3 rounded-full border transition-all ${
+                      className={`flex-shrink-0 px-6 py-3 border transition-all rounded-none ${
                         selectedDate === date.full 
-                          ? "border-[var(--color-brass)] bg-[var(--color-brass)] text-white font-semibold" 
-                          : "border-stone-300 text-[var(--color-charcoal)] hover:border-[var(--color-brass)]/60 bg-white"
+                          ? "border-[var(--color-brass)] bg-[var(--color-brass)] text-white" 
+                          : "border-[var(--color-charcoal)]/20 text-[var(--color-charcoal)] hover:border-[var(--color-charcoal)] bg-transparent"
                       }`}
                     >
-                      {date.display}
+                      <span className="text-xs uppercase tracking-widest">{date.display}</span>
                     </button>
                   ))}
                 </div>
@@ -260,36 +265,36 @@ export default function ConsultationSection() {
 
               {selectedDate && (
                 <div className="animate-in fade-in duration-300">
-                  <h3 className="text-xl text-[var(--color-charcoal)] font-serif mb-4">Select a Time Slot</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  <h3 className="text-xl text-[var(--color-charcoal)] font-serif mb-6 uppercase tracking-wider text-center">Select a Time</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-lg mx-auto">
                     {timeSlots.map((time) => (
                       <button
                         key={time}
                         onClick={() => setSelectedTime(time)}
-                        className={`px-4 py-3 rounded border transition-all ${
+                        className={`px-4 py-3 border transition-all rounded-none ${
                           selectedTime === time 
-                            ? "border-[var(--color-brass)] bg-[var(--color-brass)]/15 text-[var(--color-brass-dark)] font-semibold" 
-                            : "border-stone-300 text-[var(--color-charcoal)] hover:border-[var(--color-brass)]/60 bg-white"
+                            ? "border-[var(--color-charcoal)] bg-[var(--color-charcoal)] text-[var(--color-cream)]" 
+                            : "border-[var(--color-charcoal)]/20 text-[var(--color-charcoal)] hover:border-[var(--color-charcoal)] bg-transparent"
                         }`}
                       >
-                        {time}
+                        <span className="text-xs tracking-widest">{time}</span>
                       </button>
                     ))}
                   </div>
                 </div>
               )}
 
-              <div className="pt-6 flex justify-between items-center">
+              <div className="pt-8 flex justify-between items-center max-w-lg mx-auto w-full">
                 <button 
                   onClick={() => setStep(2)}
-                  className="text-[var(--color-warm-grey)] hover:text-[var(--color-charcoal)]"
+                  className="text-[var(--color-warm-grey)] hover:text-[var(--color-charcoal)] text-xs uppercase tracking-widest"
                 >
                   Back to Scanner
                 </button>
                 <button 
                   disabled={!selectedDate || !selectedTime}
                   onClick={() => setStep(4)}
-                  className="px-8 py-3 bg-[var(--color-brass)] text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[var(--color-brass-dark)] transition-colors rounded-sm shadow-md"
+                  className="btn-filled disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Confirm Booking
                 </button>
@@ -299,55 +304,41 @@ export default function ConsultationSection() {
 
           {/* STEP 4: Confirmation */}
           {step === 4 && (
-            <div className="flex flex-col items-center justify-center text-center animate-in zoom-in-95 duration-500">
-              <div className="w-20 h-20 bg-[var(--color-sage)]/20 rounded-full flex items-center justify-center mb-6 text-[var(--color-sage)]">
-                <CheckCircle size={40} />
+            <div className="flex flex-col items-center justify-center text-center animate-in fade-in duration-500">
+              <div className="mb-6 text-[var(--color-brass)]">
+                <CheckCircle size={48} strokeWidth={1} />
               </div>
-              <h3 className="text-3xl font-serif text-[var(--color-charcoal)] mb-2">Booking Confirmed!</h3>
-              <p className="text-[var(--color-warm-grey)] mb-8 max-w-md text-sm">
-                Thank you, {formData.name || "there"}. You will receive a payment confirmation email and a video call scheduling email shortly.
+              <h3 className="text-2xl sm:text-3xl font-serif text-[var(--color-charcoal)] mb-3 uppercase tracking-wider">Booking Confirmed</h3>
+              <p className="text-[var(--color-warm-grey)] mb-10 max-w-md text-sm font-helvetica">
+                Thank you, {formData.name || "there"}. We look forward to designing your space. A confirmation email will follow shortly.
               </p>
               
-              <div className="bg-white border border-stone-300 rounded-xl p-6 w-full max-w-sm mb-8 text-left space-y-3 text-xs shadow-md">
-                <div className="flex justify-between border-b border-stone-200 pb-2">
-                  <span className="text-[var(--color-warm-grey)]">Account Name</span>
-                  <span className="text-[var(--color-charcoal)] font-medium">{payeeName}</span>
-                </div>
-                <div className="flex justify-between border-b border-stone-200 pb-2">
-                  <span className="text-[var(--color-warm-grey)]">UPI ID</span>
-                  <span className="text-[var(--color-brass-dark)] font-mono">{upiId}</span>
-                </div>
-                {utrNumber && (
-                  <div className="flex justify-between border-b border-stone-200 pb-2">
-                    <span className="text-[var(--color-warm-grey)]">UTR / Ref No.</span>
-                    <span className="text-[var(--color-charcoal)] font-mono">{utrNumber}</span>
-                  </div>
-                )}
-                <div className="flex justify-between border-b border-stone-200 pb-2">
-                  <span className="text-[var(--color-warm-grey)]">Date</span>
+              <div className="bg-[var(--color-linen)] border border-[var(--color-charcoal)]/10 p-6 w-full max-w-sm mb-10 text-left space-y-4 text-xs shadow-none">
+                <div className="flex justify-between border-b border-[var(--color-charcoal)]/10 pb-3">
+                  <span className="text-[var(--color-warm-grey)] uppercase tracking-widest">Date</span>
                   <span className="text-[var(--color-charcoal)] font-medium">{new Date(selectedDate).toLocaleDateString()}</span>
                 </div>
-                <div className="flex justify-between border-b border-stone-200 pb-2">
-                  <span className="text-[var(--color-warm-grey)]">Time</span>
+                <div className="flex justify-between border-b border-[var(--color-charcoal)]/10 pb-3">
+                  <span className="text-[var(--color-warm-grey)] uppercase tracking-widest">Time</span>
                   <span className="text-[var(--color-charcoal)] font-medium">{selectedTime}</span>
                 </div>
-                <div className="flex justify-between pt-1">
-                  <span className="text-[var(--color-warm-grey)]">Amount Paid</span>
-                  <span className="text-[var(--color-charcoal)] font-semibold text-sm">₹{QUICK_CONSULTATION_PRICE}</span>
+                <div className="flex justify-between pb-1">
+                  <span className="text-[var(--color-warm-grey)] uppercase tracking-widest">Amount Paid</span>
+                  <span className="text-[var(--color-brass-dark)] font-semibold text-sm">₹{QUICK_CONSULTATION_PRICE}</span>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-6 w-full max-w-md justify-center">
                 <a 
                   href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(
                     `Hi Urban Spazio! I have completed the ₹999 payment for Quick Design Consultation. Name: ${formData.name}, UTR: ${utrNumber || 'N/A'}, Date: ${new Date(selectedDate).toLocaleDateString()}, Time: ${selectedTime}`
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-lg hover:bg-[#128C7E] transition-colors text-sm font-semibold shadow-md"
+                  className="btn-filled flex-1 justify-center"
                 >
-                  <MessageCircle size={18} />
-                  Send Proof on WhatsApp
+                  <MessageCircle size={16} />
+                  Send Proof
                 </a>
                 <button 
                   onClick={() => {
@@ -357,28 +348,14 @@ export default function ConsultationSection() {
                     setSelectedTime("");
                     setUtrNumber("");
                   }}
-                  className="px-6 py-3 border border-stone-300 text-[var(--color-charcoal)] bg-white rounded-lg hover:bg-stone-50 transition-colors text-sm font-medium"
+                  className="btn-outline flex-1 justify-center"
                 >
                   Book Another
                 </button>
               </div>
             </div>
           )}
-
         </div>
-
-        {/* Footer Note */}
-        <div className="mt-8 text-center text-xs text-[var(--color-warm-grey)]">
-          <span>Not ready for a consultation? </span>
-          <a href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-[var(--color-brass-dark)] hover:underline inline-flex items-center gap-1 font-semibold">
-            <MessageCircle size={12} /> Chat with us on WhatsApp
-          </a>
-          <span> or fill our </span>
-          <a href="#contact" className="text-[var(--color-brass-dark)] hover:underline font-semibold">
-            General Contact Form
-          </a>
-        </div>
-
       </div>
     </section>
   );

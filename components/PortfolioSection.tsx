@@ -1,93 +1,88 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { PORTFOLIO_ITEMS } from '@/lib/site-data';
+import React, { useState } from "react";
+import { PORTFOLIO_ITEMS } from "@/lib/site-data";
+
+type Filter = "all" | "residential" | "commercial";
 
 export default function PortfolioSection() {
-  const [filter, setFilter] = useState<'all' | 'residential' | 'commercial'>('all');
+  const [activeFilter, setActiveFilter] = useState<Filter>("all");
 
-  const filteredItems = filter === 'all' 
-    ? PORTFOLIO_ITEMS 
-    : PORTFOLIO_ITEMS.filter(item => item.category === filter);
+  const filteredItems = PORTFOLIO_ITEMS.filter((item) => {
+    if (activeFilter === "all") return true;
+    return item.category === activeFilter;
+  });
 
   return (
-    <section id="portfolio" className="py-20 lg:py-24 bg-[#FAF8F5] px-5 sm:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Compact Header */}
-        <div className="mb-10 text-center">
-          <span className="inline-block uppercase tracking-[0.2em] text-xs font-semibold text-[var(--color-brass-dark)] mb-2">
-            Our Work
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[var(--color-charcoal)]">
-            Spaces That Speak
-          </h2>
+    <section id="portfolio" className="py-24 bg-[var(--color-cream)]">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className="section-header mb-12">
+          <span className="script-label">our recent work</span>
+          <h2 className="serif-heading text-4xl md:text-5xl">Spaces That Speak</h2>
+          <div className="divider-gold divider-gold--center"></div>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex justify-center gap-3 mb-8 flex-wrap">
-          {(['all', 'residential', 'commercial'] as const).map((tab) => (
+        <div className="flex justify-center gap-8 mb-12">
+          {(["all", "residential", "commercial"] as Filter[]).map((filter) => (
             <button
-              key={tab}
-              onClick={() => setFilter(tab)}
-              className={`px-5 py-2 rounded-full text-xs font-helvetica uppercase tracking-wider font-semibold transition-all duration-300 ${
-                filter === tab
-                  ? 'bg-[var(--color-brass)] text-white shadow-md'
-                  : 'bg-white text-[var(--color-charcoal)] border border-stone-300/60 hover:border-[var(--color-brass)]'
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              className={`text-sm uppercase tracking-widest font-medium transition-colors pb-1 border-b ${
+                activeFilter === filter
+                  ? "text-[var(--color-brass-dark)] border-[var(--color-brass-dark)]"
+                  : "text-[var(--color-charcoal)]/60 border-transparent hover:text-[var(--color-charcoal)]"
               }`}
             >
-              {tab}
+              {filter}
             </button>
           ))}
         </div>
 
-        {/* Bento Grid — compact row height */}
-        <div className="grid grid-cols-2 md:grid-cols-3 auto-rows-[200px] sm:auto-rows-[220px] gap-3 sm:gap-4">
-          {filteredItems.slice(0, 6).map((item, index) => {
-            // Bento spanning: first item is the hero card
-            const isLarge = index === 0;
-            const isWide = index === 3;
-            
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-2 auto-rows-[200px] sm:auto-rows-[220px] md:auto-rows-[280px]">
+          {filteredItems.map((item, idx) => {
+            // Make some items span 2 rows or columns for a bento grid effect
+            let spanClasses = "";
+            if (idx === 0) spanClasses = "col-span-2 row-span-2";
+            else if (idx === 3) spanClasses = "row-span-2";
+            else if (idx === 4) spanClasses = "col-span-2";
+
             return (
               <div 
-                key={item.id}
-                className={`relative group overflow-hidden rounded-2xl cursor-pointer ${
-                  isLarge ? 'col-span-2 row-span-2' : isWide ? 'md:col-span-2' : 'col-span-1'
-                }`}
+                key={item.id} 
+                className={`group relative overflow-hidden bg-[var(--color-dark)] ${spanClasses}`}
               >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                 />
                 
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-80 group-hover:opacity-65 transition-opacity duration-400" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark)]/90 via-[var(--color-dark)]/30 to-transparent"></div>
                 
-                {/* Brass Border on Hover */}
-                <div className="absolute inset-3 border border-[var(--color-brass)] opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-lg pointer-events-none" />
+                {/* Thin brass border on hover */}
+                <div className="absolute inset-4 border border-[var(--color-brass)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-                {/* Content — compact padding */}
-                <div className="absolute bottom-0 left-0 p-4 sm:p-5 w-full">
-                  <span className="text-[var(--color-brass)] font-helvetica text-[10px] uppercase tracking-widest font-semibold mb-1 block">
-                    {item.philosophy}
-                  </span>
-                  <h4 className="text-white font-serif text-lg sm:text-xl font-bold leading-snug mb-0.5">
+                <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-500 group-hover:-translate-y-2">
+                  <h3 className="font-serif text-xl md:text-2xl text-white mb-1 uppercase tracking-wide">
                     {item.title}
-                  </h4>
-                  <p className="text-stone-300 font-helvetica text-xs">
-                    {item.location}
-                  </p>
-                  
-                  {/* Hover View Project */}
-                  <p className="text-white font-helvetica text-[10px] tracking-wider uppercase mt-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400 flex items-center gap-2">
-                    View Project
-                    <span className="w-5 h-[1px] bg-[var(--color-brass)] inline-block" />
-                  </p>
+                  </h3>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[var(--color-brass)] text-xs uppercase tracking-widest">
+                      {item.philosophy}
+                    </span>
+                    <span className="w-1 h-1 rounded-full bg-[var(--color-cream)]/50"></span>
+                    <span className="text-[var(--color-cream)]/70 text-xs font-light">
+                      {item.location}
+                    </span>
+                  </div>
                 </div>
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-16 text-center">
+          <button className="btn-outline">View Full Portfolio</button>
         </div>
       </div>
     </section>

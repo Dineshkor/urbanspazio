@@ -2,95 +2,234 @@
 
 /* ============================================
    URBAN SPAZIO — Design System
-   Minimalist Luxury & Editorial Aesthetics
+   Editorial Luxury · Inspired by 7th Street,
+   Dana Renata, Audrey & Style Coached by Eve
    ============================================ */
 
 @layer base {
   :root {
-    --color-brass: #B8975A;
-    --color-brass-light: #CBAB72;
-    --color-brass-dark: #9A7D48;
-    --color-charcoal: #2A2725;
-    --color-warm-white: #FAF8F5;
-    --color-off-white: #F3EFEA;
+    /* ── Warm Linen Palette ── */
+    --color-linen: #F5F0EB;
+    --color-cream: #EDE8E2;
+    --color-dark: #1E1C1A;
+    --color-charcoal: #2C2825;
+    --color-brass: #C4A265;
+    --color-brass-light: #D4B87A;
+    --color-brass-dark: #A68B4B;
+    --color-warm-grey: #8A8378;
+    --color-light-grey: #B5AFA7;
+
+    /* Legacy aliases */
+    --color-warm-white: #F5F0EB;
+    --color-off-white: #EDE8E2;
     --color-stone: #E9E3DB;
-    --color-warm-grey: #7D766D;
-    --color-sage: #8B9D83;
-    --color-sage-light: #A8B8A0;
-    --color-espresso: #E2DDD5;
-    --color-espresso-light: #D6CFB5;
+    --color-espresso: #1E1C1A;
+    --color-brass-dark: #A68B4B;
+    --color-brass-light: #D4B87A;
   }
 
   html {
     scroll-behavior: smooth;
-    background-color: var(--color-warm-white);
+    background-color: var(--color-linen);
   }
 
   body {
-    background-color: var(--color-warm-white);
+    background-color: var(--color-linen);
     color: var(--color-charcoal);
     font-family: var(--font-inter, 'Helvetica Neue', Helvetica, system-ui, sans-serif);
     font-weight: 300;
+    letter-spacing: 0.01em;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Selection color */
   ::selection {
     background-color: var(--color-brass);
     color: white;
   }
 
-  /* Smooth focus rings */
   :focus-visible {
     outline: 2px solid var(--color-brass);
     outline-offset: 2px;
-    border-radius: 4px;
   }
 
-  /* Prevent image flicker */
   img {
-    background-color: var(--color-stone);
-    contain: paint;
+    background-color: var(--color-cream);
   }
 
-  /* Standard headings across the site use Playfair Display */
+  /* Headings — Playfair Display serif */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-weight: 700;
   }
 }
 
 /* ============================================
-   Typography & Custom Utilities
+   Typography Utilities
    ============================================ */
 
-/* Bodoni Moda Italic font — used exclusively for URBAN SPAZIO in the Hero Section */
+/* Cursive script — for decorative subheadings */
+.font-script {
+  font-family: var(--font-script), 'Dancing Script', cursive;
+  font-weight: 400;
+}
+
+/* Bodoni Moda — brand title */
+.font-bodoni {
+  font-family: var(--font-bodoni), 'Bodoni Moda', 'Didot', serif;
+}
+
 .font-bodoni-italic {
-  font-family: var(--font-bodoni), 'Bodoni Moda', 'Didot', 'Bodoni MT', serif;
+  font-family: var(--font-bodoni), 'Bodoni Moda', 'Didot', serif;
   font-style: italic;
 }
 
-.font-bodoni {
-  font-family: var(--font-bodoni), 'Bodoni Moda', 'Didot', 'Bodoni MT', serif;
-}
-
-/* Crisp Helvetica Light styling for subheadings & body */
+/* Helvetica Light — body/labels */
 .font-helvetica {
   font-family: var(--font-inter, 'Helvetica Neue', Helvetica, Arial, sans-serif);
   font-weight: 300;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
 }
 
-/* Section with warm light sandstone background */
-@utility section-dark {
-  background-color: var(--color-espresso);
+/* ============================================
+   Section Header Pattern (script + serif)
+   ============================================ */
+
+.section-header {
+  text-align: center;
+}
+
+.section-header .script-label {
+  font-family: var(--font-script), 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  color: var(--color-brass);
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.section-header .serif-heading {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-weight: 700;
   color: var(--color-charcoal);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
-/* Section with stone background */
-@utility section-stone {
-  background-color: var(--color-stone);
+/* Inverted for dark sections */
+.section-header--dark .serif-heading {
+  color: var(--color-cream);
+}
+
+.section-header--dark .script-label {
+  color: var(--color-brass-light);
+}
+
+/* ============================================
+   Button Styles (editorial outlined)
+   ============================================ */
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  border: 1px solid var(--color-charcoal);
+  color: var(--color-charcoal);
+  font-family: var(--font-inter, sans-serif);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: all 0.3s ease;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-charcoal);
+  color: white;
+}
+
+.btn-outline--light {
+  border-color: var(--color-cream);
+  color: var(--color-cream);
+}
+
+.btn-outline--light:hover {
+  background-color: var(--color-cream);
+  color: var(--color-dark);
+}
+
+.btn-outline--brass {
+  border-color: var(--color-brass);
+  color: var(--color-brass);
+}
+
+.btn-outline--brass:hover {
+  background-color: var(--color-brass);
+  color: white;
+}
+
+.btn-filled {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background-color: var(--color-dark);
+  color: white;
+  font-family: var(--font-inter, sans-serif);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-filled:hover {
+  background-color: var(--color-charcoal);
+}
+
+/* ============================================
+   Decorative Elements
+   ============================================ */
+
+/* Thin gold horizontal rule */
+.divider-gold {
+  width: 60px;
+  height: 1px;
+  background-color: var(--color-brass);
+  border: none;
+  margin: 1.5rem 0;
+}
+
+.divider-gold--center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Arch-shaped image frame */
+.arch-frame {
+  border-radius: 999px 999px 0 0;
+  overflow: hidden;
+}
+
+/* ============================================
+   Section Backgrounds
+   ============================================ */
+
+@utility section-dark {
+  background-color: var(--color-dark);
+  color: var(--color-cream);
+}
+
+@utility section-cream {
+  background-color: var(--color-cream);
+}
+
+@utility section-linen {
+  background-color: var(--color-linen);
 }
 
 /* Gold/brass gradient text */
@@ -99,17 +238,4 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-}
-
-/* Brass accent underline */
-@utility underline-brass {
-  text-decoration: underline;
-  text-decoration-color: var(--color-brass);
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-/* Smooth drag cursor */
-.cursor-ew-resize {
-  cursor: ew-resize;
 }
