@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Bodoni_Moda, Dancing_Script, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
@@ -57,6 +57,10 @@ export const metadata: Metadata = {
     icon: "/images/logo.jpg",
     apple: "/images/logo.jpg",
   },
+};
+
+export const viewport: Viewport = {
+  colorScheme: "light",
 };
 
 export default function RootLayout({

@@ -8,6 +8,8 @@
 
 @layer base {
   :root {
+    color-scheme: light;
+
     /* ── Warm Linen Palette ── */
     --color-linen: #f6f1ea;
     --color-cream: #e9e1d7;
