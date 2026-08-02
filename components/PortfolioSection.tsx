@@ -1,88 +1,69 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { PORTFOLIO_ITEMS } from "@/lib/site-data";
+import { useMemo, useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
+import { PORTFOLIO_ITEMS } from '@/lib/site-data';
 
-type Filter = "all" | "residential" | "commercial";
+type Filter = 'all' | 'residential' | 'commercial';
+
+const FILTERS: Filter[] = ['all', 'residential', 'commercial'];
 
 export default function PortfolioSection() {
-  const [activeFilter, setActiveFilter] = useState<Filter>("all");
-
-  const filteredItems = PORTFOLIO_ITEMS.filter((item) => {
-    if (activeFilter === "all") return true;
-    return item.category === activeFilter;
-  });
+  const [activeFilter, setActiveFilter] = useState<Filter>('all');
+  const items = useMemo(
+    () => PORTFOLIO_ITEMS.filter((item) => activeFilter === 'all' || item.category === activeFilter),
+    [activeFilter],
+  );
 
   return (
-    <section id="portfolio" className="py-24 bg-[var(--color-cream)]">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="section-header mb-12">
-          <span className="script-label">our recent work</span>
-          <h2 className="serif-heading text-4xl md:text-5xl">Spaces That Speak</h2>
-          <div className="divider-gold divider-gold--center"></div>
-        </div>
-
-        <div className="flex justify-center gap-8 mb-12">
-          {(["all", "residential", "commercial"] as Filter[]).map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`text-sm uppercase tracking-widest font-medium transition-colors pb-1 border-b ${
-                activeFilter === filter
-                  ? "text-[var(--color-brass-dark)] border-[var(--color-brass-dark)]"
-                  : "text-[var(--color-charcoal)]/60 border-transparent hover:text-[var(--color-charcoal)]"
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-2 auto-rows-[200px] sm:auto-rows-[220px] md:auto-rows-[280px]">
-          {filteredItems.map((item, idx) => {
-            // Make some items span 2 rows or columns for a bento grid effect
-            let spanClasses = "";
-            if (idx === 0) spanClasses = "col-span-2 row-span-2";
-            else if (idx === 3) spanClasses = "row-span-2";
-            else if (idx === 4) spanClasses = "col-span-2";
-
-            return (
-              <div 
-                key={item.id} 
-                className={`group relative overflow-hidden bg-[var(--color-dark)] ${spanClasses}`}
+    <section id="portfolio" className="overflow-hidden bg-[var(--color-linen)] py-24 lg:py-32">
+      <div className="editorial-shell">
+        <header className="grid gap-6 border-t border-[var(--color-brass)] pt-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <div>
+            <span className="font-script text-3xl text-[var(--color-brass)]">Selected spaces</span>
+            <h2 className="mt-2 font-bodoni text-5xl leading-none text-[var(--color-charcoal)] sm:text-6xl">Work with a point of view.</h2>
+          </div>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 lg:justify-self-end">
+            {FILTERS.map((filter) => (
+              <button
+                key={filter}
+                type="button"
+                onClick={() => setActiveFilter(filter)}
+                className={`editorial-kicker border-b pb-2 transition-colors ${
+                  activeFilter === filter
+                    ? 'border-[var(--color-brass-dark)] text-[var(--color-brass-dark)]'
+                    : 'border-transparent text-[var(--color-warm-grey)] hover:text-[var(--color-charcoal)]'
+                }`}
+                aria-pressed={activeFilter === filter}
               >
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-                />
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark)]/90 via-[var(--color-dark)]/30 to-transparent"></div>
-                
-                {/* Thin brass border on hover */}
-                <div className="absolute inset-4 border border-[var(--color-brass)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                {filter}
+              </button>
+            ))}
+          </div>
+        </header>
 
-                <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-500 group-hover:-translate-y-2">
-                  <h3 className="font-serif text-xl md:text-2xl text-white mb-1 uppercase tracking-wide">
-                    {item.title}
-                  </h3>
-                  <div className="flex items-center gap-3">
-                    <span className="text-[var(--color-brass)] text-xs uppercase tracking-widest">
-                      {item.philosophy}
-                    </span>
-                    <span className="w-1 h-1 rounded-full bg-[var(--color-cream)]/50"></span>
-                    <span className="text-[var(--color-cream)]/70 text-xs font-light">
-                      {item.location}
-                    </span>
-                  </div>
+        <div className="mt-16 grid gap-x-7 gap-y-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-9 lg:gap-y-16">
+          {items.map((item, index) => {
+            const aspect = index % 3 === 0 ? 'aspect-[4/5]' : index % 3 === 1 ? 'aspect-square' : 'aspect-[3/4]';
+            return (
+              <article key={item.id} className={index % 3 === 1 ? 'lg:translate-y-16' : ''}>
+                <div className={`editorial-image ${aspect}`}>
+                  <img src={item.image} alt={item.title} loading="lazy" />
                 </div>
-              </div>
+                <div className="mt-4 flex items-start justify-between gap-4 border-t border-[var(--color-charcoal)]/20 pt-4">
+                  <div>
+                    <h3 className="font-serif text-xl font-medium text-[var(--color-charcoal)]">{item.title}</h3>
+                    <p className="mt-1 text-[10px] uppercase tracking-[0.15em] text-[var(--color-warm-grey)]">
+                      {item.philosophy} / {item.location}
+                    </p>
+                  </div>
+                  <a href="#contact" className="mt-0.5 text-[var(--color-brass-dark)]" aria-label={`Enquire about ${item.title}`}>
+                    <ArrowUpRight className="size-4" />
+                  </a>
+                </div>
+              </article>
             );
           })}
-        </div>
-
-        <div className="mt-16 text-center">
-          <button className="btn-outline">View Full Portfolio</button>
         </div>
       </div>
     </section>

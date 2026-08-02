@@ -22,8 +22,8 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[var(--color-dark)] text-[var(--color-cream)] pt-20 pb-10 border-t border-[var(--color-cream)]/10">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col items-center text-center">
+    <footer className="border-t border-[var(--color-cream)]/10 bg-[var(--color-dark)] pb-10 pt-16 text-[var(--color-cream)]">
+      <div className="editorial-shell flex flex-col items-center text-center">
         
         {/* Brand Name */}
         <h2 className="font-bodoni-italic text-4xl sm:text-5xl mb-6">

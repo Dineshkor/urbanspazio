@@ -20,20 +20,15 @@ const InstagramIcon = ({ size = 20 }: { size?: number }) => (
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-24 bg-[var(--color-dark)] text-[var(--color-cream)]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="contact" className="bg-[var(--color-dark)] py-24 text-[var(--color-cream)] lg:py-32">
+      <div className="editorial-shell">
         
-        <div className="section-header section-header--dark mb-16">
-          <span className="font-script text-2xl text-[var(--color-brass)] mb-2 block">
-            let&apos;s connect
-          </span>
-          <h2 className="serif-heading text-3xl sm:text-5xl mb-4">
-            GET IN TOUCH
-          </h2>
-          <div className="divider-gold divider-gold--center" />
+        <div className="mb-16 border-t border-[var(--color-brass)] pt-5">
+          <span className="font-script text-3xl text-[var(--color-brass-light)]">Let&apos;s connect</span>
+          <h2 className="mt-2 font-bodoni text-5xl leading-none text-white sm:text-6xl">Begin with a conversation.</h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mt-12">
+        <div className="mt-12 grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-24">
           
           {/* Left: Form */}
           <div className="order-2 lg:order-1">

@@ -1,28 +1,28 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { BRAND, NAV_LINKS } from '@/lib/constants';
+import { useEffect, useState } from 'react';
+import { NAV_LINKS } from '@/lib/constants';
 import { Menu, X } from 'lucide-react';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#hero');
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const onScroll = () => {
       const isScrolled = window.scrollY > 30;
       setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev));
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+    const frame = window.requestAnimationFrame(onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {
-    if (!mounted) return;
     const sections = NAV_LINKS.map((l) =>
       document.querySelector(l.href)
     ).filter(Boolean) as Element[];
@@ -43,27 +43,27 @@ export default function Header() {
 
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
-  }, [mounted]);
+  }, []);
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[var(--color-linen)]/97 border-b border-[var(--color-cream)] py-3'
-          : 'bg-transparent py-5'
+          ? 'bg-[var(--color-linen)]/95 border-b border-[var(--color-cream)] py-3 backdrop-blur-sm'
+          : 'bg-[var(--color-linen)]/75 py-4 lg:bg-transparent lg:py-6'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between">
+      <div className="editorial-shell flex items-center justify-between">
         {/* ── Logo ── */}
         <a href="#hero" className="group">
-          <span className="text-lg sm:text-xl font-bodoni-italic tracking-wide text-[var(--color-charcoal)]">
+          <span className="text-xl font-bodoni-italic text-[var(--color-charcoal)] sm:text-2xl">
             Urban{' '}
             <span className="text-[var(--color-brass)]">Spazio</span>
           </span>
         </a>
 
         {/* ── Desktop Nav ── */}
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden items-center gap-6 xl:gap-8 lg:flex" aria-label="Primary navigation">
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.href;
             return (
@@ -92,8 +92,9 @@ export default function Header() {
         {/* ── Mobile Toggle ── */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden p-2 text-[var(--color-charcoal)]"
+          className="p-2 text-[var(--color-charcoal)] lg:hidden"
           aria-label="Toggle navigation"
+          aria-expanded={mobileOpen}
         >
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -101,8 +102,8 @@ export default function Header() {
 
       {/* ── Mobile Drawer ── */}
       {mobileOpen && (
-        <div className="lg:hidden bg-[var(--color-linen)] border-t border-[var(--color-cream)] px-6 py-6">
-          <nav className="space-y-1">
+        <div className="border-t border-[var(--color-cream)] bg-[var(--color-paper)] px-6 py-6 lg:hidden">
+          <nav className="space-y-1" aria-label="Mobile navigation">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.name}

@@ -9,15 +9,16 @@
 @layer base {
   :root {
     /* ── Warm Linen Palette ── */
-    --color-linen: #F5F0EB;
-    --color-cream: #EDE8E2;
-    --color-dark: #1E1C1A;
-    --color-charcoal: #2C2825;
-    --color-brass: #C4A265;
-    --color-brass-light: #D4B87A;
-    --color-brass-dark: #A68B4B;
-    --color-warm-grey: #8A8378;
-    --color-light-grey: #B5AFA7;
+    --color-linen: #f6f1ea;
+    --color-cream: #e9e1d7;
+    --color-paper: #fcfaf7;
+    --color-dark: #1c1a18;
+    --color-charcoal: #2b2825;
+    --color-brass: #b69152;
+    --color-brass-light: #d6bb88;
+    --color-brass-dark: #8f6f3d;
+    --color-warm-grey: #756f67;
+    --color-light-grey: #b9b0a5;
 
     /* Legacy aliases */
     --color-warm-white: #F5F0EB;
@@ -90,6 +91,48 @@
   font-family: var(--font-inter, 'Helvetica Neue', Helvetica, Arial, sans-serif);
   font-weight: 300;
   letter-spacing: 0.03em;
+}
+
+.editorial-shell {
+  width: min(100%, 80rem);
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 4vw, 4rem);
+}
+
+.editorial-kicker {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hairline {
+  height: 1px;
+  background: color-mix(in srgb, var(--color-brass) 78%, transparent);
+}
+
+.editorial-image {
+  overflow: hidden;
+  background: var(--color-cream);
+}
+
+.editorial-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 700ms ease;
+}
+
+.editorial-image:hover img {
+  transform: scale(1.035);
+}
+
+.section-number {
+  color: color-mix(in srgb, var(--color-brass) 36%, transparent);
+  font-family: var(--font-bodoni), "Bodoni Moda", Didot, serif;
+  font-size: clamp(4rem, 9vw, 8.5rem);
+  font-weight: 400;
+  line-height: 0.75;
 }
 
 /* ============================================
@@ -232,10 +275,10 @@
   background-color: var(--color-linen);
 }
 
-/* Gold/brass gradient text */
-@utility text-gradient-brass {
-  background: linear-gradient(135deg, var(--color-brass-dark), var(--color-brass), var(--color-brass-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
 }

@@ -17,23 +17,19 @@ export default function TestimonialSection() {
   const current = TESTIMONIALS[currentIndex];
 
   return (
-    <section id="testimonials" className="py-24 md:py-32 bg-[var(--color-linen)]">
-      <div className="container mx-auto px-6 max-w-4xl text-center">
-        <div className="mb-12">
-          <span className="font-script text-2xl text-[var(--color-brass)] block mb-2">kind words</span>
-          <h2 className="font-serif text-3xl md:text-4xl text-[var(--color-charcoal)] uppercase tracking-wide">
-            Reviews
-          </h2>
+    <section id="testimonials" className="bg-[var(--color-linen)] py-24 md:py-32">
+      <div className="editorial-shell max-w-5xl text-center">
+        <div className="border-t border-[var(--color-brass)] pt-5">
+          <span className="font-script text-3xl text-[var(--color-brass)]">Kind words</span>
+          <h2 className="mt-2 font-bodoni text-5xl leading-none text-[var(--color-charcoal)] sm:text-6xl">Lived in, loved well.</h2>
         </div>
 
-        <div className="divider-gold divider-gold--center mb-16" />
-
-        <div className="relative min-h-[300px] flex flex-col items-center justify-center transition-opacity duration-500">
-          <span className="font-serif text-[var(--color-brass)] text-8xl leading-none absolute -top-12 opacity-20 select-none">
+        <div className="relative flex min-h-[300px] flex-col items-center justify-center pt-16 transition-opacity duration-500">
+          <span className="absolute top-8 font-bodoni text-8xl leading-none text-[var(--color-brass)]/25 select-none">
             &ldquo;
           </span>
           
-          <p className="font-serif italic text-2xl md:text-4xl text-[var(--color-charcoal)] leading-relaxed mb-12 relative z-10">
+          <p className="relative z-10 mb-10 max-w-4xl font-bodoni-italic text-3xl leading-tight text-[var(--color-charcoal)] md:text-5xl">
             {current.quote}
           </p>
 
@@ -53,7 +49,7 @@ export default function TestimonialSection() {
           </div>
         </div>
 
-        <div className="divider-gold divider-gold--center mt-12 mb-8" />
+        <div className="hairline mx-auto mt-12 mb-8 w-20" />
 
         <div className="flex justify-center space-x-3">
           {TESTIMONIALS.map((_, idx) => (

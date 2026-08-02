@@ -1,37 +1,27 @@
-import { PROCESS_STEPS } from "@/lib/site-data";
+import { PROCESS_STEPS } from '@/lib/site-data';
 
 export default function ProcessSection() {
   return (
-    <section id="process" className="py-24 lg:py-32 bg-[var(--color-cream)]">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <div className="section-header mb-20 text-center">
-          <span className="font-script text-2xl text-[var(--color-brass)] block mb-2">how it works</span>
-          <h2 className="font-serif text-3xl md:text-4xl text-[var(--color-charcoal)] uppercase tracking-wide">
-            From Vision to Reality
-          </h2>
-          <div className="divider-gold divider-gold--center" />
-        </div>
-
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-0">
-          {PROCESS_STEPS.map((step, index) => (
-            <div 
-              key={step.step} 
-              className={`flex-1 flex flex-col items-center text-center px-4 lg:px-6 ${
-                index !== PROCESS_STEPS.length - 1 ? 'lg:border-r lg:border-[var(--color-brass)] lg:border-opacity-30' : ''
-              }`}
-            >
-              <div className="font-serif text-6xl md:text-7xl font-light text-[var(--color-brass)] mb-6">
-                {step.step}
-              </div>
-              <h3 className="font-serif text-xl md:text-2xl text-[var(--color-charcoal)] mb-4 uppercase tracking-wide">
-                {step.title}
-              </h3>
-              <p className="font-helvetica text-[var(--color-charcoal)] opacity-80 leading-relaxed text-sm md:text-base">
-                {step.description}
-              </p>
-            </div>
+    <section id="process" className="bg-[var(--color-paper)] py-24 lg:py-32">
+      <div className="editorial-shell">
+        <header className="mb-16 grid gap-5 border-t border-[var(--color-brass)] pt-5 md:grid-cols-[0.7fr_1.3fr] md:items-end">
+          <div>
+            <span className="font-script text-3xl text-[var(--color-brass)]">How it unfolds</span>
+            <h2 className="mt-2 font-bodoni text-5xl leading-none text-[var(--color-charcoal)] sm:text-6xl">From vision to reality.</h2>
+          </div>
+          <p className="max-w-lg text-sm leading-7 text-[var(--color-warm-grey)] md:justify-self-end">
+            A clear, collaborative process brings every decision into focus before the final handover.
+          </p>
+        </header>
+        <ol className="grid border-t border-[var(--color-charcoal)]/15 lg:grid-cols-5">
+          {PROCESS_STEPS.map((step) => (
+            <li key={step.step} className="border-b border-[var(--color-charcoal)]/15 px-0 py-8 lg:border-b-0 lg:border-r lg:px-6 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0">
+              <span className="font-bodoni text-5xl leading-none text-[var(--color-brass)]">{step.step}</span>
+              <h3 className="mt-7 font-serif text-xl font-medium text-[var(--color-charcoal)]">{step.title}</h3>
+              <p className="mt-4 text-sm leading-7 text-[var(--color-warm-grey)]">{step.description}</p>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

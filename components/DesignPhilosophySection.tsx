@@ -1,59 +1,33 @@
-"use client";
-
-import React from "react";
-import { DESIGN_PHILOSOPHIES } from "@/lib/site-data";
+import { DESIGN_PHILOSOPHIES } from '@/lib/site-data';
 
 export default function DesignPhilosophySection() {
   return (
-    <section id="philosophy" className="py-24 bg-[var(--color-dark)] text-[var(--color-cream)]">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="section-header section-header--dark mb-16">
-          <span className="script-label">our design language</span>
-          <h2 className="serif-heading text-4xl md:text-5xl">Four Philosophies, One Vision</h2>
-          <div className="divider-gold divider-gold--center"></div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          {DESIGN_PHILOSOPHIES.map((philosophy) => (
-            <div 
-              key={philosophy.id}
-              className="group relative flex flex-col border-t border-[var(--color-brass)] pt-4 overflow-hidden"
-            >
-              <div className="aspect-[4/3] w-full relative overflow-hidden mb-6">
-                <img 
-                  src={philosophy.image} 
-                  alt={philosophy.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark)]/90 via-[var(--color-dark)]/20 to-transparent transition-opacity duration-500 group-hover:opacity-80"></div>
-                
-                <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col justify-end">
-                  <h3 className="font-serif text-2xl md:text-3xl uppercase tracking-wide mb-1 text-white">
-                    {philosophy.title}
-                  </h3>
-                  <p className="text-[var(--color-brass-light)] text-sm uppercase tracking-widest mb-4">
-                    {philosophy.subtitle}
-                  </p>
-                </div>
+    <section id="philosophy" className="bg-[var(--color-dark)] py-24 text-[var(--color-cream)] lg:py-32">
+      <div className="editorial-shell">
+        <header className="mb-16 grid gap-5 border-t border-[var(--color-brass)] pt-5 md:grid-cols-[0.8fr_1.2fr] md:items-end">
+          <div>
+            <span className="font-script text-3xl text-[var(--color-brass-light)]">Our design language</span>
+            <h2 className="mt-2 max-w-md font-bodoni text-5xl leading-none sm:text-6xl">Four philosophies, one vision.</h2>
+          </div>
+          <p className="max-w-lg text-sm leading-7 text-[var(--color-cream)]/65 md:justify-self-end">
+            Each project finds its own balance of material, light, and rhythm. These are the visual languages we return to most often.
+          </p>
+        </header>
+        <div className="grid gap-x-10 gap-y-16 md:grid-cols-2">
+          {DESIGN_PHILOSOPHIES.map((philosophy, index) => (
+            <article key={philosophy.id} className={index % 2 === 1 ? 'md:translate-y-16' : ''}>
+              <div className="editorial-image aspect-[4/3]">
+                <img src={philosophy.image} alt={philosophy.title} loading="lazy" />
               </div>
-
-              <div className="px-2">
-                <p className="text-[var(--color-cream)]/80 font-light leading-relaxed mb-6">
-                  {philosophy.description}
+              <div className="mt-5 border-t border-white/20 pt-4">
+                <span className="editorial-kicker text-[var(--color-brass-light)]">{philosophy.subtitle}</span>
+                <h3 className="mt-3 font-bodoni text-4xl leading-none text-white">{philosophy.title}</h3>
+                <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--color-cream)]/70">{philosophy.description}</p>
+                <p className="mt-5 text-xs leading-6 text-[var(--color-brass-light)]/85">
+                  {philosophy.characteristics.slice(0, 3).join(' / ')}
                 </p>
-                
-                <div className="flex flex-wrap gap-2">
-                  {philosophy.characteristics.map((char, idx) => (
-                    <span 
-                      key={idx} 
-                      className="inline-block px-3 py-1 text-xs border border-[var(--color-cream)]/20 text-[var(--color-cream)]/90 uppercase tracking-wider"
-                    >
-                      {char}
-                    </span>
-                  ))}
-                </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

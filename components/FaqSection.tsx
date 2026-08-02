@@ -12,17 +12,12 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="faq" className="py-24 bg-[var(--color-linen)]">
-      <div className="max-w-4xl mx-auto px-6 lg:px-8">
+    <section id="faq" className="bg-[var(--color-paper)] py-24 lg:py-32">
+      <div className="editorial-shell max-w-5xl">
         
-        <div className="section-header mb-16">
-          <span className="font-script text-2xl text-[var(--color-brass)] mb-2 block">
-            common questions
-          </span>
-          <h2 className="serif-heading text-3xl sm:text-5xl mb-4">
-            FAQ
-          </h2>
-          <div className="divider-gold divider-gold--center" />
+        <div className="mb-14 border-t border-[var(--color-brass)] pt-5">
+          <span className="font-script text-3xl text-[var(--color-brass)]">Common questions</span>
+          <h2 className="mt-2 font-bodoni text-5xl leading-none text-[var(--color-charcoal)] sm:text-6xl">The details, considered.</h2>
         </div>
 
         <div className="space-y-2 border-t border-[var(--color-brass)]/30">
@@ -34,10 +29,13 @@ export default function FaqSection() {
                 className="border-b border-[var(--color-brass)]/30"
               >
                 <button
+                  type="button"
                   onClick={() => toggleFaq(index)}
-                  className="w-full flex items-center justify-between py-6 text-left focus:outline-none group"
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${index}`}
+                  className="group flex w-full items-center justify-between py-6 text-left"
                 >
-                  <span className={`text-lg sm:text-xl font-serif uppercase tracking-wider transition-colors ${isOpen ? 'text-[var(--color-brass-dark)]' : 'text-[var(--color-charcoal)] group-hover:text-[var(--color-brass-dark)]'}`}>
+                  <span className={`font-serif text-lg transition-colors sm:text-xl ${isOpen ? 'text-[var(--color-brass-dark)]' : 'text-[var(--color-charcoal)] group-hover:text-[var(--color-brass-dark)]'}`}>
                     {faq.question}
                   </span>
                   <span className="text-[var(--color-brass)] ml-4 flex-shrink-0">
@@ -45,7 +43,7 @@ export default function FaqSection() {
                   </span>
                 </button>
                 
-                <div 
+                <div id={`faq-answer-${index}`}
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 pb-6 opacity-100' : 'max-h-0 opacity-0'}`}
                 >
                   <p className="text-[var(--color-warm-grey)] font-helvetica text-sm sm:text-base leading-relaxed max-w-3xl">

@@ -44,16 +44,16 @@ export default function ConsultationSection() {
   });
 
   return (
-    <section id="consultation" className="py-24 bg-[var(--color-dark)] text-[var(--color-cream)] relative">
-      <div className="max-w-4xl mx-auto px-6 lg:px-8">
+    <section id="consultation" className="relative bg-[var(--color-dark)] py-24 text-[var(--color-cream)] lg:py-32">
+      <div className="editorial-shell max-w-5xl">
         
         {/* Header */}
         <div className="section-header section-header--dark mb-16">
-          <span className="font-script text-2xl text-[var(--color-brass)] mb-2 block">
-            let&apos;s begin
+          <span className="font-script mb-2 block text-3xl text-[var(--color-brass-light)]">
+            a focused beginning
           </span>
-          <h2 className="serif-heading text-3xl sm:text-5xl mb-4">
-            BOOK YOUR CONSULTATION
+          <h2 className="font-bodoni text-5xl leading-none text-white sm:text-6xl">
+            Start with the details.
           </h2>
           <div className="divider-gold divider-gold--center" />
           <p className="text-[var(--color-cream)]/70 max-w-xl mx-auto text-sm sm:text-base font-helvetica mt-6">
@@ -74,7 +74,7 @@ export default function ConsultationSection() {
         </div>
 
         {/* Steps Container */}
-        <div className="bg-[var(--color-cream)] p-6 sm:p-10 md:p-12 border border-[var(--color-brass)]/30 min-h-[400px] flex flex-col justify-center text-[var(--color-charcoal)] relative z-10">
+        <div className="relative z-10 flex min-h-[400px] flex-col justify-center border-y border-[var(--color-brass)]/45 bg-[var(--color-paper)] p-6 text-[var(--color-charcoal)] sm:p-10 md:p-12">
           
           {/* STEP 1: Details */}
           {step === 1 && (
