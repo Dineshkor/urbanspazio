@@ -47,17 +47,17 @@ export default function ConsultationSection() {
     <section id="consultation" className="relative bg-[var(--color-dark)] py-24 text-[var(--color-cream)] lg:py-32">
       <div className="editorial-shell max-w-5xl">
         
-        {/* Header */}
-        <div className="section-header section-header--dark mb-16">
-          <span className="font-script mb-2 block text-3xl text-[var(--color-brass-light)]">
+        {/* ── Section Header ── */}
+        <div className="flex flex-col items-center text-center mb-16">
+          <span className="font-script text-2xl sm:text-3xl text-[var(--color-brass-light)] mb-2">
             a focused beginning
           </span>
-          <h2 className="font-bodoni text-5xl leading-none text-white sm:text-6xl">
-            Start with the details.
+          <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-paper)] uppercase tracking-[0.1em] font-semibold">
+            BOOK CONSULTATION
           </h2>
-          <div className="divider-gold divider-gold--center" />
-          <p className="text-[var(--color-cream)]/70 max-w-xl mx-auto text-sm sm:text-base font-helvetica mt-6">
-            ₹{QUICK_CONSULTATION_PRICE} · {QUICK_CONSULTATION_DURATION} · Online Video Call
+          <div className="w-12 h-[1px] bg-[var(--color-brass)] my-4 opacity-40" />
+          <p className="text-[var(--color-light-grey)] max-w-xl mx-auto text-xs sm:text-sm font-helvetica font-light">
+            ₹{QUICK_CONSULTATION_PRICE} · {QUICK_CONSULTATION_DURATION} · Online Video Call Session
           </p>
         </div>
 

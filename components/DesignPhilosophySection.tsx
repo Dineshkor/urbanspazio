@@ -1,35 +1,73 @@
+'use client';
+
+import React from 'react';
 import { DESIGN_PHILOSOPHIES } from '@/lib/site-data';
+import { ArrowRight } from 'lucide-react';
 
 export default function DesignPhilosophySection() {
   return (
-    <section id="philosophy" className="bg-[var(--color-dark)] py-24 text-[var(--color-cream)] lg:py-32">
+    <section id="philosophy" className="py-24 lg:py-36 bg-[#1E1C1A] text-[var(--color-paper)] relative overflow-hidden">
       <div className="editorial-shell">
-        <header className="mb-16 grid gap-5 border-t border-[var(--color-brass)] pt-5 md:grid-cols-[0.8fr_1.2fr] md:items-end">
-          <div>
-            <span className="font-script text-3xl text-[var(--color-brass-light)]">Our design language</span>
-            <h2 className="mt-2 max-w-md font-bodoni text-5xl leading-none sm:text-6xl">Four philosophies, one vision.</h2>
-          </div>
-          <p className="max-w-lg text-sm leading-7 text-[var(--color-cream)]/65 md:justify-self-end">
-            Each project finds its own balance of material, light, and rhythm. These are the visual languages we return to most often.
+        
+        {/* ── Section Header ── */}
+        <div className="flex flex-col items-center text-center mb-20">
+          <span className="font-script text-2xl sm:text-3xl text-[var(--color-brass-light)] mb-2">
+            our design language
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-paper)] uppercase tracking-[0.1em] font-semibold">
+            FOUR PHILOSOPHIES, ONE VISION
+          </h2>
+          <div className="w-12 h-[1px] bg-[var(--color-brass)] my-4 opacity-40" />
+          <p className="max-w-md text-xs sm:text-sm font-helvetica text-[var(--color-light-grey)] leading-relaxed font-light">
+            Guided by natural light, organic materials, and intentional minimalism — crafted for contemporary Indian living.
           </p>
-        </header>
-        <div className="grid gap-x-10 gap-y-16 md:grid-cols-2">
-          {DESIGN_PHILOSOPHIES.map((philosophy, index) => (
-            <article key={philosophy.id} className={index % 2 === 1 ? 'md:translate-y-16' : ''}>
-              <div className="editorial-image aspect-[4/3]">
-                <img src={philosophy.image} alt={philosophy.title} loading="lazy" />
+        </div>
+
+        {/* ── 2x2 Uncluttered Landscape Panels Grid ── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          {DESIGN_PHILOSOPHIES.map((philosophy) => (
+            <div
+              key={philosophy.id}
+              className="group relative w-full aspect-[16/10] overflow-hidden border-t-2 border-[var(--color-brass)] bg-[#2A2725]"
+            >
+              {/* Background Image */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={philosophy.image}
+                alt={philosophy.title}
+                loading="lazy"
+                className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-103 group-hover:opacity-90"
+              />
+
+              {/* Overlay Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+              {/* Content Panel */}
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 z-10 flex flex-col justify-end">
+                <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[var(--color-brass-light)] mb-1.5">
+                  {philosophy.subtitle}
+                </span>
+
+                <h3 className="text-2xl sm:text-3xl font-serif text-white uppercase tracking-[0.05em] mb-2 font-semibold">
+                  {philosophy.title}
+                </h3>
+
+                {/* Compact Characteristics Pills */}
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {philosophy.characteristics.slice(0, 3).map((item, i) => (
+                    <span
+                      key={i}
+                      className="px-2.5 py-0.5 border border-white/20 bg-black/40 backdrop-blur-xs text-[10px] font-helvetica text-stone-200"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <div className="mt-5 border-t border-white/20 pt-4">
-                <span className="editorial-kicker text-[var(--color-brass-light)]">{philosophy.subtitle}</span>
-                <h3 className="mt-3 font-bodoni text-4xl leading-none text-white">{philosophy.title}</h3>
-                <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--color-cream)]/70">{philosophy.description}</p>
-                <p className="mt-5 text-xs leading-6 text-[var(--color-brass-light)]/85">
-                  {philosophy.characteristics.slice(0, 3).join(' / ')}
-                </p>
-              </div>
-            </article>
+            </div>
           ))}
         </div>
+
       </div>
     </section>
   );

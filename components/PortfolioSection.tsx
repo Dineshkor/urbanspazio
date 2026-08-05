@@ -1,70 +1,80 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import React, { useState } from 'react';
 import { PORTFOLIO_ITEMS } from '@/lib/site-data';
 
-type Filter = 'all' | 'residential' | 'commercial';
-
-const FILTERS: Filter[] = ['all', 'residential', 'commercial'];
-
 export default function PortfolioSection() {
-  const [activeFilter, setActiveFilter] = useState<Filter>('all');
-  const items = useMemo(
-    () => PORTFOLIO_ITEMS.filter((item) => activeFilter === 'all' || item.category === activeFilter),
-    [activeFilter],
-  );
+  const [filter, setFilter] = useState<'all' | 'residential' | 'commercial'>('all');
+
+  const filteredItems = filter === 'all'
+    ? PORTFOLIO_ITEMS
+    : PORTFOLIO_ITEMS.filter((item) => item.category === filter);
 
   return (
-    <section id="portfolio" className="overflow-hidden bg-[var(--color-linen)] py-24 lg:py-32">
+    <section id="portfolio" className="py-24 lg:py-36 bg-[var(--color-linen)] relative overflow-hidden">
       <div className="editorial-shell">
-        <header className="grid gap-6 border-t border-[var(--color-brass)] pt-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <div>
-            <span className="font-script text-3xl text-[var(--color-brass)]">Selected spaces</span>
-            <h2 className="mt-2 font-bodoni text-5xl leading-none text-[var(--color-charcoal)] sm:text-6xl">Work with a point of view.</h2>
-          </div>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 lg:justify-self-end">
-            {FILTERS.map((filter) => (
-              <button
-                key={filter}
-                type="button"
-                onClick={() => setActiveFilter(filter)}
-                className={`editorial-kicker border-b pb-2 transition-colors ${
-                  activeFilter === filter
-                    ? 'border-[var(--color-brass-dark)] text-[var(--color-brass-dark)]'
-                    : 'border-transparent text-[var(--color-warm-grey)] hover:text-[var(--color-charcoal)]'
-                }`}
-                aria-pressed={activeFilter === filter}
-              >
-                {filter}
-              </button>
-            ))}
-          </div>
-        </header>
-
-        <div className="mt-16 grid gap-x-7 gap-y-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-9 lg:gap-y-16">
-          {items.map((item, index) => {
-            const aspect = index % 3 === 0 ? 'aspect-[4/5]' : index % 3 === 1 ? 'aspect-square' : 'aspect-[3/4]';
-            return (
-              <article key={item.id} className={index % 3 === 1 ? 'lg:translate-y-16' : ''}>
-                <div className={`editorial-image ${aspect}`}>
-                  <img src={item.image} alt={item.title} loading="lazy" />
-                </div>
-                <div className="mt-4 flex items-start justify-between gap-4 border-t border-[var(--color-charcoal)]/20 pt-4">
-                  <div>
-                    <h3 className="font-serif text-xl font-medium text-[var(--color-charcoal)]">{item.title}</h3>
-                    <p className="mt-1 text-[10px] uppercase tracking-[0.15em] text-[var(--color-warm-grey)]">
-                      {item.philosophy} / {item.location}
-                    </p>
-                  </div>
-                  <a href="#contact" className="mt-0.5 text-[var(--color-brass-dark)]" aria-label={`Enquire about ${item.title}`}>
-                    <ArrowUpRight className="size-4" />
-                  </a>
-                </div>
-              </article>
-            );
-          })}
+        
+        {/* ── Section Header ── */}
+        <div className="flex flex-col items-center text-center mb-16">
+          <span className="font-script text-2xl sm:text-3xl text-[var(--color-brass)] mb-2">
+            our recent work
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] font-semibold">
+            SPACES THAT SPEAK
+          </h2>
+          <div className="w-12 h-[1px] bg-[var(--color-brass)] my-4 opacity-40" />
         </div>
+
+        {/* ── Minimal Filter Text Tabs ── */}
+        <div className="flex justify-center gap-8 mb-16 border-b border-[var(--color-charcoal)]/15 pb-4">
+          {(['all', 'residential', 'commercial'] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setFilter(tab)}
+              className={`text-xs font-helvetica uppercase tracking-[0.2em] transition-all ${
+                filter === tab
+                  ? 'text-[var(--color-brass-dark)] font-semibold border-b border-[var(--color-brass)] pb-1'
+                  : 'text-[var(--color-warm-grey)] hover:text-[var(--color-charcoal)]'
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+
+        {/* ── Spacious Portfolio Grid ── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14">
+          {filteredItems.slice(0, 4).map((item) => (
+            <div key={item.id} className="group flex flex-col">
+              {/* Photo Frame */}
+              <div className="aspect-[4/3] overflow-hidden border border-[var(--color-cream)] bg-[var(--color-cream)] relative mb-4">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-103"
+                />
+              </div>
+
+              {/* Minimal Caption Info */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.05em] font-medium">
+                    {item.title}
+                  </h3>
+                  <p className="text-[11px] font-helvetica text-[var(--color-warm-grey)] uppercase tracking-[0.15em] mt-0.5 font-light">
+                    {item.location} · {item.philosophy}
+                  </p>
+                </div>
+                <span className="text-xs uppercase tracking-[0.2em] font-medium text-[var(--color-brass-dark)] group-hover:translate-x-1 transition-transform">
+                  View →
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
   );

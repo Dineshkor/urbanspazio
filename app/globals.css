@@ -2,33 +2,32 @@
 
 /* ============================================
    URBAN SPAZIO — Design System
-   Editorial Luxury · Inspired by 7th Street,
-   Dana Renata, Audrey & Style Coached by Eve
+   High-Fashion Luxury Editorial Aesthetics
+   Directly modeled after: 7th Street Socials,
+   Dana Renata, Audrey Showit & Style Coached by Eve
    ============================================ */
 
 @layer base {
   :root {
     color-scheme: light;
 
-    /* ── Warm Linen Palette ── */
-    --color-linen: #f6f1ea;
-    --color-cream: #e9e1d7;
-    --color-paper: #fcfaf7;
-    --color-dark: #1c1a18;
-    --color-charcoal: #2b2825;
-    --color-brass: #b69152;
-    --color-brass-light: #d6bb88;
-    --color-brass-dark: #8f6f3d;
-    --color-warm-grey: #756f67;
-    --color-light-grey: #b9b0a5;
+    /* ── High-End Linen Palette ── */
+    --color-linen: #F6F2EC;
+    --color-cream: #EAE3D9;
+    --color-paper: #FAF7F2;
+    --color-dark: #1E1C1A;
+    --color-charcoal: #1C1A18;
+    --color-brass: #B89A67;
+    --color-brass-light: #D8C39D;
+    --color-brass-dark: #8E7345;
+    --color-warm-grey: #7A746D;
+    --color-light-grey: #C2BBB2;
 
     /* Legacy aliases */
-    --color-warm-white: #F5F0EB;
-    --color-off-white: #EDE8E2;
-    --color-stone: #E9E3DB;
+    --color-warm-white: #F6F2EC;
+    --color-off-white: #EAE3D9;
+    --color-stone: #EAE3D9;
     --color-espresso: #1E1C1A;
-    --color-brass-dark: #A68B4B;
-    --color-brass-light: #D4B87A;
   }
 
   html {
@@ -61,10 +60,11 @@
     background-color: var(--color-cream);
   }
 
-  /* Headings — Playfair Display serif */
+  /* Headings — High-Fashion Bodoni / Playfair Serif */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
-    font-weight: 700;
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 }
 
@@ -72,13 +72,31 @@
    Typography Utilities
    ============================================ */
 
-/* Cursive script — for decorative subheadings */
+/* Flowing Cursive Script — for decorative subheadings */
 .font-script {
   font-family: var(--font-script), 'Dancing Script', cursive;
   font-weight: 400;
 }
 
-/* Bodoni Moda — brand title */
+/* ============================================
+   TAN PARADISO Custom WebFont
+   ============================================ */
+@font-face {
+  font-family: 'TAN PARADISO';
+  src: url('/fonts/TAN-PARADISO-Regular.woff2') format('woff2'),
+       url('/fonts/TAN-PARADISO-Regular.ttf') format('truetype'),
+       url('/fonts/TAN-PARADISO-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Tan Paradiso font — luxury display serif for URBAN SPAZIO logo & main title */
+.font-tan-paradiso {
+  font-family: 'TAN PARADISO', 'Bodoni Moda', 'Didot', serif;
+}
+
+/* Bodoni Moda — brand display title */
 .font-bodoni {
   font-family: var(--font-bodoni), 'Bodoni Moda', 'Didot', serif;
 }
@@ -88,104 +106,72 @@
   font-style: italic;
 }
 
-/* Helvetica Light — body/labels */
+/* Helvetica Light — clean body text */
 .font-helvetica {
   font-family: var(--font-inter, 'Helvetica Neue', Helvetica, Arial, sans-serif);
   font-weight: 300;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
 }
 
+/* ============================================
+   Container Shell & Layout Utilities
+   ============================================ */
+
 .editorial-shell {
-  width: min(100%, 80rem);
+  width: min(100%, 76rem);
   margin-inline: auto;
-  padding-inline: clamp(1.5rem, 4vw, 4rem);
+  padding-inline: clamp(1.5rem, 5vw, 4rem);
 }
 
 .editorial-kicker {
   font-size: 0.6875rem;
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
 .hairline {
   height: 1px;
-  background: color-mix(in srgb, var(--color-brass) 78%, transparent);
+  background-color: var(--color-charcoal);
+  opacity: 0.15;
 }
 
-.editorial-image {
+.hairline-brass {
+  height: 1px;
+  background-color: var(--color-brass);
+  opacity: 0.35;
+}
+
+/* Arch-shaped image frame (signature Dana Renata / Style Coached by Eve oval top) */
+.arch-frame {
+  border-radius: 9999px 9999px 0 0;
+  overflow: hidden;
+}
+
+/* Rectangular framed image with thin border overlay */
+.editorial-image-frame {
+  position: relative;
   overflow: hidden;
   background: var(--color-cream);
 }
 
-.editorial-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 700ms ease;
-}
-
-.editorial-image:hover img {
-  transform: scale(1.035);
-}
-
-.section-number {
-  color: color-mix(in srgb, var(--color-brass) 36%, transparent);
-  font-family: var(--font-bodoni), "Bodoni Moda", Didot, serif;
-  font-size: clamp(4rem, 9vw, 8.5rem);
-  font-weight: 400;
-  line-height: 0.75;
-}
-
 /* ============================================
-   Section Header Pattern (script + serif)
-   ============================================ */
-
-.section-header {
-  text-align: center;
-}
-
-.section-header .script-label {
-  font-family: var(--font-script), 'Dancing Script', cursive;
-  font-size: 1.5rem;
-  color: var(--color-brass);
-  margin-bottom: 0.25rem;
-  display: block;
-}
-
-.section-header .serif-heading {
-  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
-  font-weight: 700;
-  color: var(--color-charcoal);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-/* Inverted for dark sections */
-.section-header--dark .serif-heading {
-  color: var(--color-cream);
-}
-
-.section-header--dark .script-label {
-  color: var(--color-brass-light);
-}
-
-/* ============================================
-   Button Styles (editorial outlined)
+   Buttons (Editorial Outlined Rectangles)
    ============================================ */
 
 .btn-outline {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.875rem 2rem;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2.25rem;
   border: 1px solid var(--color-charcoal);
   color: var(--color-charcoal);
   font-family: var(--font-inter, sans-serif);
-  font-size: 0.7rem;
+  font-size: 0.6875rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   transition: all 0.3s ease;
   background: transparent;
   cursor: pointer;
@@ -193,94 +179,80 @@
 
 .btn-outline:hover {
   background-color: var(--color-charcoal);
-  color: white;
+  color: #ffffff;
 }
 
-.btn-outline--light {
-  border-color: var(--color-cream);
-  color: var(--color-cream);
-}
-
-.btn-outline--light:hover {
-  background-color: var(--color-cream);
-  color: var(--color-dark);
-}
-
-.btn-outline--brass {
+.btn-outline-brass {
   border-color: var(--color-brass);
-  color: var(--color-brass);
+  color: var(--color-brass-dark);
 }
 
-.btn-outline--brass:hover {
+.btn-outline-brass:hover {
   background-color: var(--color-brass);
-  color: white;
+  color: #ffffff;
+}
+
+.btn-outline-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2.25rem;
+  border: 1px solid #FAF7F2;
+  color: #FAF7F2;
+  font-family: var(--font-inter, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  transition: all 0.3s ease;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn-outline-light:hover {
+  background-color: #FAF7F2;
+  color: #1E1C1A;
 }
 
 .btn-filled {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.875rem 2rem;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2.25rem;
   background-color: var(--color-dark);
-  color: white;
+  color: #ffffff;
   font-family: var(--font-inter, sans-serif);
-  font-size: 0.7rem;
+  font-size: 0.6875rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   transition: all 0.3s ease;
   cursor: pointer;
+  border: 1px solid var(--color-dark);
 }
 
 .btn-filled:hover {
-  background-color: var(--color-charcoal);
+  background-color: var(--color-brass-dark);
+  border-color: var(--color-brass-dark);
 }
 
 /* ============================================
-   Decorative Elements
-   ============================================ */
-
-/* Thin gold horizontal rule */
-.divider-gold {
-  width: 60px;
-  height: 1px;
-  background-color: var(--color-brass);
-  border: none;
-  margin: 1.5rem 0;
-}
-
-.divider-gold--center {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Arch-shaped image frame */
-.arch-frame {
-  border-radius: 999px 999px 0 0;
-  overflow: hidden;
-}
-
-/* ============================================
-   Section Backgrounds
+   Section Background Utilities
    ============================================ */
 
 @utility section-dark {
   background-color: var(--color-dark);
-  color: var(--color-cream);
+  color: var(--color-paper);
 }
 
 @utility section-cream {
   background-color: var(--color-cream);
+  color: var(--color-charcoal);
 }
 
 @utility section-linen {
   background-color: var(--color-linen);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 1ms !important;
-    scroll-behavior: auto !important;
-    transition-duration: 1ms !important;
-  }
+  color: var(--color-charcoal);
 }

@@ -1,27 +1,61 @@
+'use client';
+
+import React from 'react';
 import { PROCESS_STEPS } from '@/lib/site-data';
+import { ArrowRight } from 'lucide-react';
 
 export default function ProcessSection() {
   return (
-    <section id="process" className="bg-[var(--color-paper)] py-24 lg:py-32">
+    <section id="process" className="py-24 lg:py-36 bg-[#EAE3D9] text-[var(--color-charcoal)] relative overflow-hidden">
       <div className="editorial-shell">
-        <header className="mb-16 grid gap-5 border-t border-[var(--color-brass)] pt-5 md:grid-cols-[0.7fr_1.3fr] md:items-end">
-          <div>
-            <span className="font-script text-3xl text-[var(--color-brass)]">How it unfolds</span>
-            <h2 className="mt-2 font-bodoni text-5xl leading-none text-[var(--color-charcoal)] sm:text-6xl">From vision to reality.</h2>
-          </div>
-          <p className="max-w-lg text-sm leading-7 text-[var(--color-warm-grey)] md:justify-self-end">
-            A clear, collaborative process brings every decision into focus before the final handover.
+        
+        {/* ── Section Header ── */}
+        <div className="flex flex-col items-center text-center mb-20">
+          <span className="font-script text-2xl sm:text-3xl text-[var(--color-brass-dark)] mb-2">
+            how it works
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] font-semibold">
+            FROM VISION TO REALITY
+          </h2>
+          <div className="w-12 h-[1px] bg-[var(--color-charcoal)] opacity-20 my-4" />
+          <p className="max-w-md text-xs sm:text-sm font-helvetica text-[var(--color-warm-grey)] leading-relaxed font-light">
+            A structured, 4-step architectural journey from initial concept ideation to final white-glove handover.
           </p>
-        </header>
-        <ol className="grid border-t border-[var(--color-charcoal)]/15 lg:grid-cols-5">
-          {PROCESS_STEPS.map((step) => (
-            <li key={step.step} className="border-b border-[var(--color-charcoal)]/15 px-0 py-8 lg:border-b-0 lg:border-r lg:px-6 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0">
-              <span className="font-bodoni text-5xl leading-none text-[var(--color-brass)]">{step.step}</span>
-              <h3 className="mt-7 font-serif text-xl font-medium text-[var(--color-charcoal)]">{step.title}</h3>
-              <p className="mt-4 text-sm leading-7 text-[var(--color-warm-grey)]">{step.description}</p>
-            </li>
-          ))}
-        </ol>
+        </div>
+
+        {/* ── Horizontal Box Grid (Modeled directly after Style Coached by Eve reference) ── */}
+        <div className="border border-[var(--color-charcoal)]/30 bg-[#F6F2EC] p-8 sm:p-12 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 divide-y lg:divide-y-0 lg:divide-x divide-[var(--color-charcoal)]/15">
+            {PROCESS_STEPS.map((step, index) => {
+              const stepNum = `0${index + 1}`;
+
+              return (
+                <div key={step.step || index} className={`flex flex-col items-start text-left ${index > 0 ? 'pt-8 lg:pt-0 lg:pl-8' : ''}`}>
+                  <span className="text-4xl sm:text-5xl font-serif text-[var(--color-brass-dark)] font-light mb-3">
+                    {stepNum}
+                  </span>
+
+                  <h3 className="text-lg sm:text-xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] mb-2 font-semibold">
+                    {step.title}
+                  </h3>
+
+                  <p className="text-xs font-helvetica text-[var(--color-warm-grey)] leading-relaxed font-light">
+                    {step.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Centered CTA Action */}
+        <div className="flex justify-center">
+          <a href="#consultation" className="btn-filled text-[10px]">
+            <span>Start Your Project</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+        </div>
+
       </div>
     </section>
   );

@@ -1,38 +1,92 @@
-import { ArrowUpRight } from 'lucide-react';
-import { BRAND } from '@/lib/constants';
+'use client';
+
+import React from 'react';
 import { PACKAGE_SEGMENTS } from '@/lib/site-data';
+import { ArrowRight, Check } from 'lucide-react';
 
 export default function PackageSection() {
   return (
-    <section id="packages" className="bg-[var(--color-linen)] py-24 lg:py-32">
+    <section id="packages" className="py-24 lg:py-36 bg-[#EAE3D9] text-[var(--color-charcoal)] relative overflow-hidden">
       <div className="editorial-shell">
-        <header className="mb-16 grid gap-5 border-t border-[var(--color-brass)] pt-5 md:grid-cols-[0.7fr_1.3fr] md:items-end">
-          <div>
-            <span className="font-script text-3xl text-[var(--color-brass)]">Investment</span>
-            <h2 className="mt-2 font-bodoni text-5xl leading-none text-[var(--color-charcoal)] sm:text-6xl">A scope to suit the space.</h2>
-          </div>
-          <p className="max-w-lg text-sm leading-7 text-[var(--color-warm-grey)] md:justify-self-end">
-            Every project is scoped individually. These ranges provide a useful starting point for the conversation.
+        
+        {/* ── Section Header ── */}
+        <div className="flex flex-col items-center text-center mb-20">
+          <span className="font-script text-2xl sm:text-3xl text-[var(--color-brass-dark)] mb-2">
+            investment
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] font-semibold">
+            PACKAGES
+          </h2>
+          <div className="w-12 h-[1px] bg-[var(--color-charcoal)] opacity-20 my-4" />
+          <p className="max-w-md text-xs sm:text-sm font-helvetica text-[var(--color-warm-grey)] leading-relaxed font-light">
+            Transparent investment tiers designed for varying project scopes and luxury requirements.
           </p>
-        </header>
-        <div className="grid border-y border-[var(--color-charcoal)]/15 md:grid-cols-3">
-          {PACKAGE_SEGMENTS.map((pkg, index) => (
-            <article key={pkg.id} className={`flex min-h-[31rem] flex-col px-0 py-9 md:px-8 md:first:pl-0 md:last:pr-0 ${index > 0 ? 'md:border-l md:border-[var(--color-charcoal)]/15' : ''}`}>
-              <span className="editorial-kicker text-[var(--color-brass-dark)]">{pkg.popular ? 'Most requested' : `0${index + 1}`}</span>
-              <h3 className="mt-6 font-bodoni text-4xl leading-none text-[var(--color-charcoal)]">{pkg.tier}</h3>
-              <p className="mt-3 text-xs uppercase tracking-[0.15em] text-[var(--color-brass-dark)]">{pkg.range}</p>
-              <p className="mt-8 text-sm leading-7 text-[var(--color-warm-grey)]">{pkg.description}</p>
-              <ul className="mt-8 flex-1 space-y-3">
-                {pkg.includes.map((item) => (
-                  <li key={item} className="border-t border-[var(--color-charcoal)]/12 pt-3 text-xs leading-5 text-[var(--color-charcoal)]/75">{item}</li>
-                ))}
-              </ul>
-              <a href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(`Hi Urban Spazio! I am interested in the ${pkg.tier} package.`)}`} target="_blank" rel="noopener noreferrer" className="btn-outline mt-10 w-fit">
-                Start a conversation <ArrowUpRight className="size-3.5" />
-              </a>
-            </article>
-          ))}
         </div>
+
+        {/* ── 3 Investment Tier Cards ── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {PACKAGE_SEGMENTS.map((tier) => {
+            const isPopular = tier.popular;
+
+            return (
+              <div
+                key={tier.id}
+                className={`p-8 sm:p-10 flex flex-col justify-between border transition-all duration-300 ${
+                  isPopular
+                    ? 'bg-[#1E1C1A] text-[var(--color-paper)] border-[#1E1C1A]'
+                    : 'bg-[#F6F2EC] text-[var(--color-charcoal)] border-[var(--color-charcoal)]/20'
+                }`}
+              >
+                <div>
+                  {/* Tier Title */}
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className={`text-2xl font-serif uppercase tracking-[0.08em] font-semibold ${isPopular ? 'text-white' : 'text-[var(--color-charcoal)]'}`}>
+                      {tier.tier} Tier
+                    </h3>
+                    {isPopular && (
+                      <span className="px-2.5 py-0.5 bg-[var(--color-brass)] text-white text-[9px] uppercase tracking-[0.2em] font-semibold">
+                        Most Popular
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Price */}
+                  <p className={`text-xl sm:text-2xl font-serif mb-4 font-medium ${isPopular ? 'text-[var(--color-brass-light)]' : 'text-[var(--color-brass-dark)]'}`}>
+                    {tier.range}
+                  </p>
+
+                  <p className={`text-xs font-helvetica leading-relaxed mb-6 font-light ${isPopular ? 'text-stone-300' : 'text-[var(--color-warm-grey)]'}`}>
+                    {tier.description}
+                  </p>
+
+                  {/* Features list */}
+                  <div className={`space-y-3 pt-6 border-t ${isPopular ? 'border-white/10' : 'border-[var(--color-charcoal)]/15'} mb-8`}>
+                    {tier.includes.map((feature, i) => (
+                      <div key={i} className="flex items-start gap-2.5 text-xs font-helvetica font-light">
+                        <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${isPopular ? 'text-[var(--color-brass)]' : 'text-[var(--color-brass-dark)]'}`} />
+                        <span className={isPopular ? 'text-stone-200' : 'text-[var(--color-charcoal)]'}>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <a
+                  href="#consultation"
+                  className={`w-full justify-center ${
+                    isPopular
+                      ? 'btn-outline-light text-[10px]'
+                      : 'btn-outline text-[10px]'
+                  }`}
+                >
+                  <span>Inquire Tier</span>
+                  <ArrowRight className="w-3.5 h-3.5 inline ml-1" />
+                </a>
+              </div>
+            );
+          })}
+        </div>
+
       </div>
     </section>
   );

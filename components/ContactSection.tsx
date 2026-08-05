@@ -1,7 +1,10 @@
-import { BRAND } from "@/lib/constants";
-import { ArrowRight, Mail, MessageCircle, MapPin } from "lucide-react";
+'use client';
 
-const InstagramIcon = ({ size = 20 }: { size?: number }) => (
+import React from 'react';
+import { BRAND } from '@/lib/constants';
+import { Mail, MessageCircle, MapPin, ArrowRight } from 'lucide-react';
+
+const InstagramIcon = ({ size = 18 }: { size?: number }) => (
   <svg
     width={size}
     height={size}
@@ -20,91 +23,136 @@ const InstagramIcon = ({ size = 20 }: { size?: number }) => (
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="bg-[var(--color-dark)] py-24 text-[var(--color-cream)] lg:py-32">
+    <section id="contact" className="py-24 lg:py-36 bg-[#1E1C1A] text-[var(--color-paper)] relative overflow-hidden">
       <div className="editorial-shell">
         
-        <div className="mb-16 border-t border-[var(--color-brass)] pt-5">
-          <span className="font-script text-3xl text-[var(--color-brass-light)]">Let&apos;s connect</span>
-          <h2 className="mt-2 font-bodoni text-5xl leading-none text-white sm:text-6xl">Begin with a conversation.</h2>
+        {/* ── Section Header ── */}
+        <div className="flex flex-col items-center text-center mb-20">
+          <span className="font-script text-2xl sm:text-3xl text-[var(--color-brass-light)] mb-2">
+            let&apos;s connect
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-paper)] uppercase tracking-[0.1em] font-semibold">
+            GET IN TOUCH
+          </h2>
+          <div className="w-12 h-[1px] bg-[var(--color-brass)] my-4 opacity-40" />
+          <p className="max-w-md text-xs sm:text-sm font-helvetica text-[var(--color-light-grey)] leading-relaxed font-light">
+            We work with select residential and commercial clients across Delhi NCR. Tell us about your vision.
+          </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-24">
+        {/* ── 2-Column Uncluttered Form + Info Grid ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           
-          {/* Left: Form */}
-          <div className="order-2 lg:order-1">
-            <form className="space-y-8">
-              <div>
-                <input 
-                  type="text" 
-                  placeholder="NAME"
+          {/* Form Column (7 cols) */}
+          <div className="lg:col-span-7">
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <input
+                  type="text"
+                  placeholder="Your Name *"
                   required
-                  className="w-full bg-transparent border-b border-[var(--color-cream)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-cream)]/50 focus:border-[var(--color-brass)] focus:outline-none py-3 transition-colors rounded-none text-xs uppercase tracking-widest font-helvetica"
+                  className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-white placeholder:text-stone-400 focus:border-[var(--color-brass)] focus:outline-hidden rounded-none font-helvetica"
+                />
+                <input
+                  type="email"
+                  placeholder="Email Address *"
+                  required
+                  className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-white placeholder:text-stone-400 focus:border-[var(--color-brass)] focus:outline-hidden rounded-none font-helvetica"
                 />
               </div>
-              <div>
-                <input 
-                  type="email" 
-                  placeholder="EMAIL"
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <input
+                  type="tel"
+                  placeholder="Phone Number *"
                   required
-                  className="w-full bg-transparent border-b border-[var(--color-cream)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-cream)]/50 focus:border-[var(--color-brass)] focus:outline-none py-3 transition-colors rounded-none text-xs uppercase tracking-widest font-helvetica"
+                  className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-white placeholder:text-stone-400 focus:border-[var(--color-brass)] focus:outline-hidden rounded-none font-helvetica"
                 />
-              </div>
-              <div>
-                <textarea 
-                  placeholder="MESSAGE"
-                  rows={4}
+                <select
                   required
-                  className="w-full bg-transparent border-b border-[var(--color-cream)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-cream)]/50 focus:border-[var(--color-brass)] focus:outline-none py-3 transition-colors resize-none rounded-none text-xs uppercase tracking-widest font-helvetica"
-                ></textarea>
+                  className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-stone-300 focus:border-[var(--color-brass)] focus:outline-hidden rounded-none font-helvetica"
+                >
+                  <option value="" disabled className="bg-[#1E1C1A]">Project Type *</option>
+                  <option value="Residential" className="bg-[#1E1C1A]">Residential</option>
+                  <option value="Commercial" className="bg-[#1E1C1A]">Commercial</option>
+                </select>
               </div>
-              <button type="submit" className="btn-outline--light w-full justify-center mt-4">
-                Send Message <ArrowRight size={14} />
+
+              <textarea
+                placeholder="Tell us about your project requirements..."
+                rows={4}
+                required
+                className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-white placeholder:text-stone-400 focus:border-[var(--color-brass)] focus:outline-hidden resize-none rounded-none font-helvetica"
+              />
+
+              <button type="submit" className="btn-outline-light text-[10px]">
+                <span>Send Inquiry</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </form>
           </div>
 
-          {/* Right: Info */}
-          <div className="order-1 lg:order-2 flex flex-col justify-center space-y-12">
-            
-            <div className="space-y-6">
-              <h3 className="font-serif text-2xl uppercase tracking-widest text-[var(--color-cream)]">
-                Studio
+          {/* Direct Studio Contact Info Column (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col justify-between pt-6 lg:pt-0 lg:pl-8 border-t lg:border-t-0 lg:border-l border-white/10 space-y-8">
+            <div>
+              <h3 className="text-xl font-serif uppercase tracking-[0.1em] text-white mb-6">
+                Studio Contact
               </h3>
-              <div className="space-y-4 text-sm font-helvetica text-[var(--color-cream)]/70">
-                <a href={`mailto:${BRAND.email}`} className="flex items-center gap-4 hover:text-[var(--color-brass)] transition-colors">
-                  <Mail size={18} strokeWidth={1.5} className="text-[var(--color-brass)]" />
-                  <span className="tracking-wide">{BRAND.email}</span>
-                </a>
-                <a href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 hover:text-[var(--color-brass)] transition-colors">
-                  <MessageCircle size={18} strokeWidth={1.5} className="text-[var(--color-brass)]" />
-                  <span className="tracking-wide">{BRAND.phone}</span>
-                </a>
+
+              <div className="space-y-6 text-xs sm:text-sm font-helvetica text-stone-300 font-light">
                 <div className="flex items-start gap-4">
-                  <MapPin size={18} strokeWidth={1.5} className="text-[var(--color-brass)] mt-1 shrink-0" />
-                  <span className="tracking-wide leading-relaxed">{BRAND.address}</span>
+                  <Mail className="w-4 h-4 text-[var(--color-brass-light)] shrink-0 mt-1" />
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-0.5">Direct Email</p>
+                    <a href={`mailto:${BRAND.email}`} className="hover:text-[var(--color-brass-light)] transition-colors">
+                      {BRAND.email}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <MessageCircle className="w-4 h-4 text-[var(--color-brass-light)] shrink-0 mt-1" />
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-0.5">WhatsApp Studio Line</p>
+                    <a
+                      href={`https://wa.me/${BRAND.whatsapp}?text=Hi%20Urban%20Spazio!`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[var(--color-brass-light)] transition-colors"
+                    >
+                      +{BRAND.phone}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <MapPin className="w-4 h-4 text-[var(--color-brass-light)] shrink-0 mt-1" />
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-0.5">Service Region</p>
+                    <p>Delhi NCR · New Delhi · Gurugram · Noida</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div>
-              <h3 className="font-serif text-lg uppercase tracking-widest text-[var(--color-cream)] mb-6">
-                Socials
-              </h3>
-              <div className="flex gap-6">
-                <a 
-                  href={BRAND.socialLinks.instagram} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-[var(--color-cream)]/70 hover:text-[var(--color-brass)] transition-colors"
-                >
-                  <InstagramIcon size={20} />
-                </a>
-              </div>
+            {/* Social Links */}
+            <div className="pt-6 border-t border-white/10 flex items-center gap-6">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-stone-400">Follow Studio:</span>
+              <a
+                href={BRAND.socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-stone-300 hover:text-[var(--color-brass-light)] transition-colors flex items-center gap-2 text-xs font-helvetica"
+              >
+                <InstagramIcon size={16} />
+                <span>Instagram</span>
+              </a>
             </div>
 
           </div>
 
         </div>
+
       </div>
     </section>
   );
