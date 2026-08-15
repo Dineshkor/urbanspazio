@@ -111,97 +111,93 @@ export default function HeroSection() {
 
           </div>
 
-          {/* ── Right Column: Minimalistic Arch-Framed Showcase (6 cols) ── */}
+          {/* ── Right Column: Minimal Arch Gallery Showcase (6 cols) ── */}
           <div className="lg:col-span-6 relative flex flex-col items-center justify-center">
-            
-            {/* Arch-Framed Container (Modeled after Dana Renata & Style Coached by Eve signature layout) */}
-            <div className="relative w-full max-w-md aspect-[4/5] arch-frame border border-[var(--color-cream)] shadow-sm overflow-hidden bg-[var(--color-cream)]">
-              
+
+            {/* Arch Frame — pure image, no overlays */}
+            <div className="relative w-full max-w-md aspect-[4/5] arch-frame overflow-hidden bg-[var(--color-cream)] shadow-[0_40px_80px_-40px_rgba(28,26,24,0.35)]">
+
               {/* Slides */}
               {FEATURED_PROJECTS.map((project, index) => (
                 <div
                   key={project.id}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                  className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
                     index === current ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
                   }`}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  {/* eslint-disable-next-line @next/next/img-element */}
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full object-cover ${index === current ? 'animate-kenburns' : ''}`}
                     loading={index === 0 ? 'eager' : 'lazy'}
                   />
-                  {/* Gradient Overlay for Text Visibility */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
                 </div>
               ))}
 
-              {/* Minimal Floating Glass Spec Card */}
-              <div className="absolute bottom-0 inset-x-0 p-5 z-20">
-                <div className="bg-[#FAF7F2]/95 backdrop-blur-xs p-4 border border-[var(--color-cream)]">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="text-[9px] uppercase tracking-[0.2em] font-semibold text-[var(--color-brass-dark)] mb-0.5">
-                        Client Work Showcase
-                      </p>
-                      <h3 className="font-serif text-base sm:text-lg font-medium text-[var(--color-charcoal)] leading-snug">
-                        {activeProject.title}
-                      </h3>
-                    </div>
-                    <a
-                      href="#portfolio"
-                      className="text-[9px] uppercase tracking-[0.2em] font-semibold text-[var(--color-brass-dark)] border-b border-[var(--color-brass)] hover:text-[var(--color-charcoal)] transition-colors shrink-0 pt-1"
-                    >
-                      View →
-                    </a>
-                  </div>
+            </div>
 
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-[10px] uppercase tracking-[0.12em] text-[var(--color-warm-grey)] font-light">
-                    <span>{activeProject.style}</span>
-                    <span>·</span>
-                    <span>{activeProject.area}</span>
-                    <span>·</span>
-                    <span>{activeProject.scope}</span>
-                  </div>
+            {/* ── Caption Row — minimal spec, outside the image ── */}
+            <div className="mt-9 w-full max-w-md">
+              <div className="flex items-end justify-between gap-6">
+                <div className="min-w-0">
+                  <p className="text-[9px] uppercase tracking-[0.25em] font-semibold text-[var(--color-brass-dark)]">
+                    Client Work — 0{current + 1} / 0{FEATURED_PROJECTS.length}
+                  </p>
+                  <h3
+                    key={activeProject.title}
+                    className="font-bodoni-italic text-lg sm:text-xl text-[var(--color-charcoal)] leading-snug mt-1.5 animate-[fadeUp_0.5s_ease-out]"
+                  >
+                    {activeProject.title}
+                  </h3>
+                </div>
+
+                {/* Minimal Prev / Next */}
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    onClick={prev}
+                    className="w-9 h-9 grid place-items-center border border-[var(--color-charcoal)]/15 text-[var(--color-charcoal)] transition-colors hover:border-[var(--color-brass)] hover:text-[var(--color-brass-dark)]"
+                    aria-label="Previous project"
+                  >
+                    <ChevronLeft size={14} strokeWidth={1.5} />
+                  </button>
+                  <button
+                    onClick={next}
+                    className="w-9 h-9 grid place-items-center border border-[var(--color-charcoal)]/15 text-[var(--color-charcoal)] transition-colors hover:border-[var(--color-brass)] hover:text-[var(--color-brass-dark)]"
+                    aria-label="Next project"
+                  >
+                    <ChevronRight size={14} strokeWidth={1.5} />
+                  </button>
                 </div>
               </div>
 
-              {/* Prev / Next Controls */}
-              <button
-                onClick={prev}
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/75 hover:bg-white text-[var(--color-charcoal)] transition-colors shadow-xs"
-                aria-label="Previous project"
-              >
-                <ChevronLeft size={16} />
-              </button>
-              <button
-                onClick={next}
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/75 hover:bg-white text-[var(--color-charcoal)] transition-colors shadow-xs"
-                aria-label="Next project"
-              >
-                <ChevronRight size={16} />
-              </button>
+              {/* Hairline + Meta */}
+              <div className="mt-3 h-[1px] w-full bg-[var(--color-charcoal)]/10" />
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] uppercase tracking-[0.15em] text-[var(--color-warm-grey)] font-light">
+                  <span>{activeProject.style}</span>
+                  <span className="text-[var(--color-brass)]">·</span>
+                  <span>{activeProject.area}</span>
+                  <span className="text-[var(--color-brass)]">·</span>
+                  <span>{activeProject.scope}</span>
+                </div>
 
-              {/* Slide Counter & Dots */}
-              <div className="absolute top-4 right-4 z-30 flex items-center gap-2 bg-black/30 backdrop-blur-xs px-3 py-1.5 rounded-full">
-                <span className="text-white text-[9px] font-medium tracking-wider">
-                  0{current + 1} / 0{FEATURED_PROJECTS.length}
-                </span>
-                <div className="flex gap-1">
+                {/* Silent Dots */}
+                <div className="flex items-center gap-1.5">
                   {FEATURED_PROJECTS.map((_, i) => (
                     <button
                       key={i}
                       onClick={() => setCurrent(i)}
-                      className={`h-1 transition-all rounded-full ${
-                        i === current ? 'w-4 bg-[var(--color-brass)]' : 'w-1.5 bg-white/50 hover:bg-white'
+                      className={`h-1 rounded-full transition-all duration-300 ${
+                        i === current
+                          ? 'w-6 bg-[var(--color-brass)]'
+                          : 'w-1.5 bg-[var(--color-charcoal)]/20 hover:bg-[var(--color-charcoal)]/40'
                       }`}
                       aria-label={`Go to slide ${i + 1}`}
                     />
                   ))}
                 </div>
               </div>
-
             </div>
 
           </div>

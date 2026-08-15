@@ -148,6 +148,31 @@
   overflow: hidden;
 }
 
+/* Slow editorial settle on hero slides */
+@keyframes kenburns {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.animate-kenburns {
+  animation: kenburns 6s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Rectangular framed image with thin border overlay */
 .editorial-image-frame {
   position: relative;
