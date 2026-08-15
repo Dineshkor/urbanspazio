@@ -8,9 +8,9 @@ export default function HeroSection() {
     <section id="hero" className="relative bg-[var(--color-linen)] pt-40 sm:pt-44 lg:pt-52 pb-24 lg:pb-36 overflow-hidden">
       <div className="editorial-shell flex flex-col items-center text-center">
         
-        {/* ── Main Brand Title in TAN PARADISO Font (NO IMAGES) ── */}
-        <h1 className="font-tan-paradiso text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-[var(--color-charcoal)] uppercase tracking-[0.04em] leading-[1.15] max-w-5xl mb-6 font-normal">
-          URBAN <span className="text-[var(--color-brass-dark)]">SPAZIO</span>
+        {/* ── Main Brand Title in High-Fashion Bodoni Moda Italic (NO IMAGES) ── */}
+        <h1 className="font-bodoni-italic text-6xl sm:text-8xl md:text-9xl text-[var(--color-charcoal)] tracking-tight leading-[0.98] max-w-5xl mb-6 font-normal">
+          Urban <span className="text-[var(--color-brass-dark)] italic">Spazio</span>
         </h1>
 
         {/* ── Cursive Subheading Accent ── */}

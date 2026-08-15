@@ -28,8 +28,8 @@ export default function Footer() {
       <div className="editorial-shell flex flex-col items-center text-center">
         
         {/* Brand Display Title */}
-        <h2 className="font-tan-paradiso text-3xl sm:text-4xl text-white uppercase tracking-[0.15em] mb-2 font-normal">
-          URBAN <span className="text-[var(--color-brass-light)]">SPAZIO</span>
+        <h2 className="font-bodoni-italic text-3xl sm:text-4xl text-white tracking-wide mb-2 font-normal">
+          Urban <span className="text-[var(--color-brass-light)] italic">Spazio</span>
         </h2>
         
         <p className="text-[9px] uppercase tracking-[0.35em] text-stone-400 font-light mb-6">
