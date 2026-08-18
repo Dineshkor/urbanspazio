@@ -156,14 +156,18 @@ function DesktopStage({
     offset: ['start start', 'end end'],
   });
   const progress = useSpring(scrollYProgress, { stiffness: 70, damping: 24, mass: 0.6 });
+  // NOTE (review fix 3f219d4): scrollYProgress is normalized 0..1; the scene's
+  // layer beats are chapter indices 0..total, so scale ONLY the scene progress.
+  // ChapterText and ChapterRail keep consuming the normalized `progress`.
+  const sceneProgress = useTransform(progress, (v) => v * chapters.length);
 
   return (
     <div ref={sectionRef} style={{ height: `${chapters.length * 100}vh` }} className="relative">
-      <div className="sticky top-0 h-screen overflow-hidden">
+      <div className="sticky top-0 h-dvh overflow-hidden">
         {/* Proscenium frame */}
         <div className="absolute inset-[4vh_6vw]">
           <div className="relative h-full border border-[var(--color-brass)]/25 rounded-md overflow-hidden bg-[#1E1C1A] shadow-[0_0_90px_rgba(197,162,93,0.1)]">
-            {renderScene(progress)}
+            {renderScene(sceneProgress)}
             <ChapterText chapters={chapters} progress={progress} />
           </div>
         </div>
