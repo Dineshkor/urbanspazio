@@ -64,9 +64,9 @@ export default function HeroSection() {
           {/* ── Left Column: Typographic Brand & Message (6 cols) ── */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">
             
-            {/* Brand Title in Upright Luxury Bodoni Moda */}
-            <h1 className="font-bodoni text-5xl sm:text-7xl lg:text-8xl text-[var(--color-charcoal)] tracking-tight leading-[0.98] mb-3 font-normal">
-              Urban <span className="text-gold-metallic font-normal">Spazio</span>
+            {/* Brand Title in Upright Luxury Bodoni Moda (All-Caps URBN SPAZIO) */}
+            <h1 className="font-bodoni text-4xl sm:text-6xl lg:text-7xl xl:text-8xl text-[var(--color-charcoal)] uppercase tracking-[0.04em] leading-[1.02] mb-3 font-normal">
+              URBN <span className="text-gold-metallic font-normal">SPAZIO</span>
             </h1>
 
             {/* Cursive Subheading */}

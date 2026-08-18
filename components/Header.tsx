@@ -54,8 +54,16 @@ export default function Header() {
       }`}
     >
       <div className="editorial-shell flex items-center justify-between gap-4">
-        {/* ── Brand Logo: Monogram Only (No text beside) ── */}
-        <a href="#hero" className="flex items-center shrink-0 bg-transparent group" aria-label="Urban Spazio Home">
+        {/* ── Brand Logo: Monogram Only (Refreshes Page on Click) ── */}
+        <a
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = '/';
+          }}
+          className="flex items-center shrink-0 bg-transparent group cursor-pointer"
+          aria-label="Urban Spazio Home"
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/logo-cropped.png"

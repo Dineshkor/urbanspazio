@@ -28,17 +28,27 @@ export default function Footer() {
       <div className="editorial-shell flex flex-col items-center text-center">
         
         {/* Official Transparent Monogram Logo Mark */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/logo-cropped.png"
-          alt="Urban Spazio Monogram"
-          className="h-10 w-auto object-contain mb-3 bg-transparent"
-        />
+        <a
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = '/';
+          }}
+          className="flex flex-col items-center group cursor-pointer"
+          aria-label="Urban Spazio Home"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/logo-cropped.png"
+            alt="Urban Spazio Monogram"
+            className="h-10 w-auto object-contain mb-3 bg-transparent transition-transform duration-300 group-hover:scale-105"
+          />
 
-        {/* Brand Display Title */}
-        <h2 className="font-bodoni-italic text-3xl sm:text-4xl text-white tracking-wide mb-2 font-normal">
-          Urban <span className="text-gold-metallic-light italic">Spazio</span>
-        </h2>
+          {/* Brand Display Title */}
+          <h2 className="font-bodoni-italic text-3xl sm:text-4xl text-white tracking-wide mb-2 font-normal">
+            Urban <span className="text-gold-metallic-light italic">Spazio</span>
+          </h2>
+        </a>
         
         <p className="text-[9px] uppercase tracking-[0.35em] text-stone-400 font-light mb-6">
           {BRAND.tagline}
