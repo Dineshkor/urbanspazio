@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useRef, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import {
   animate,
   motion,
   useInView,
   useMotionValue,
+  useMotionValueEvent,
   useReducedMotion,
   useScroll,
   useSpring,
@@ -138,9 +139,19 @@ function ChapterTextItem({
   const fade = Math.min(0.1, (e - s) / 3);
   const opacity = useTransform(progress, [s, s + fade, e - fade, e], [0, 1, 1, 0]);
   const y = useTransform(progress, [s, s + fade], [26, 0]);
+  const [hidden, setHidden] = useState(true);
+
+  useMotionValueEvent(opacity, 'change', (v) => {
+    const next = v < 0.5;
+    if (next !== hidden) setHidden(next);
+  });
 
   return (
-    <motion.div style={{ opacity, y }} className="absolute inset-x-0 bottom-0">
+    <motion.div
+      style={{ opacity, y }}
+      aria-hidden={hidden}
+      className="absolute inset-x-0 bottom-0"
+    >
       <div className="flex items-end gap-5">
         <span className="font-bodoni text-5xl sm:text-6xl text-gold-metallic-light leading-none">
           {chapter.label}
