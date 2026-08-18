@@ -157,28 +157,60 @@ function StepRow({ step, index }: { step: (typeof STEPS)[0]; index: number }) {
   );
 }
 
+/* ── Reveal Variants ── */
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
 /* ── Main Section ── */
 export default function ProcessSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section
+    <motion.section
       id="process"
-      className="py-24 lg:py-36 bg-[#EAE3D9] text-[var(--color-charcoal)] relative overflow-hidden"
+      className="py-24 lg:py-36 text-[var(--color-charcoal)] relative overflow-hidden"
+      initial={{ backgroundColor: '#BFAF96' }}
+      whileInView={{ backgroundColor: '#EAE3D9' }}
+      viewport={{ once: true, margin: '0px 0px -15% 0px' }}
+      transition={{ duration: 1.4, ease: 'easeInOut' }}
     >
       <div className="editorial-shell">
-        <div className="flex flex-col items-center text-center mb-20">
-          <span className="font-script text-2xl sm:text-3xl text-gold-metallic mb-2">
+        <motion.div
+          className="flex flex-col items-center text-center mb-20"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-60px' }}
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
+        >
+          <motion.span
+            className="font-script text-2xl sm:text-3xl text-gold-metallic mb-2"
+            variants={fadeUp}
+          >
             how it works
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] font-semibold">
+          </motion.span>
+          <motion.h2
+            className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] font-semibold"
+            variants={fadeUp}
+          >
             FROM VISION TO REALITY
-          </h2>
-          <div className="w-12 h-[1px] bg-[var(--color-charcoal)] opacity-20 my-4" />
-          <p className="max-w-md text-xs sm:text-sm font-helvetica text-[var(--color-warm-grey)] leading-relaxed font-light">
+          </motion.h2>
+          <motion.div
+            className="w-12 h-[1px] bg-[var(--color-charcoal)] opacity-20 my-4"
+            variants={fadeUp}
+          />
+          <motion.p
+            className="max-w-md text-xs sm:text-sm font-helvetica text-[var(--color-warm-grey)] leading-relaxed font-light"
+            variants={fadeUp}
+          >
             Five steps. Your space, made real.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <div ref={containerRef} className="relative">
           <ProcessLine containerRef={containerRef} />
@@ -202,6 +234,6 @@ export default function ProcessSection() {
           </a>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
