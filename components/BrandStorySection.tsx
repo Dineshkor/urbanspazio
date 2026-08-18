@@ -12,6 +12,7 @@ import {
   Palette,
   Sparkles,
 } from 'lucide-react';
+import ConsultationModal from '@/components/ConsultationModal';
 
 /* ── Milestone Data ── */
 const MILESTONES = [
@@ -278,6 +279,7 @@ function MilestoneRow({ milestone, index }: { milestone: (typeof MILESTONES)[0];
 /* ── Main Section ── */
 export default function BrandStorySection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [consultOpen, setConsultOpen] = useState(false);
 
   return (
     <motion.section
@@ -409,13 +411,18 @@ export default function BrandStorySection() {
           </motion.div>
 
           <motion.div variants={fadeUp}>
-            <a href="#consultation" className="btn-filled text-[10px] mt-9">
+            <button
+              type="button"
+              onClick={() => setConsultOpen(true)}
+              className="btn-filled text-[10px] mt-9"
+            >
               <span>Begin Your Story</span>
               <ArrowRight className="w-3.5 h-3.5" />
-            </a>
+            </button>
           </motion.div>
         </motion.div>
       </div>
+      {consultOpen && <ConsultationModal onClose={() => setConsultOpen(false)} />}
     </motion.section>
   );
 }
