@@ -305,10 +305,17 @@ export default function BrandStorySection() {
             our journey
           </motion.span>
           <motion.h2
-            className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] font-semibold"
+            className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] font-semibold flex items-center justify-center gap-2 sm:gap-3"
             variants={fadeUp}
           >
-            THE URBN SPAZIO STORY
+            THE
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/logo-cropped.png"
+              alt="Urban Spazio"
+              className="h-9 sm:h-12 w-auto object-contain bg-transparent"
+            />
+            STORY
           </motion.h2>
           <motion.div
             className="w-12 h-[1px] bg-[var(--color-charcoal)] opacity-20 my-4"
