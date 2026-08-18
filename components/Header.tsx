@@ -49,22 +49,19 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#0E1A40]/95 backdrop-blur-md border-b border-[#946B2D]/40 py-4 shadow-xl'
-          : 'bg-[#0E1A40] border-b border-[#946B2D]/25 py-5'
+          ? 'bg-[#222F5B]/95 backdrop-blur-md border-b border-[#946B2D]/40 py-4 shadow-xl'
+          : 'bg-[#222F5B] border-b border-[#946B2D]/25 py-5'
       }`}
     >
       <div className="editorial-shell flex items-center justify-between gap-4">
-        {/* ── Brand Logo with Monogram & Luxury Cursive Script ── */}
-        <a href="#hero" className="flex items-center gap-2.5 group shrink-0 bg-transparent">
+        {/* ── Brand Logo: Monogram Only (No text beside) ── */}
+        <a href="#hero" className="flex items-center shrink-0 bg-transparent group" aria-label="Urban Spazio Home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/logo-cropped.png"
-            alt="Urban Spazio Monogram"
-            className="h-8 sm:h-9 w-auto object-contain bg-transparent transition-transform duration-300 group-hover:scale-105"
+            alt="Urban Spazio"
+            className="h-9 sm:h-11 w-auto object-contain bg-transparent transition-transform duration-300 group-hover:scale-105"
           />
-          <span className="font-pinyon text-2xl sm:text-3xl lg:text-4xl text-[#FAF7F2] tracking-wide leading-none pt-1 bg-transparent">
-            Urban <span className="text-[#D8B97C]">Spazio</span>
-          </span>
         </a>
 
         {/* ── Desktop Nav Links ── */}
@@ -91,7 +88,7 @@ export default function Header() {
         <div className="hidden lg:block shrink-0">
           <a
             href="#consultation"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-[#946B2D] text-[#946B2D] hover:bg-[#946B2D] hover:text-[#0E1A40] font-helvetica text-[10px] uppercase tracking-[0.2em] font-semibold transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-[#946B2D] text-[#946B2D] hover:bg-[#946B2D] hover:text-[#222F5B] font-helvetica text-[10px] uppercase tracking-[0.2em] font-semibold transition-all duration-300"
           >
             Book Consultation
           </a>
@@ -109,7 +106,7 @@ export default function Header() {
 
       {/* ── Mobile Navigation Drawer ── */}
       {mobileOpen && (
-        <div className="lg:hidden bg-[#0E1A40] border-t border-[#946B2D]/35 px-6 py-8 shadow-2xl">
+        <div className="lg:hidden bg-[#222F5B] border-t border-[#946B2D]/35 px-6 py-8 shadow-2xl">
           <nav className="flex flex-col space-y-4">
             {NAV_LINKS.map((link) => (
               <a
@@ -129,7 +126,7 @@ export default function Header() {
               <a
                 href="#consultation"
                 onClick={() => setMobileOpen(false)}
-                className="w-full inline-flex items-center justify-center py-3 bg-[#946B2D] text-[#0E1A40] font-semibold uppercase text-[10px] tracking-[0.2em]"
+                className="w-full inline-flex items-center justify-center py-3 bg-[#946B2D] text-[#222F5B] font-semibold uppercase text-[10px] tracking-[0.2em]"
               >
                 Book Consultation — ₹999
               </a>
