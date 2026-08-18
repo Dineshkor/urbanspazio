@@ -80,6 +80,7 @@ function DesktopStage({
     offset: ['start start', 'end end'],
   });
   const progress = useSpring(scrollYProgress, { stiffness: 70, damping: 24, mass: 0.6 });
+  const sceneProgress = useTransform(progress, (v) => v * chapters.length);
 
   return (
     <div ref={sectionRef} style={{ height: `${chapters.length * 100}vh` }} className="relative">
@@ -87,7 +88,7 @@ function DesktopStage({
         {/* Proscenium frame */}
         <div className="absolute inset-[4vh_6vw]">
           <div className="relative h-full border border-[var(--color-brass)]/25 rounded-md overflow-hidden bg-[#1E1C1A] shadow-[0_0_90px_rgba(197,162,93,0.1)]">
-            {renderScene(progress)}
+            {renderScene(sceneProgress)}
             <ChapterText chapters={chapters} progress={progress} />
           </div>
         </div>
