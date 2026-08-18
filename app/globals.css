@@ -17,9 +17,9 @@
     --color-paper: #FAF7F2;
     --color-dark: #1E1C1A;
     --color-charcoal: #1C1A18;
-    --color-brass: #B89A67;
-    --color-brass-light: #D8C39D;
-    --color-brass-dark: #8E7345;
+    --color-brass: #C5A25D;
+    --color-brass-light: #E4C988;
+    --color-brass-dark: #9E7B35;
     --color-warm-grey: #7A746D;
     --color-light-grey: #C2BBB2;
 
@@ -126,20 +126,20 @@
 }
 
 /* ============================================
-   Pure Rich Metallic Gold Typography (High Contrast, No Silver/Washout)
+   Luxury Gold Foil Typography (Matches Reference Stationery)
    ============================================ */
 
-/* Pure Rich Burnished Gold Metal — High Legibility */
+/* Brushed Satin Gold Foil — from reference image */
 .text-gold-metallic,
-.text-chrome-gold {
+.text-chrome-gold,
+.text-gold-foil {
   background: linear-gradient(
     135deg,
-    #7B5712 0%,
-    #A87B24 22%,
-    #D4A747 45%,
-    #E8C66E 60%,
-    #B58728 78%,
-    #6E4A0C 100%
+    #9E7B35 0%,
+    #C5A25D 30%,
+    #E8CF94 50%,
+    #C5A25D 70%,
+    #94712D 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -149,15 +149,15 @@
   font-weight: 500;
 }
 
-/* Bright Warm Gold for Dark Backgrounds */
+/* Light / Bright Gold Foil for Dark Backgrounds */
 .text-gold-metallic-light {
   background: linear-gradient(
     135deg,
-    #C49A45 0%,
-    #E8C66E 30%,
-    #F7DE98 55%,
-    #D4A747 80%,
-    #A87B24 100%
+    #C5A25D 0%,
+    #E8CF94 35%,
+    #F3E2B8 55%,
+    #E4C988 75%,
+    #C5A25D 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -166,15 +166,15 @@
   display: inline-block;
 }
 
-/* Warm Champagne / Bronze Gold */
+/* Warm Champagne / Bronze Gold Foil */
 .text-gold-champagne {
   background: linear-gradient(
     135deg,
-    #8A651C 0%,
-    #C89B3B 35%,
-    #E5C37A 55%,
-    #A87B24 80%,
-    #6B4B0F 100%
+    #9E7B35 0%,
+    #C5A25D 35%,
+    #DFBF7A 55%,
+    #C5A25D 75%,
+    #8A6726 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

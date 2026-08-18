@@ -49,8 +49,8 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#222F5B]/95 backdrop-blur-md border-b border-[#946B2D]/40 py-4 shadow-xl'
-          : 'bg-[#222F5B] border-b border-[#946B2D]/25 py-5'
+          ? 'bg-[#222F5B]/95 backdrop-blur-md border-b border-[#C5A25D]/40 py-4 shadow-xl'
+          : 'bg-[#222F5B] border-b border-[#C5A25D]/25 py-5'
       }`}
     >
       <div className="editorial-shell flex items-center justify-between gap-4">
@@ -74,8 +74,8 @@ export default function Header() {
                 href={link.href}
                 className={`text-[10px] xl:text-[11px] font-medium tracking-[0.16em] uppercase transition-all duration-200 whitespace-nowrap ${
                   isActive
-                    ? 'text-[#946B2D] border-b-2 border-[#946B2D] pb-1 font-semibold'
-                    : 'text-[#FAF7F2]/85 hover:text-[#946B2D]'
+                    ? 'text-[#C5A25D] border-b-2 border-[#C5A25D] pb-1 font-semibold'
+                    : 'text-[#FAF7F2]/85 hover:text-[#C5A25D]'
                 }`}
               >
                 {link.name}
@@ -84,11 +84,11 @@ export default function Header() {
           })}
         </nav>
 
-        {/* ── Desktop Action CTA Button in Bronze Gold (#946B2D) ── */}
+        {/* ── Desktop Action CTA Button in Gold Foil (#C5A25D) ── */}
         <div className="hidden lg:block shrink-0">
           <a
             href="#consultation"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-[#946B2D] text-[#946B2D] hover:bg-[#946B2D] hover:text-[#222F5B] font-helvetica text-[10px] uppercase tracking-[0.2em] font-semibold transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-[#C5A25D] text-[#C5A25D] hover:bg-[#C5A25D] hover:text-[#222F5B] font-helvetica text-[10px] uppercase tracking-[0.2em] font-semibold transition-all duration-300"
           >
             Book Consultation
           </a>
@@ -100,13 +100,13 @@ export default function Header() {
           className="lg:hidden p-2 text-[#FAF7F2] focus:outline-hidden"
           aria-label="Toggle Navigation"
         >
-          {mobileOpen ? <X className="w-5 h-5 text-[#946B2D]" /> : <Menu className="w-5 h-5 text-[#FAF7F2]" />}
+          {mobileOpen ? <X className="w-5 h-5 text-[#C5A25D]" /> : <Menu className="w-5 h-5 text-[#FAF7F2]" />}
         </button>
       </div>
 
       {/* ── Mobile Navigation Drawer ── */}
       {mobileOpen && (
-        <div className="lg:hidden bg-[#222F5B] border-t border-[#946B2D]/35 px-6 py-8 shadow-2xl">
+        <div className="lg:hidden bg-[#222F5B] border-t border-[#C5A25D]/35 px-6 py-8 shadow-2xl">
           <nav className="flex flex-col space-y-4">
             {NAV_LINKS.map((link) => (
               <a
@@ -115,18 +115,18 @@ export default function Header() {
                 onClick={() => setMobileOpen(false)}
                 className={`text-xs tracking-[0.2em] uppercase font-medium transition-colors ${
                   activeSection === link.href
-                    ? 'text-[#946B2D]'
+                    ? 'text-[#C5A25D]'
                     : 'text-[#FAF7F2]'
                 }`}
               >
                 {link.name}
               </a>
             ))}
-            <div className="pt-4 border-t border-[#946B2D]/20">
+            <div className="pt-4 border-t border-[#C5A25D]/20">
               <a
                 href="#consultation"
                 onClick={() => setMobileOpen(false)}
-                className="w-full inline-flex items-center justify-center py-3 bg-[#946B2D] text-[#222F5B] font-semibold uppercase text-[10px] tracking-[0.2em]"
+                className="w-full inline-flex items-center justify-center py-3 bg-[#C5A25D] text-[#222F5B] font-semibold uppercase text-[10px] tracking-[0.2em]"
               >
                 Book Consultation — ₹999
               </a>
