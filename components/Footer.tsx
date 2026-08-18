@@ -27,9 +27,17 @@ export default function Footer() {
     <footer className="bg-[#191715] text-stone-300 py-16 border-t border-white/10">
       <div className="editorial-shell flex flex-col items-center text-center">
         
+        {/* Official Transparent Monogram Logo Mark */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/logo-cropped.png"
+          alt="Urban Spazio Monogram"
+          className="h-10 w-auto object-contain mb-3 bg-transparent"
+        />
+
         {/* Brand Display Title */}
         <h2 className="font-bodoni-italic text-3xl sm:text-4xl text-white tracking-wide mb-2 font-normal">
-          Urban <span className="text-[var(--color-brass-light)] italic">Spazio</span>
+          Urban <span className="text-[#D8B97C] italic">Spazio</span>
         </h2>
         
         <p className="text-[9px] uppercase tracking-[0.35em] text-stone-400 font-light mb-6">

@@ -78,6 +78,18 @@
   font-weight: 400;
 }
 
+/* Pinyon Script — High-End Aristocratic Luxury Calligraphy */
+.font-pinyon {
+  font-family: var(--font-pinyon), 'Pinyon Script', cursive;
+  font-weight: 400;
+}
+
+/* Alex Brush — Elegant Signature Script */
+.font-alex {
+  font-family: var(--font-alex), 'Alex Brush', cursive;
+  font-weight: 400;
+}
+
 /* ============================================
    TAN PARADISO Custom WebFont
    ============================================ */

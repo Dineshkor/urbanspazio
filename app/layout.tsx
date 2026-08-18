@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bodoni_Moda, Dancing_Script, Inter, Playfair_Display } from "next/font/google";
+import { Bodoni_Moda, Dancing_Script, Inter, Playfair_Display, Pinyon_Script, Alex_Brush } from "next/font/google";
 import "./globals.css";
 
 const bodoni = Bodoni_Moda({
@@ -15,6 +15,20 @@ const script = Dancing_Script({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
+});
+
+const pinyon = Pinyon_Script({
+  variable: "--font-pinyon",
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
+});
+
+const alex = Alex_Brush({
+  variable: "--font-alex",
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
 });
 
 const playfair = Playfair_Display({
@@ -54,8 +68,8 @@ export const metadata: Metadata = {
     siteName: "Urban Spazio",
   },
   icons: {
-    icon: "/images/logo.jpg",
-    apple: "/images/logo.jpg",
+    icon: "/images/logo-cropped.png",
+    apple: "/images/logo-cropped.png",
   },
 };
 
@@ -71,7 +85,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bodoni.variable} ${script.variable} ${playfair.variable} ${inter.variable}`}
+      className={`${bodoni.variable} ${script.variable} ${pinyon.variable} ${alex.variable} ${playfair.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-dvh antialiased">
