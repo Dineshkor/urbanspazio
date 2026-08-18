@@ -54,6 +54,7 @@ export default function RoomScene({
       <Pendant progress={progress} beat={beats.pendant} />
       <Styling progress={progress} beat={beats.styling} />
       <Doorway progress={progress} beat={beats.doorway} />
+      <DriftParticles progress={progress} beat={beats.doorway} />
       <Flood progress={progress} beat={beats.flood} />
       <rect width="100" height="75" fill="url(#vignetteGrad)" pointerEvents="none" />
 
@@ -401,6 +402,37 @@ function Doorway({ progress, beat }: { progress: MotionValue<number>; beat: numb
           transformBox: 'view-box',
         }}
       />
+    </motion.g>
+  );
+}
+
+const DRIFT_DOTS = [
+  { cx: 86, delay: 0, dur: 6 },
+  { cx: 88, delay: 1.2, dur: 7 },
+  { cx: 90, delay: 2.4, dur: 6.5 },
+  { cx: 84, delay: 3.1, dur: 7.5 },
+];
+
+function DriftParticles({ progress, beat }: { progress: MotionValue<number>; beat: number }) {
+  const lp = useLayerProgress(progress, beat);
+  return (
+    <motion.g style={{ opacity: lp }}>
+      {DRIFT_DOTS.map((d, i) => (
+        <circle
+          key={i}
+          cx={d.cx}
+          cy={46}
+          r="0.5"
+          fill="#E8CF94"
+          style={{
+            animationName: 'goldDrift',
+            animationDuration: `${d.dur}s`,
+            animationDelay: `${d.delay}s`,
+            animationIterationCount: 'infinite',
+            animationTimingFunction: 'ease-in-out',
+          }}
+        />
+      ))}
     </motion.g>
   );
 }

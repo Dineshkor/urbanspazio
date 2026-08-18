@@ -351,3 +351,18 @@
   background-color: var(--color-linen);
   color: var(--color-charcoal);
 }
+
+/* Cinematic room — gold particles drifting from the open doorway */
+@keyframes goldDrift {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-18px) translateX(3px);
+    opacity: 0;
+  }
+}
