@@ -352,17 +352,14 @@
   color: var(--color-charcoal);
 }
 
-/* Cinematic room — gold particles drifting from the open doorway */
-@keyframes goldDrift {
-  0% {
-    transform: translateY(0) translateX(0);
-    opacity: 0;
+/* Timeline node pulse ring */
+@keyframes nodePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
   }
-  20% {
-    opacity: 0.9;
-  }
-  100% {
-    transform: translateY(-18px) translateX(3px);
+  50% {
+    transform: scale(1.25);
     opacity: 0;
   }
 }
