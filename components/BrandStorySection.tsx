@@ -337,36 +337,79 @@ export default function BrandStorySection() {
           viewport={{ once: true, margin: '-40px' }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
         >
-          <motion.div
-            className="group relative w-36 sm:w-44 cursor-pointer"
-            variants={fadeUp}
-          >
-            <div className="arch-frame overflow-hidden bg-[var(--color-cream)] shadow-[0_24px_48px_-24px_rgba(28,26,24,0.35)]">
+          {/* ── Founder portrait: arch frame, orbiting ring, offset mat, museum label ── */}
+          <motion.div className="group relative w-56 sm:w-72" variants={fadeUp}>
+            {/* Rotating brass text ring (halo behind the portrait) */}
+            <div
+              className="absolute -inset-6 z-0 flex items-center justify-center"
+              aria-hidden="true"
+            >
+              <svg
+                viewBox="0 0 200 200"
+                className="w-80 h-80 sm:w-96 sm:h-96 origin-center text-[var(--color-brass)] opacity-60 [animation:spinSlow_30s_linear_infinite] motion-reduce:[animation:none]"
+              >
+                <defs>
+                  <path
+                    id="founderRingPath"
+                    d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0"
+                    fill="none"
+                  />
+                </defs>
+                <text
+                  fontSize="9"
+                  letterSpacing="3"
+                  fill="currentColor"
+                  className="font-helvetica font-medium uppercase"
+                >
+                  <textPath href="#founderRingPath" startOffset="0">
+                    URBAN SPAZIO ✦ FOUNDER ✦ URBAN SPAZIO ✦ PRINCIPAL DESIGNER ✦
+                  </textPath>
+                </text>
+              </svg>
+            </div>
+
+            {/* Offset gold mat frame sliding in behind */}
+            <motion.div
+              className="absolute -inset-3 z-0 border border-[var(--color-brass)]/45"
+              initial={{ opacity: 0, x: 12, y: 12 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            />
+
+            {/* Photo with settle-zoom reveal */}
+            <motion.div
+              className="relative z-10 arch-frame overflow-hidden bg-[var(--color-cream)] shadow-[0_40px_80px_-40px_rgba(28,26,24,0.5)]"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/brand-story.jpg"
                 alt="Sonali Bachkheti — Founder &amp; Principal Designer"
-                className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
               />
-            </div>
-            <div className="absolute inset-0 border border-[var(--color-brass)]/40 pointer-events-none transition-colors duration-500 group-hover:border-[var(--color-brass)]/70" />
+            </motion.div>
           </motion.div>
 
-          <motion.span
-            className="font-script text-3xl text-gold-metallic mt-5"
+          {/* Museum label plaque overlapping the photo edge */}
+          <motion.div
+            className="relative z-20 -mt-9 w-fit -rotate-1 bg-[var(--color-paper)] border border-[var(--color-brass)]/35 px-7 py-3.5 shadow-[0_24px_48px_-28px_rgba(28,26,24,0.45)] transition-transform duration-500 hover:rotate-0"
             variants={fadeUp}
           >
-            Sonali Bachkheti
-          </motion.span>
-          <motion.span
-            className="text-[9px] uppercase tracking-[0.2em] text-[var(--color-warm-grey)] font-medium"
-            variants={fadeUp}
-          >
-            Founder &amp; Principal Designer
-          </motion.span>
+            <span className="block font-script text-2xl sm:text-3xl text-gold-metallic leading-none">
+              Sonali Bachkheti
+            </span>
+            <span className="block mx-auto mt-2 h-px w-8 bg-[var(--color-brass)]/60" />
+            <span className="block mt-1.5 text-[8px] uppercase tracking-[0.28em] text-[var(--color-warm-grey)] font-medium">
+              Founder &amp; Principal Designer
+            </span>
+          </motion.div>
 
           <motion.div variants={fadeUp}>
-            <a href="#consultation" className="btn-filled text-[10px] mt-7">
+            <a href="#consultation" className="btn-filled text-[10px] mt-9">
               <span>Begin Your Story</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>

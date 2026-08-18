@@ -363,3 +363,10 @@
     opacity: 0;
   }
 }
+
+/* Founder portrait — slow orbiting text ring */
+@keyframes spinSlow {
+  to {
+    transform: rotate(360deg);
+  }
+}
