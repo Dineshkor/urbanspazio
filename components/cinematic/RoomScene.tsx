@@ -48,9 +48,9 @@ export default function RoomScene({
       <LightBeams progress={progress} beat={beats.light} />
       <Blueprints progress={progress} beat={beats.blueprints} />
       <Materials progress={progress} beat={beats.materials} />
-      <Samples progress={progress} beat={beats.samples} />
       <Artwork progress={progress} beat={beats.artwork} />
       <Sofa progress={progress} beat={beats.furniture} />
+      <Samples progress={progress} beat={beats.samples} />
       <Pendant progress={progress} beat={beats.pendant} />
       <Styling progress={progress} beat={beats.styling} />
       <Doorway progress={progress} beat={beats.doorway} />
@@ -115,13 +115,12 @@ function Ember({ progress, beat }: { progress: MotionValue<number>; beat: number
   return (
     <motion.g style={{ opacity: lp }}>
       <circle cx="50" cy="38" r="3.5" fill="url(#glowGrad)" />
-      <motion.circle
+      <circle
         cx="50"
         cy="38"
         r="1.4"
         fill="#E8CF94"
-        animate={{ r: [1.2, 1.6, 1.2], opacity: [0.85, 1, 0.85] }}
-        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+        className="animate-pulse motion-reduce:animate-none"
       />
     </motion.g>
   );
