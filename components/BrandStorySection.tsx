@@ -103,7 +103,7 @@ function TimelineLine({ containerRef }: { containerRef: React.RefObject<HTMLDivE
   const dotTop = useTransform(scaleY, (v) => `${v * 100}%`);
 
   return (
-    <div className="absolute left-6 lg:left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-[var(--color-charcoal)]/10">
+    <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-[var(--color-charcoal)]/10">
       <motion.div
         className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--color-brass)] to-[var(--color-brass)]"
         style={{ scaleY, originY: 0 }}
@@ -193,7 +193,7 @@ function MilestoneCard({
   return (
     <motion.div
       ref={ref}
-      className={`max-w-sm ${isRight ? 'ml-auto text-right' : 'text-left'}`}
+      className={`w-full max-w-sm ${isRight ? 'ml-auto text-right' : 'text-left'}`}
       initial={{ opacity: 0, x: isRight ? 48 : -48, filter: 'blur(4px)' }}
       whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
       viewport={{ once: true, margin: '-80px' }}
@@ -246,26 +246,20 @@ function MilestoneRow({ milestone, index }: { milestone: (typeof MILESTONES)[0];
   const isEven = index % 2 === 0;
 
   return (
-    <div className="relative grid lg:grid-cols-[1fr_auto_1fr] lg:gap-12 items-center py-9">
-      {/* Desktop: alternating sides */}
-      <div className={`hidden lg:flex lg:justify-start ${isEven ? 'lg:justify-end' : ''}`}>
-        <MilestoneCard milestone={milestone} index={index} align={isEven ? 'right' : 'left'} />
+    <div className="relative grid grid-cols-[1fr_auto_1fr] gap-3 sm:gap-8 lg:gap-12 items-center py-7 lg:py-9">
+      {/* Left slot: card on even rows (right side of line), empty on odd rows */}
+      <div className={`flex min-w-0 ${isEven ? 'justify-end' : ''}`}>
+        {isEven && <MilestoneCard milestone={milestone} index={index} align="right" />}
       </div>
-      <div className="hidden lg:flex lg:justify-center">
+
+      {/* Center node */}
+      <div className="flex justify-center">
         <CenterNode milestone={milestone} index={index} />
       </div>
 
-      {/* Mobile: node left, card right */}
-      <div className="lg:hidden relative flex items-start gap-4 pl-2">
-        <div className="flex flex-col items-center shrink-0 pt-1">
-          <CenterNode milestone={milestone} index={index} />
-          {index < MILESTONES.length - 1 && (
-            <div className="w-px h-14 bg-gradient-to-b from-[var(--color-brass)] to-transparent opacity-40 mt-2" />
-          )}
-        </div>
-        <div className="flex-1 pb-6">
-          <MilestoneCard milestone={milestone} index={index} align="left" />
-        </div>
+      {/* Right slot: card on odd rows (left side of line), empty on even rows */}
+      <div className={`flex min-w-0 ${isEven ? '' : 'justify-start'}`}>
+        {!isEven && <MilestoneCard milestone={milestone} index={index} align="left" />}
       </div>
     </div>
   );
