@@ -83,7 +83,7 @@ function DesktopStage({
 
   return (
     <div ref={sectionRef} style={{ height: `${chapters.length * 100}vh` }} className="relative">
-      <div className="sticky top-0 h-screen overflow-hidden">
+      <div className="sticky top-0 h-dvh overflow-hidden">
         {/* Proscenium frame */}
         <div className="absolute inset-[4vh_6vw]">
           <div className="relative h-full border border-[var(--color-brass)]/25 rounded-md overflow-hidden bg-[#1E1C1A] shadow-[0_0_90px_rgba(197,162,93,0.1)]">
@@ -134,8 +134,9 @@ function ChapterTextItem({
 }) {
   const s = index / total;
   const e = (index + 1) / total;
-  const opacity = useTransform(progress, [s, s + 0.1, e - 0.1, e], [0, 1, 1, 0]);
-  const y = useTransform(progress, [s, s + 0.1], [26, 0]);
+  const fade = Math.min(0.1, (e - s) / 3);
+  const opacity = useTransform(progress, [s, s + fade, e - fade, e], [0, 1, 1, 0]);
+  const y = useTransform(progress, [s, s + fade], [26, 0]);
 
   return (
     <motion.div style={{ opacity, y }} className="absolute inset-x-0 bottom-0">
