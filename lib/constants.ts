@@ -23,10 +23,10 @@ export const QUICK_CONSULTATION_DURATION = "30 min to 1 hr";
 
 export const NAV_LINKS = [
   { name: "Home", href: "#hero" },
+  { name: "Story", href: "#story" },
   { name: "Services", href: "#services" },
   { name: "Philosophy", href: "#philosophy" },
   { name: "Portfolio", href: "#portfolio" },
   { name: "Process", href: "#process" },
-  { name: "Story", href: "#story" },
   { name: "Contact", href: "#contact" },
 ] as const;
