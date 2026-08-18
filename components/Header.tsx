@@ -49,8 +49,8 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#222F5B]/95 backdrop-blur-md border-b border-[#C5A25D]/40 py-4 shadow-xl'
-          : 'bg-[#222F5B] border-b border-[#C5A25D]/25 py-5'
+          ? 'bg-[#3B5B9E]/95 backdrop-blur-md border-b border-[#C5A25D]/40 py-4 shadow-xl'
+          : 'bg-[#3B5B9E] border-b border-[#C5A25D]/25 py-5'
       }`}
     >
       <div className="editorial-shell flex items-center justify-between gap-4">
@@ -114,7 +114,7 @@ export default function Header() {
 
       {/* ── Mobile Navigation Drawer ── */}
       {mobileOpen && (
-        <div className="lg:hidden bg-[#222F5B] border-t border-[#C5A25D]/35 px-6 py-8 shadow-2xl">
+        <div className="lg:hidden bg-[#3B5B9E] border-t border-[#C5A25D]/35 px-6 py-8 shadow-2xl">
           <nav className="flex flex-col space-y-4">
             {NAV_LINKS.map((link) => (
               <a
