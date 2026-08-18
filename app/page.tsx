@@ -21,6 +21,9 @@ export default function HomePage() {
         {/* ── Hero: Full-screen cinematic intro ── */}
         <HeroSection />
 
+        {/* ── Brand Story: About us ── */}
+        <BrandStorySection />
+
         {/* ── Services: What we offer ── */}
         <ServicesSection />
 
@@ -38,9 +41,6 @@ export default function HomePage() {
 
         {/* ── Packages: Investment tiers (stone bg) ── */}
         <PackageSection />
-
-        {/* ── Brand Story: About us ── */}
-        <BrandStorySection />
 
         {/* ── Testimonials: Client quotes ── */}
         <TestimonialSection />
