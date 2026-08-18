@@ -330,18 +330,48 @@ export default function BrandStorySection() {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col sm:flex-row items-center justify-center gap-8 pt-10 border-t border-[var(--color-charcoal)]/10">
-          <a href="#consultation" className="btn-filled text-[10px]">
-            <span>Begin Your Story</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </a>
-          <div className="flex flex-col items-center sm:items-end">
-            <span className="font-script text-3xl text-gold-metallic">Sonali Bachkheti</span>
-            <span className="text-[9px] uppercase tracking-[0.2em] text-[var(--color-warm-grey)] font-medium">
-              Founder &amp; Principal Designer
-            </span>
-          </div>
-        </div>
+        <motion.div
+          className="mt-20 pt-10 border-t border-[var(--color-charcoal)]/10 flex flex-col items-center text-center"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-40px' }}
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
+        >
+          <motion.div
+            className="group relative w-36 sm:w-44 cursor-pointer"
+            variants={fadeUp}
+          >
+            <div className="arch-frame overflow-hidden bg-[var(--color-cream)] shadow-[0_24px_48px_-24px_rgba(28,26,24,0.35)]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/brand-story.jpg"
+                alt="Sonali Bachkheti — Founder &amp; Principal Designer"
+                className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div className="absolute inset-0 border border-[var(--color-brass)]/40 pointer-events-none transition-colors duration-500 group-hover:border-[var(--color-brass)]/70" />
+          </motion.div>
+
+          <motion.span
+            className="font-script text-3xl text-gold-metallic mt-5"
+            variants={fadeUp}
+          >
+            Sonali Bachkheti
+          </motion.span>
+          <motion.span
+            className="text-[9px] uppercase tracking-[0.2em] text-[var(--color-warm-grey)] font-medium"
+            variants={fadeUp}
+          >
+            Founder &amp; Principal Designer
+          </motion.span>
+
+          <motion.div variants={fadeUp}>
+            <a href="#consultation" className="btn-filled text-[10px] mt-7">
+              <span>Begin Your Story</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </motion.div>
+        </motion.div>
       </div>
     </motion.section>
   );
