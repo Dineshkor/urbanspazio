@@ -25,7 +25,6 @@ export const NAV_LINKS = [
   { name: "Home", href: "#hero" },
   { name: "Story", href: "#story" },
   { name: "Services", href: "#services" },
-  { name: "Philosophy", href: "#philosophy" },
   { name: "Portfolio", href: "#portfolio" },
   { name: "Process", href: "#process" },
   { name: "Contact", href: "#contact" },

@@ -1,7 +1,6 @@
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import ServicesSection from '@/components/ServicesSection';
-import DesignPhilosophySection from '@/components/DesignPhilosophySection';
 import PortfolioSection from '@/components/PortfolioSection';
 import ProcessSection from '@/components/ProcessSection';
 import ConsultationSection from '@/components/ConsultationSection';
@@ -26,9 +25,6 @@ export default function HomePage() {
 
         {/* ── Services: What we offer ── */}
         <ServicesSection />
-
-        {/* ── Design Philosophy: 4 theme showcase (dark section) ── */}
-        <DesignPhilosophySection />
 
         {/* ── Portfolio: Bento grid of our work ── */}
         <PortfolioSection />
