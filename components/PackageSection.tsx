@@ -11,7 +11,7 @@ export default function PackageSection() {
         
         {/* ── Section Header ── */}
         <div className="flex flex-col items-center text-center mb-20">
-          <span className="font-script text-2xl sm:text-3xl text-[var(--color-brass-dark)] mb-2">
+          <span className="font-script text-2xl sm:text-3xl text-gold-metallic mb-2">
             investment
           </span>
           <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] font-semibold">
@@ -51,7 +51,7 @@ export default function PackageSection() {
                   </div>
 
                   {/* Price */}
-                  <p className={`text-xl sm:text-2xl font-serif mb-4 font-medium ${isPopular ? 'text-[var(--color-brass-light)]' : 'text-[var(--color-brass-dark)]'}`}>
+                  <p className={`text-xl sm:text-2xl font-serif mb-4 font-medium ${isPopular ? 'text-gold-metallic-light' : 'text-gold-metallic'}`}>
                     {tier.range}
                   </p>
 

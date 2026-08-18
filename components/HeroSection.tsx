@@ -64,13 +64,13 @@ export default function HeroSection() {
           {/* ── Left Column: Typographic Brand & Message (6 cols) ── */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">
             
-            {/* Brand Title in Bodoni Moda Italic */}
-            <h1 className="font-bodoni-italic text-5xl sm:text-7xl lg:text-8xl text-[var(--color-charcoal)] tracking-tight leading-[0.96] mb-3 font-normal">
-              Urban <span className="text-[var(--color-brass-dark)] italic">Spazio</span>
+            {/* Brand Title in Upright Luxury Bodoni Moda */}
+            <h1 className="font-bodoni text-5xl sm:text-7xl lg:text-8xl text-[var(--color-charcoal)] tracking-tight leading-[0.98] mb-3 font-normal">
+              Urban <span className="text-gold-metallic font-normal">Spazio</span>
             </h1>
 
             {/* Cursive Subheading */}
-            <p className="font-script text-xl sm:text-3xl text-[var(--color-brass)] mb-4">
+            <p className="font-script text-xl sm:text-3xl text-gold-metallic mb-4">
               defining spaces, defining lifestyles
             </p>
 
@@ -136,7 +136,7 @@ export default function HeroSection() {
             <div className="mt-9 w-full max-w-md">
               <div className="flex items-end justify-between gap-6">
                 <div className="min-w-0">
-                  <p className="text-[9px] uppercase tracking-[0.25em] font-semibold text-[var(--color-brass-dark)]">
+                  <p className="text-[9px] uppercase tracking-[0.25em] font-semibold text-gold-metallic">
                     Client Work — 0{current + 1} / 0{FEATURED_PROJECTS.length}
                   </p>
                   <h3

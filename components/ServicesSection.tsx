@@ -15,7 +15,7 @@ export default function ServicesSection() {
         
         {/* ── Section Header (Cursive Accent + Serif Heading) ── */}
         <div className="flex flex-col items-center text-center mb-20">
-          <span className="font-script text-2xl sm:text-3xl text-[var(--color-brass)] mb-2">
+          <span className="font-script text-2xl sm:text-3xl text-gold-metallic mb-2">
             how we can work together
           </span>
           <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] font-semibold">
@@ -34,7 +34,7 @@ export default function ServicesSection() {
             {/* Left: Text Content (7 cols) */}
             <div className="lg:col-span-7 flex flex-col items-start text-left">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl sm:text-4xl font-serif text-[var(--color-brass)] font-light">
+                <span className="text-3xl sm:text-4xl font-serif text-gold-metallic-light font-light">
                   01
                 </span>
                 <span className="px-3 py-1 bg-[var(--color-brass)] text-white text-[10px] uppercase tracking-[0.2em] font-semibold">
@@ -46,7 +46,7 @@ export default function ServicesSection() {
                 {quickConsultation.title}
               </h3>
 
-              <p className="text-xs font-helvetica text-[var(--color-brass-light)] uppercase tracking-[0.2em] mb-5">
+              <p className="text-xs font-helvetica text-gold-metallic-light uppercase tracking-[0.2em] mb-5">
                 {quickConsultation.subtitle}
               </p>
 
@@ -107,7 +107,7 @@ export default function ServicesSection() {
                   
                   {/* Text Column (7 cols) */}
                   <div className={`lg:col-span-7 flex flex-col items-start text-left ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
-                    <span className="text-4xl sm:text-5xl font-serif text-[var(--color-brass-dark)] opacity-40 mb-2 font-light">
+                    <span className="text-4xl sm:text-5xl font-serif text-gold-metallic mb-2 font-light">
                       {stepNum}
                     </span>
 
@@ -115,7 +115,7 @@ export default function ServicesSection() {
                       {service.title}
                     </h3>
 
-                    <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--color-brass-dark)] font-semibold mb-4">
+                    <p className="text-[11px] uppercase tracking-[0.2em] text-gold-metallic font-semibold mb-4">
                       {service.subtitle}
                     </p>
 

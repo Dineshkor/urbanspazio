@@ -37,7 +37,7 @@ export default function Footer() {
 
         {/* Brand Display Title */}
         <h2 className="font-bodoni-italic text-3xl sm:text-4xl text-white tracking-wide mb-2 font-normal">
-          Urban <span className="text-[#D8B97C] italic">Spazio</span>
+          Urban <span className="text-gold-metallic-light italic">Spazio</span>
         </h2>
         
         <p className="text-[9px] uppercase tracking-[0.35em] text-stone-400 font-light mb-6">

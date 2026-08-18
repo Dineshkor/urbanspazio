@@ -18,7 +18,7 @@ export default function TestimonialSection() {
         
         {/* ── Section Header ── */}
         <div className="flex flex-col items-center text-center mb-16">
-          <span className="font-script text-2xl sm:text-3xl text-[var(--color-brass-dark)] mb-2">
+          <span className="font-script text-2xl sm:text-3xl text-gold-metallic mb-2">
             kind words
           </span>
           <h2 className="text-3xl sm:text-4xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.12em] font-semibold">

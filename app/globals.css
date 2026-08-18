@@ -126,6 +126,61 @@
 }
 
 /* ============================================
+   Metallic Gold Typography Utilities
+   ============================================ */
+
+/* High-luster luxury metallic gold gradient text */
+.text-gold-metallic {
+  background: linear-gradient(
+    135deg,
+    #9C7736 0%,
+    #D4AF37 25%,
+    #F3E5AB 45%,
+    #C59B27 70%,
+    #896420 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* Light / Bright metallic gold for dark backgrounds */
+.text-gold-metallic-light {
+  background: linear-gradient(
+    135deg,
+    #E5C384 0%,
+    #FFF4D0 30%,
+    #D4AF37 55%,
+    #FFE9A0 80%,
+    #C49A45 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* Warm Champagne / Bronze metallic gold */
+.text-gold-champagne {
+  background: linear-gradient(
+    135deg,
+    #A67C33 0%,
+    #D8B97C 35%,
+    #F5DEB3 55%,
+    #B89A67 80%,
+    #8A6B2D 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* ============================================
    Container Shell & Layout Utilities
    ============================================ */
 

@@ -11,7 +11,7 @@ export default function ProcessSection() {
         
         {/* ── Section Header ── */}
         <div className="flex flex-col items-center text-center mb-20">
-          <span className="font-script text-2xl sm:text-3xl text-[var(--color-brass-dark)] mb-2">
+          <span className="font-script text-2xl sm:text-3xl text-gold-metallic mb-2">
             how it works
           </span>
           <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] font-semibold">
@@ -31,7 +31,7 @@ export default function ProcessSection() {
 
               return (
                 <div key={step.step || index} className={`flex flex-col items-start text-left ${index > 0 ? 'pt-8 lg:pt-0 lg:pl-8' : ''}`}>
-                  <span className="text-4xl sm:text-5xl font-serif text-[var(--color-brass-dark)] font-light mb-3">
+                  <span className="text-4xl sm:text-5xl font-serif text-gold-metallic font-light mb-3">
                     {stepNum}
                   </span>
 

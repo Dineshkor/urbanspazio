@@ -11,7 +11,7 @@ export default function DesignPhilosophySection() {
         
         {/* ── Section Header ── */}
         <div className="flex flex-col items-center text-center mb-20">
-          <span className="font-script text-2xl sm:text-3xl text-[var(--color-brass-light)] mb-2">
+          <span className="font-script text-2xl sm:text-3xl text-gold-metallic-light mb-2">
             our design language
           </span>
           <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-paper)] uppercase tracking-[0.1em] font-semibold">
@@ -44,7 +44,7 @@ export default function DesignPhilosophySection() {
 
               {/* Content Panel */}
               <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 z-10 flex flex-col justify-end">
-                <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[var(--color-brass-light)] mb-1.5">
+                <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-gold-metallic-light mb-1.5">
                   {philosophy.subtitle}
                 </span>
 

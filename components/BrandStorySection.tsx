@@ -21,7 +21,7 @@ export default function BrandStorySection() {
             </div>
             
             {/* Cursive Subcaption under portrait */}
-            <span className="font-script text-2xl text-[var(--color-brass)] mt-4">
+            <span className="font-script text-2xl text-gold-metallic mt-4">
               i&apos;m so glad you&apos;re here
             </span>
           </div>
@@ -29,7 +29,7 @@ export default function BrandStorySection() {
           {/* ── Right Column: Narrative & Signature (7 cols) ── */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             {/* Cursive Accent */}
-            <span className="font-script text-2xl sm:text-3xl text-[var(--color-brass)] mb-2">
+            <span className="font-script text-2xl sm:text-3xl text-gold-metallic mb-2">
               hey there
             </span>
 
@@ -54,15 +54,15 @@ export default function BrandStorySection() {
             {/* Stat Highlights */}
             <div className="grid grid-cols-3 gap-6 pt-6 border-t border-[var(--color-charcoal)]/15 w-full max-w-lg mb-8">
               <div>
-                <span className="text-2xl sm:text-3xl font-serif text-[var(--color-brass-dark)] font-medium">100+</span>
+                <span className="text-2xl sm:text-3xl font-serif text-gold-metallic font-medium">100+</span>
                 <p className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-warm-grey)] mt-1 font-medium">Projects Completed</p>
               </div>
               <div>
-                <span className="text-2xl sm:text-3xl font-serif text-[var(--color-brass-dark)] font-medium">4</span>
+                <span className="text-2xl sm:text-3xl font-serif text-gold-metallic font-medium">4</span>
                 <p className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-warm-grey)] mt-1 font-medium">Core Aesthetics</p>
               </div>
               <div>
-                <span className="text-2xl sm:text-3xl font-serif text-[var(--color-brass-dark)] font-medium">100%</span>
+                <span className="text-2xl sm:text-3xl font-serif text-gold-metallic font-medium">100%</span>
                 <p className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-warm-grey)] mt-1 font-medium">Bespoke Design</p>
               </div>
             </div>
@@ -75,7 +75,7 @@ export default function BrandStorySection() {
               </a>
 
               <div className="flex flex-col items-end">
-                <span className="font-script text-3xl text-[var(--color-charcoal)]">
+                <span className="font-script text-3xl text-gold-metallic">
                   Sonali Bachkheti
                 </span>
                 <span className="text-[9px] uppercase tracking-[0.2em] text-[var(--color-warm-grey)] font-medium">
