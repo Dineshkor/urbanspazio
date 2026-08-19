@@ -298,35 +298,43 @@ export default function BrandStorySection() {
           viewport={{ once: true, margin: '-60px' }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
         >
-          <motion.span
-            className="font-script text-2xl sm:text-3xl text-gold-metallic mb-2"
+          <motion.div
+            className="flex items-center gap-2 mb-2"
             variants={fadeUp}
           >
-            our journey
-          </motion.span>
+            <span className="text-[10px] sm:text-xs font-helvetica uppercase tracking-[0.28em] text-[var(--color-warm-grey)] font-medium">
+              Presented by
+            </span>
+            <span className="text-[10px] sm:text-xs font-serif uppercase tracking-[0.25em] text-gold-metallic font-semibold">
+              URBAN SPAZIO
+            </span>
+          </motion.div>
+
           <motion.h2
-            className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] font-semibold flex items-center justify-center gap-2 sm:gap-3"
+            className="font-tan-paradiso text-4xl sm:text-6xl lg:text-7xl text-[var(--color-charcoal)] font-normal tracking-tight leading-tight flex items-baseline justify-center gap-2 sm:gap-3.5"
             variants={fadeUp}
           >
-            THE
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/logo-cropped.png"
-              alt="Urban Spazio"
-              className="h-9 sm:h-12 w-auto object-contain bg-transparent"
-            />
-            STORY
+            <span className="lowercase">the</span>
+            <span className="relative inline-flex flex-col items-center">
+              <span className="text-gold-metallic font-medium uppercase tracking-normal">
+                US
+              </span>
+              <span className="text-[8px] sm:text-[9px] font-sans font-medium uppercase tracking-[0.25em] text-[var(--color-brass-dark)] -mt-1 sm:-mt-1.5 opacity-90">
+                Urban Spazio
+              </span>
+            </span>
+            <span className="lowercase">story</span>
           </motion.h2>
+
           <motion.div
             className="w-12 h-[1px] bg-[var(--color-charcoal)] opacity-20 my-4"
             variants={fadeUp}
           />
           <motion.p
-            className="max-w-lg text-xs sm:text-sm font-helvetica text-[var(--color-warm-grey)] leading-relaxed font-light"
+            className="max-w-xl text-xs sm:text-sm font-helvetica text-[var(--color-warm-grey)] leading-relaxed font-light"
             variants={fadeUp}
           >
-            From a single vision to over 100 bespoke projects — scroll through the milestones that
-            shaped our craft.
+            Urban Spazio reflects &ldquo;New Age Spaces&rdquo; designed for a modern, fast-paced world. For US, true luxury is not just visual elegance — it is how calm, welcoming, and mentally peaceful your home makes you feel.
           </motion.p>
         </motion.div>
 
