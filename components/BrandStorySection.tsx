@@ -311,7 +311,7 @@ export default function BrandStorySection() {
           </motion.div>
 
           <motion.h2
-            className="font-tan-paradiso text-4xl sm:text-6xl lg:text-7xl text-[var(--color-charcoal)] font-normal tracking-tight leading-tight flex items-baseline justify-center gap-2 sm:gap-3.5"
+            className="font-bodoni text-4xl sm:text-6xl lg:text-7xl text-[var(--color-charcoal)] font-normal tracking-tight leading-tight flex items-baseline justify-center gap-2 sm:gap-3.5"
             variants={fadeUp}
           >
             <span className="lowercase">the</span>
