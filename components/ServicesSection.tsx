@@ -135,7 +135,7 @@ export default function ServicesSection() {
                     <a
                       href={
                         service.cta.action === 'whatsapp'
-                          ? `https://wa.me/${BRAND.whatsapp}?text=Hi Urban Spazio! I want to inquire about ${encodeURIComponent(service.title)}.`
+                          ? `https://wa.me/${BRAND.whatsapp}?text=Hi Urbn Spazio! I want to inquire about ${encodeURIComponent(service.title)}.`
                           : '#contact'
                       }
                       target={service.cta.action === 'whatsapp' ? '_blank' : '_self'}

@@ -47,7 +47,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Urban Spazio | Defining Spaces, Defining Lifestyles",
+  title: "Urbn Spazio | Defining Spaces, Defining Lifestyles",
   description:
     "Premium minimalist interior design studio offering consultation, turnkey execution, and bespoke luxury furniture. Specializing in Japandi, Neo Classical, Modern Contemporary, and Biophilic design.",
   keywords: [
@@ -56,16 +56,16 @@ export const metadata: Metadata = {
     "Japandi design",
     "biophilic design",
     "modular furniture",
-    "Urban Spazio",
+    "Urbn Spazio",
     "Delhi NCR interior designer",
   ],
   openGraph: {
-    title: "Urban Spazio | Defining Spaces, Defining Lifestyles",
+    title: "Urbn Spazio | Defining Spaces, Defining Lifestyles",
     description:
       "Premium minimalist interior design studio. Consultation, turnkey execution, and bespoke luxury furniture.",
     type: "website",
     locale: "en_IN",
-    siteName: "Urban Spazio",
+    siteName: "Urbn Spazio",
   },
   icons: {
     icon: "/images/logo-cropped.png",

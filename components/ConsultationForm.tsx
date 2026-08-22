@@ -315,7 +315,7 @@ export default function ConsultationForm() {
             <div className="flex flex-col sm:flex-row gap-6 w-full max-w-md justify-center">
               <a
                 href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(
-                  `Hi Urban Spazio! I have completed the ₹999 payment for Quick Design Consultation. Name: ${formData.name}, UTR: ${utrNumber || 'N/A'}, Date: ${new Date(selectedDate).toLocaleDateString()}, Time: ${selectedTime}`
+                  `Hi Urbn Spazio! I have completed the ₹999 payment for Quick Design Consultation. Name: ${formData.name}, UTR: ${utrNumber || 'N/A'}, Date: ${new Date(selectedDate).toLocaleDateString()}, Time: ${selectedTime}`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"

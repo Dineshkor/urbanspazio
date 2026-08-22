@@ -84,7 +84,7 @@ export default function HeroSection() {
             </h1>
 
             {/* Cursive Subheading */}
-            <p className="font-script text-xl sm:text-3xl text-gold-metallic mb-4">
+            <p className="font-script text-lg sm:text-2xl text-[#04101C] mb-4">
               defining spaces, defining lifestyles
             </p>
 

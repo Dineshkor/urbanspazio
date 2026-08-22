@@ -35,18 +35,18 @@ export default function Footer() {
             window.location.href = '/';
           }}
           className="flex flex-col items-center group cursor-pointer"
-          aria-label="Urban Spazio Home"
+          aria-label="Urbn Spazio Home"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/logo-cropped.png"
-            alt="Urban Spazio Monogram"
+              <img
+                src="/images/logo-cropped.png"
+                alt="Urbn Spazio Monogram"
             className="h-10 w-auto object-contain mb-3 bg-transparent transition-transform duration-300 group-hover:scale-105"
           />
 
           {/* Brand Display Title */}
           <h2 className="font-bodoni-italic text-3xl sm:text-4xl text-[var(--color-paper)] tracking-wide mb-2 font-normal">
-            Urban <span className="text-gold-metallic-light italic">Spazio</span>
+            Urbn <span className="text-gold-metallic-light italic">Spazio</span>
           </h2>
         </a>
 
@@ -69,7 +69,7 @@ export default function Footer() {
 
         {/* Copyright & Social */}
         <div className="flex flex-col sm:flex-row items-center gap-4 text-[10px] font-helvetica text-[var(--color-light-grey)]/70 tracking-wider">
-          <p>© {currentYear} Urban Spazio Interior Studio. All rights reserved.</p>
+          <p>© {currentYear} Urbn Spazio Interior Studio. All rights reserved.</p>
           <span className="hidden sm:inline">·</span>
           <a
             href={BRAND.socialLinks.instagram}

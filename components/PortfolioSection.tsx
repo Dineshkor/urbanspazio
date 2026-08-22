@@ -49,7 +49,7 @@ export default function PortfolioSection() {
             <a
               key={item.id}
               href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(
-                `Hi Urban Spazio! I loved the ${item.title} project and would like to enquire about a similar space.`
+                `Hi Urbn Spazio! I loved the ${item.title} project and would like to enquire about a similar space.`
               )}`}
               target="_blank"
               rel="noopener noreferrer"

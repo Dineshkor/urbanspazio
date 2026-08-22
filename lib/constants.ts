@@ -3,7 +3,7 @@
    ============================================ */
 
 export const BRAND = {
-  name: "Urban Spazio",
+  name: "Urbn Spazio",
   tagline: "Defining Spaces, Defining Lifestyles",
   email: "us.urbanspazio@gmail.com",
   phone: "+91 96257 70993",

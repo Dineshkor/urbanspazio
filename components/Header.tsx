@@ -62,12 +62,12 @@ export default function Header() {
             window.location.href = '/';
           }}
           className="flex items-center shrink-0 bg-transparent group cursor-pointer"
-          aria-label="Urban Spazio Home"
+          aria-label="Urbn Spazio Home"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/logo-cropped.png"
-            alt="Urban Spazio"
+            alt="Urbn Spazio"
             className="h-9 sm:h-11 w-auto object-contain bg-transparent transition-transform duration-300 group-hover:scale-105"
           />
         </a>

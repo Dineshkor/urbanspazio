@@ -115,7 +115,7 @@ export default function ContactSection() {
                   <div>
                     <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--color-light-grey)]/80 mb-0.5">WhatsApp Studio Line</p>
                     <a
-                      href={`https://wa.me/${BRAND.whatsapp}?text=Hi%20Urban%20Spazio!`}
+                      href={`https://wa.me/${BRAND.whatsapp}?text=Hi%20Urbn%20Spazio!`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="hover:text-[var(--color-brass-light)] transition-colors"

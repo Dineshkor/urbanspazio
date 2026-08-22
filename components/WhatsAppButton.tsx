@@ -23,7 +23,7 @@ export default function WhatsAppButton() {
   if (!visible) return null;
 
   const url = `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(
-    'Hi Urban Spazio! I have a query about your interior design services.'
+    'Hi Urbn Spazio! I have a query about your interior design services.'
   )}`;
 
   return (

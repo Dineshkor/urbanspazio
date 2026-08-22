@@ -425,7 +425,7 @@ export default function BrandStorySection() {
               Presented by
             </span>
             <span className="text-[10px] sm:text-xs font-serif uppercase tracking-[0.25em] text-gold-metallic font-semibold">
-              URBAN SPAZIO
+              URBN SPAZIO
             </span>
           </motion.div>
 
@@ -439,7 +439,7 @@ export default function BrandStorySection() {
                 US
               </span>
               <span className="text-[8px] sm:text-[9px] font-sans font-medium uppercase tracking-[0.25em] text-[var(--color-brass-dark)] -mt-1 sm:-mt-1.5 opacity-90">
-                Urban Spazio
+                Urbn Spazio
               </span>
             </span>
             <span className="lowercase">story</span>
@@ -453,7 +453,7 @@ export default function BrandStorySection() {
             className="max-w-xl text-xs sm:text-sm font-helvetica text-[var(--color-warm-grey)] leading-relaxed font-light"
             variants={fadeUp}
           >
-            Urban Spazio reflects &ldquo;New Age Spaces&rdquo; designed for a modern, fast-paced world. For US, true luxury is not just visual elegance — it is how calm, welcoming, and mentally peaceful your home makes you feel.
+            Urbn Spazio reflects &ldquo;New Age Spaces&rdquo; designed for a modern, fast-paced world. For US, true luxury is not just visual elegance — it is how calm, welcoming, and mentally peaceful your home makes you feel.
           </motion.p>
         </motion.div>
 

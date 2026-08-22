@@ -294,7 +294,7 @@ export interface Testimonial {
 export const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "Urban Spazio transformed our apartment into something we see in design magazines. Their attention to detail and understanding of our lifestyle was exceptional.",
+      "Urbn Spazio transformed our apartment into something we see in design magazines. Their attention to detail and understanding of our lifestyle was exceptional.",
     author: "Rohan & Devika Kapur",
     location: "DLF Phase 5, Gurugram",
     project: "Full Home Design",
