@@ -84,8 +84,9 @@ export default function HeroSection() {
             </h1>
 
             {/* Cursive Subheading */}
-            <p className="font-script text-lg sm:text-2xl text-[#04101C] mb-4">
-              defining spaces, defining lifestyles
+            <p className="font-script text-lg sm:text-2xl mb-4">
+              <span className="text-gold-metallic">defining spaces,</span>{' '}
+              <span className="text-[#2A5583]">defining lifestyles</span>
             </p>
 
             {/* Thin Hairline Divider */}

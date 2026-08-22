@@ -417,18 +417,6 @@ export default function BrandStorySection() {
           viewport={{ once: true, margin: '-60px' }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
         >
-          <motion.div
-            className="flex items-center gap-2 mb-2"
-            variants={fadeUp}
-          >
-            <span className="text-[10px] sm:text-xs font-helvetica uppercase tracking-[0.28em] text-[var(--color-warm-grey)] font-medium">
-              Presented by
-            </span>
-            <span className="text-[10px] sm:text-xs font-serif uppercase tracking-[0.25em] text-gold-metallic font-semibold">
-              URBN SPAZIO
-            </span>
-          </motion.div>
-
           <motion.h2
             className="font-bodoni text-4xl sm:text-6xl lg:text-7xl text-[var(--color-charcoal)] font-normal tracking-tight leading-tight flex items-baseline justify-center gap-2 sm:gap-3.5"
             variants={fadeUp}
