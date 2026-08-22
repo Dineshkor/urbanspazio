@@ -28,7 +28,7 @@ export default function ServicesSection() {
         </div>
 
         {/* ── Featured Service 01: Quick Consultation (Dark Charcoal Contrast Box like Style Coached by Eve) ── */}
-        <div className="mb-24 bg-[#1E1C1A] text-[var(--color-paper)] p-8 sm:p-14 border border-[var(--color-charcoal)] relative">
+        <div className="mb-24 panel-glow text-[var(--color-paper)] p-8 sm:p-14 border border-[var(--color-brass)]/25 relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
             {/* Left: Text Content (7 cols) */}
@@ -46,7 +46,7 @@ export default function ServicesSection() {
                 {quickConsultation.title}
               </h3>
 
-              <p className="text-xs font-helvetica text-gold-metallic-light uppercase tracking-[0.2em] mb-5">
+              <p className="text-xs font-helvetica text-[var(--color-brass-light)] uppercase tracking-[0.2em] mb-5">
                 {quickConsultation.subtitle}
               </p>
 
@@ -57,7 +57,7 @@ export default function ServicesSection() {
               {/* Deliverables list */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8 w-full border-t border-white/10 pt-6">
                 {quickConsultation.deliverables.map((item, i) => (
-                  <div key={i} className="flex items-center gap-2.5 text-xs font-helvetica text-stone-300 font-light">
+                  <div key={i} className="flex items-center gap-2.5 text-xs font-helvetica text-[var(--color-light-grey)] font-normal">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brass)] shrink-0" />
                     <span>{item}</span>
                   </div>

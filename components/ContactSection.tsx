@@ -23,7 +23,7 @@ const InstagramIcon = ({ size = 18 }: { size?: number }) => (
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-24 lg:py-36 bg-[#1E1C1A] text-[var(--color-paper)] relative overflow-hidden">
+    <section id="contact" className="panel-glow py-24 lg:py-36 text-[var(--color-paper)] relative overflow-hidden">
       <div className="editorial-shell">
         
         {/* ── Section Header ── */}
@@ -51,13 +51,13 @@ export default function ContactSection() {
                   type="text"
                   placeholder="Your Name *"
                   required
-                  className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-white placeholder:text-stone-400 focus:border-[var(--color-brass)] focus:outline-hidden rounded-none font-helvetica"
+                  className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-[var(--color-paper)] placeholder:text-[var(--color-light-grey)]/70 focus:border-[var(--color-brass)] focus:outline-hidden rounded-none font-helvetica"
                 />
                 <input
                   type="email"
                   placeholder="Email Address *"
                   required
-                  className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-white placeholder:text-stone-400 focus:border-[var(--color-brass)] focus:outline-hidden rounded-none font-helvetica"
+                  className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-[var(--color-paper)] placeholder:text-[var(--color-light-grey)]/70 focus:border-[var(--color-brass)] focus:outline-hidden rounded-none font-helvetica"
                 />
               </div>
 
@@ -66,15 +66,15 @@ export default function ContactSection() {
                   type="tel"
                   placeholder="Phone Number *"
                   required
-                  className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-white placeholder:text-stone-400 focus:border-[var(--color-brass)] focus:outline-hidden rounded-none font-helvetica"
+                  className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-[var(--color-paper)] placeholder:text-[var(--color-light-grey)]/70 focus:border-[var(--color-brass)] focus:outline-hidden rounded-none font-helvetica"
                 />
                 <select
                   required
-                  className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-stone-300 focus:border-[var(--color-brass)] focus:outline-hidden rounded-none font-helvetica"
+                  className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-[var(--color-light-grey)] focus:border-[var(--color-brass)] focus:outline-hidden rounded-none font-helvetica"
                 >
-                  <option value="" disabled className="bg-[#1E1C1A]">Project Type *</option>
-                  <option value="Residential" className="bg-[#1E1C1A]">Residential</option>
-                  <option value="Commercial" className="bg-[#1E1C1A]">Commercial</option>
+                  <option value="" disabled className="bg-[var(--navbar-bg)]">Project Type *</option>
+                  <option value="Residential" className="bg-[var(--navbar-bg)]">Residential</option>
+                  <option value="Commercial" className="bg-[var(--navbar-bg)]">Commercial</option>
                 </select>
               </div>
 
@@ -82,7 +82,7 @@ export default function ContactSection() {
                 placeholder="Tell us about your project requirements..."
                 rows={4}
                 required
-                className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-white placeholder:text-stone-400 focus:border-[var(--color-brass)] focus:outline-hidden resize-none rounded-none font-helvetica"
+                className="w-full bg-transparent border-b border-white/20 pb-3 text-xs sm:text-sm text-[var(--color-paper)] placeholder:text-[var(--color-light-grey)]/70 focus:border-[var(--color-brass)] focus:outline-hidden resize-none rounded-none font-helvetica"
               />
 
               <button type="submit" className="btn-outline-light text-[10px]">
@@ -95,15 +95,15 @@ export default function ContactSection() {
           {/* Direct Studio Contact Info Column (5 cols) */}
           <div className="lg:col-span-5 flex flex-col justify-between pt-6 lg:pt-0 lg:pl-8 border-t lg:border-t-0 lg:border-l border-white/10 space-y-8">
             <div>
-              <h3 className="text-xl font-serif uppercase tracking-[0.1em] text-white mb-6">
+              <h3 className="text-xl font-serif uppercase tracking-[0.1em] text-[var(--color-paper)] mb-6">
                 Studio Contact
               </h3>
 
-              <div className="space-y-6 text-xs sm:text-sm font-helvetica text-stone-300 font-light">
+              <div className="space-y-6 text-xs sm:text-sm font-helvetica text-[var(--color-light-grey)] font-normal">
                 <div className="flex items-start gap-4">
                   <Mail className="w-4 h-4 text-[var(--color-brass-light)] shrink-0 mt-1" />
                   <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-0.5">Direct Email</p>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--color-light-grey)]/80 mb-0.5">Direct Email</p>
                     <a href={`mailto:${BRAND.email}`} className="hover:text-[var(--color-brass-light)] transition-colors">
                       {BRAND.email}
                     </a>
@@ -113,7 +113,7 @@ export default function ContactSection() {
                 <div className="flex items-start gap-4">
                   <MessageCircle className="w-4 h-4 text-[var(--color-brass-light)] shrink-0 mt-1" />
                   <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-0.5">WhatsApp Studio Line</p>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--color-light-grey)]/80 mb-0.5">WhatsApp Studio Line</p>
                     <a
                       href={`https://wa.me/${BRAND.whatsapp}?text=Hi%20Urban%20Spazio!`}
                       target="_blank"
@@ -128,7 +128,7 @@ export default function ContactSection() {
                 <div className="flex items-start gap-4">
                   <MapPin className="w-4 h-4 text-[var(--color-brass-light)] shrink-0 mt-1" />
                   <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-0.5">Service Region</p>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--color-light-grey)]/80 mb-0.5">Service Region</p>
                     <p>Delhi NCR · New Delhi · Gurugram · Noida</p>
                   </div>
                 </div>
@@ -137,12 +137,12 @@ export default function ContactSection() {
 
             {/* Social Links */}
             <div className="pt-6 border-t border-white/10 flex items-center gap-6">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-stone-400">Follow Studio:</span>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-[var(--color-light-grey)]/80">Follow Studio:</span>
               <a
                 href={BRAND.socialLinks.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-stone-300 hover:text-[var(--color-brass-light)] transition-colors flex items-center gap-2 text-xs font-helvetica"
+                className="text-[var(--color-light-grey)] hover:text-[var(--color-brass-light)] transition-colors flex items-center gap-2 text-xs font-helvetica"
               >
                 <InstagramIcon size={16} />
                 <span>Instagram</span>

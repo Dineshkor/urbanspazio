@@ -33,14 +33,14 @@ export default function PackageSection() {
                 key={tier.id}
                 className={`p-8 sm:p-10 flex flex-col justify-between border transition-all duration-300 ${
                   isPopular
-                    ? 'bg-[#1E1C1A] text-[var(--color-paper)] border-[#1E1C1A]'
+                    ? 'panel-glow text-[var(--color-paper)] border-[var(--color-brass)]/40'
                     : 'bg-[#F6F2EC] text-[var(--color-charcoal)] border-[var(--color-charcoal)]/20'
                 }`}
               >
                 <div>
                   {/* Tier Title */}
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className={`text-2xl font-serif uppercase tracking-[0.08em] font-semibold ${isPopular ? 'text-white' : 'text-[var(--color-charcoal)]'}`}>
+                    <h3 className={`text-2xl font-serif uppercase tracking-[0.08em] font-semibold ${isPopular ? 'text-[var(--color-paper)]' : 'text-[var(--color-charcoal)]'}`}>
                       {tier.tier} Tier
                     </h3>
                     {isPopular && (
@@ -55,7 +55,7 @@ export default function PackageSection() {
                     {tier.range}
                   </p>
 
-                  <p className={`text-xs font-helvetica leading-relaxed mb-6 font-light ${isPopular ? 'text-stone-300' : 'text-[var(--color-warm-grey)]'}`}>
+                  <p className={`text-xs font-helvetica leading-relaxed mb-6 font-normal ${isPopular ? 'text-[var(--color-light-grey)]' : 'text-[var(--color-warm-grey)]'}`}>
                     {tier.description}
                   </p>
 
@@ -64,7 +64,7 @@ export default function PackageSection() {
                     {tier.includes.map((feature, i) => (
                       <div key={i} className="flex items-start gap-2.5 text-xs font-helvetica font-light">
                         <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${isPopular ? 'text-[var(--color-brass)]' : 'text-[var(--color-brass-dark)]'}`} />
-                        <span className={isPopular ? 'text-stone-200' : 'text-[var(--color-charcoal)]'}>{feature}</span>
+                        <span className={isPopular ? 'text-[var(--color-paper)]/90' : 'text-[var(--color-charcoal)]'}>{feature}</span>
                       </div>
                     ))}
                   </div>

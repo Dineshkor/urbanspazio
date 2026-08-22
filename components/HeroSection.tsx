@@ -40,6 +40,7 @@ const FEATURED_PROJECTS = [
 
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   const next = useCallback(() => {
     setCurrent((prev) => (prev + 1) % FEATURED_PROJECTS.length);
@@ -49,10 +50,23 @@ export default function HeroSection() {
     setCurrent((prev) => (prev - 1 + FEATURED_PROJECTS.length) % FEATURED_PROJECTS.length);
   }, []);
 
+  const goTo = useCallback((index: number) => {
+    setCurrent(index);
+  }, []);
+
   useEffect(() => {
+    // Respect reduced-motion preference — no autoplay
+    if (
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+    if (paused) return;
+    // Re-created on every slide change so manual navigation resets the timer
     const timer = setInterval(next, 6000);
     return () => clearInterval(timer);
-  }, [next]);
+  }, [next, paused, current]);
 
   const activeProject = FEATURED_PROJECTS[current];
 
@@ -78,13 +92,16 @@ export default function HeroSection() {
             <div className="w-16 h-[1px] bg-[var(--color-charcoal)] opacity-20 my-4" />
 
             {/* Description */}
-            <p className="max-w-md text-xs sm:text-sm font-helvetica text-[var(--color-warm-grey)] leading-relaxed mb-8 font-light tracking-wide">
+            <p className="max-w-md text-xs sm:text-sm font-helvetica text-[var(--color-warm-grey)] leading-relaxed mb-7 font-normal tracking-wide">
               A luxury interior architecture studio in Delhi NCR curating serene, intentional residences through organic textures, natural light, and bespoke architectural craftsmanship.
             </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
-              <a href="#consultation" className="btn-filled text-[11px] tracking-[0.2em] justify-center">
+              <a
+                href="#consultation"
+                className="inline-flex items-center justify-center gap-[0.6rem] px-[2.25rem] py-[0.85rem] bg-[var(--color-brass)] border border-[var(--color-brass)] text-white font-helvetica text-[11px] font-medium uppercase tracking-[0.2em] transition-all duration-300 hover:bg-[var(--color-brass-dark)] hover:border-[var(--color-brass-dark)] cursor-pointer"
+              >
                 <span>Book Consultation</span>
                 <span className="opacity-75 font-normal">₹999</span>
                 <ArrowRight className="w-3.5 h-3.5 ml-1" />
@@ -95,7 +112,7 @@ export default function HeroSection() {
             </div>
 
             {/* Design Languages Strip */}
-            <div className="mt-12 pt-6 border-t border-[var(--color-charcoal)]/10 w-full flex flex-wrap items-center gap-x-5 gap-y-2 opacity-75">
+            <div className="mt-10 pt-6 border-t border-[var(--color-charcoal)]/10 w-full flex flex-wrap items-center gap-x-5 gap-y-2 opacity-75">
               <span className="text-[10px] uppercase tracking-[0.25em] font-semibold text-[var(--color-warm-grey)]">
                 Aesthetics:
               </span>
@@ -110,7 +127,13 @@ export default function HeroSection() {
           <div className="lg:col-span-6 relative flex flex-col items-center justify-center">
 
             {/* Arch Frame — pure image, no overlays */}
-            <div className="relative w-full max-w-md aspect-[4/5] arch-frame overflow-hidden bg-[var(--color-cream)] shadow-[0_40px_80px_-40px_rgba(28,26,24,0.35)]">
+            <div
+              className="relative w-full max-w-md aspect-[4/5] arch-frame overflow-hidden bg-[var(--color-cream)] shadow-[0_40px_80px_-40px_rgba(28,26,24,0.35)]"
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+              onFocus={() => setPaused(true)}
+              onBlur={() => setPaused(false)}
+            >
 
               {/* Slides */}
               {FEATURED_PROJECTS.map((project, index) => (
@@ -126,6 +149,7 @@ export default function HeroSection() {
                     alt={project.title}
                     className={`w-full h-full object-cover ${index === current ? 'animate-kenburns' : ''}`}
                     loading={index === 0 ? 'eager' : 'lazy'}
+                    fetchPriority={index === 0 ? 'high' : undefined}
                   />
                 </div>
               ))}
@@ -136,7 +160,7 @@ export default function HeroSection() {
             <div className="mt-9 w-full max-w-md">
               <div className="flex items-end justify-between gap-6">
                 <div className="min-w-0">
-                  <p className="text-[9px] uppercase tracking-[0.25em] font-semibold text-gold-metallic">
+                  <p className="text-[9px] uppercase tracking-[0.25em] font-semibold text-[var(--color-brass-dark)]">
                     Client Work — 0{current + 1} / 0{FEATURED_PROJECTS.length}
                   </p>
                   <h3
@@ -151,14 +175,14 @@ export default function HeroSection() {
                 <div className="flex items-center gap-2 shrink-0">
                   <button
                     onClick={prev}
-                    className="w-9 h-9 grid place-items-center border border-[var(--color-charcoal)]/15 text-[var(--color-charcoal)] transition-colors hover:border-[var(--color-brass)] hover:text-[var(--color-brass-dark)]"
+                    className="w-9 h-9 grid place-items-center border border-[var(--color-charcoal)]/15 text-[var(--color-charcoal)] cursor-pointer transition-colors hover:border-[var(--color-brass)] hover:text-[var(--color-brass-dark)]"
                     aria-label="Previous project"
                   >
                     <ChevronLeft size={14} strokeWidth={1.5} />
                   </button>
                   <button
                     onClick={next}
-                    className="w-9 h-9 grid place-items-center border border-[var(--color-charcoal)]/15 text-[var(--color-charcoal)] transition-colors hover:border-[var(--color-brass)] hover:text-[var(--color-brass-dark)]"
+                    className="w-9 h-9 grid place-items-center border border-[var(--color-charcoal)]/15 text-[var(--color-charcoal)] cursor-pointer transition-colors hover:border-[var(--color-brass)] hover:text-[var(--color-brass-dark)]"
                     aria-label="Next project"
                   >
                     <ChevronRight size={14} strokeWidth={1.5} />
@@ -182,8 +206,8 @@ export default function HeroSection() {
                   {FEATURED_PROJECTS.map((_, i) => (
                     <button
                       key={i}
-                      onClick={() => setCurrent(i)}
-                      className={`h-1 rounded-full transition-all duration-300 ${
+                      onClick={() => goTo(i)}
+                      className={`h-1 rounded-full cursor-pointer transition-all duration-300 ${
                         i === current
                           ? 'w-6 bg-[var(--color-brass)]'
                           : 'w-1.5 bg-[var(--color-charcoal)]/20 hover:bg-[var(--color-charcoal)]/40'

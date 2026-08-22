@@ -31,6 +31,34 @@
     --navbar-text: #F2ECE0;
     --navbar-text-accent: #C0A57E;
 
+    /* Diagonal glow gradient — luminous sweep, dark corners */
+    --navbar-glow: linear-gradient(
+      135deg,
+      #081A2E 0%,
+      #122B47 22%,
+      #2A5583 50%,
+      #12294A 78%,
+      #081A2E 100%
+    );
+    /* Slightly deepened variant for the scrolled/compact state */
+    --navbar-glow-scrolled: linear-gradient(
+      135deg,
+      #061525 0%,
+      #0E2338 22%,
+      #214569 50%,
+      #0D2038 78%,
+      #061525 100%
+    );
+    /* Consultation panel glow — mirrors the navbar sweep, opposite diagonal */
+    --panel-glow: linear-gradient(
+      45deg,
+      #081A2E 0%,
+      #10273F 25%,
+      #24496F 50%,
+      #10263F 75%,
+      #081A2E 100%
+    );
+
     /* Legacy aliases */
     --color-warm-white: #F6F2EC;
     --color-off-white: #EAE3D9;
@@ -256,6 +284,31 @@
   position: relative;
   overflow: hidden;
   background: var(--color-cream);
+}
+
+/* ============================================
+   Navbar Surface
+   ============================================ */
+.navbar-glow {
+  background: var(--navbar-glow);
+}
+
+.navbar-glow-scrolled {
+  background: var(--navbar-glow-scrolled);
+}
+
+.panel-glow {
+  background: var(--panel-glow);
+}
+
+/* ============================================
+   Reduced Motion — respect user preference
+   (disables Ken Burns, fades, autoplay-driven motion)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .animate-kenburns {
+    animation: none;
+  }
 }
 
 /* ============================================

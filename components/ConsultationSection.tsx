@@ -5,7 +5,7 @@ import { QUICK_CONSULTATION_PRICE, QUICK_CONSULTATION_DURATION } from "@/lib/con
 
 export default function ConsultationSection() {
   return (
-    <section id="consultation" className="relative bg-[var(--color-dark)] py-24 text-[var(--color-cream)] lg:py-32">
+    <section id="consultation" className="panel-glow relative py-24 text-[var(--color-cream)] lg:py-32">
       <div className="editorial-shell max-w-5xl">
 
         {/* ── Section Header ── */}

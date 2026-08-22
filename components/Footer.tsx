@@ -24,7 +24,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#191715] text-stone-300 py-16 border-t border-white/10">
+    <footer className="bg-[#04101C] text-[var(--color-light-grey)] py-16 border-t border-[var(--color-brass)]/40">
       <div className="editorial-shell flex flex-col items-center text-center">
         
         {/* Official Transparent Monogram Logo Mark */}
@@ -45,30 +45,30 @@ export default function Footer() {
           />
 
           {/* Brand Display Title */}
-          <h2 className="font-bodoni-italic text-3xl sm:text-4xl text-white tracking-wide mb-2 font-normal">
+          <h2 className="font-bodoni-italic text-3xl sm:text-4xl text-[var(--color-paper)] tracking-wide mb-2 font-normal">
             Urban <span className="text-gold-metallic-light italic">Spazio</span>
           </h2>
         </a>
-        
-        <p className="text-[9px] uppercase tracking-[0.35em] text-stone-400 font-light mb-6">
+
+        <p className="text-[9px] uppercase tracking-[0.35em] text-[var(--color-light-grey)]/80 font-normal mb-6">
           {BRAND.tagline}
         </p>
 
         <div className="w-12 h-[1px] bg-[var(--color-brass)] opacity-40 mb-8" />
 
         {/* Minimal Nav Links */}
-        <div className="flex flex-wrap justify-center gap-6 sm:gap-10 mb-10 text-[10px] uppercase tracking-[0.2em] font-helvetica text-stone-400">
-          <a href="#hero" className="hover:text-white transition-colors">Home</a>
-          <a href="#services" className="hover:text-white transition-colors">Services</a>
-          <a href="#philosophy" className="hover:text-white transition-colors">Philosophy</a>
-          <a href="#portfolio" className="hover:text-white transition-colors">Portfolio</a>
-          <a href="#process" className="hover:text-white transition-colors">Process</a>
-          <a href="#story" className="hover:text-white transition-colors">Story</a>
-          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+        <div className="flex flex-wrap justify-center gap-6 sm:gap-10 mb-10 text-[10px] uppercase tracking-[0.2em] font-helvetica text-[var(--color-light-grey)]/90">
+          <a href="#hero" className="hover:text-[var(--color-paper)] transition-colors">Home</a>
+          <a href="#services" className="hover:text-[var(--color-paper)] transition-colors">Services</a>
+          <a href="#philosophy" className="hover:text-[var(--color-paper)] transition-colors">Philosophy</a>
+          <a href="#portfolio" className="hover:text-[var(--color-paper)] transition-colors">Portfolio</a>
+          <a href="#process" className="hover:text-[var(--color-paper)] transition-colors">Process</a>
+          <a href="#story" className="hover:text-[var(--color-paper)] transition-colors">Story</a>
+          <a href="#contact" className="hover:text-[var(--color-paper)] transition-colors">Contact</a>
         </div>
 
         {/* Copyright & Social */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 text-[10px] font-helvetica text-stone-500 tracking-wider">
+        <div className="flex flex-col sm:flex-row items-center gap-4 text-[10px] font-helvetica text-[var(--color-light-grey)]/70 tracking-wider">
           <p>© {currentYear} Urban Spazio Interior Studio. All rights reserved.</p>
           <span className="hidden sm:inline">·</span>
           <a
