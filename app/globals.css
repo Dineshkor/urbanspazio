@@ -23,6 +23,14 @@
     --color-warm-grey: #7A746D;
     --color-light-grey: #C2BBB2;
 
+    /* ── Navbar Navy + Gold Palette ── */
+    --navbar-bg: #071D33;
+    --navbar-bg-dark: #0B3760;
+    --navbar-accent: #C0A57E;
+    --navbar-border: #C0A57E;
+    --navbar-text: #F2ECE0;
+    --navbar-text-accent: #C0A57E;
+
     /* Legacy aliases */
     --color-warm-white: #F6F2EC;
     --color-off-white: #EAE3D9;
