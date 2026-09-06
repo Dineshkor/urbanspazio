@@ -22,7 +22,7 @@ export const SERVICES: Service[] = [
     title: "Quick Design Consultation",
     subtitle: "Online · 30 min to 1 hr",
     description:
-      "Get expert design advice from the comfort of your home. Share your space, discuss your vision, and receive actionable design direction — all in a focused video call.",
+      "Expert design direction over a focused video call — share your space and vision, get a clear concept, moodboard references, palette, material and budget guidance.",
     price: "₹999",
     duration: "30 min – 1 hr",
     deliverables: [
@@ -40,7 +40,7 @@ export const SERVICES: Service[] = [
     title: "Advanced Design Consultation",
     subtitle: "Complete Design Package",
     description:
-      "Full-scope design service including 2D layouts, photorealistic 3D visualizations, on-site visits, material selection, and a comprehensive design presentation — all the paperwork, perfectly prepared.",
+      "Complete design package with 2D plans, photorealistic 3D renders, on-site measurement, material boards and full BOQ documentation — ready to execute.",
     deliverables: [
       "Detailed 2D floor plans & elevations",
       "Photorealistic 3D renders",
@@ -57,7 +57,7 @@ export const SERVICES: Service[] = [
     title: "Turnkey Services",
     subtitle: "Design + Execution",
     description:
-      "End-to-end interior transformation. We handle everything from concept to completion — design, procurement, civil work, carpentry, electrical, painting, and final styling.",
+      "Complete home transformation from concept to handover — design, procurement, civil work, execution and styling, fully managed by our team.",
     deliverables: [
       "Complete design development",
       "Project management & scheduling",
@@ -74,7 +74,7 @@ export const SERVICES: Service[] = [
     title: "Project Management (PMC)",
     subtitle: "Execution Only",
     description:
-      "Already have your design ready? We bring it to life. Our PMC service handles pure execution — coordinating contractors, managing timelines, ensuring quality, and delivering on schedule.",
+      "Have your design ready? We execute it end to end — contractor coordination, timelines, quality checks, budget tracking and on-schedule handover.",
     deliverables: [
       "Contractor coordination",
       "Timeline & milestone management",
@@ -91,7 +91,7 @@ export const SERVICES: Service[] = [
     title: "Custom / Bespoke Furniture",
     subtitle: "Luxury Furniture Design",
     description:
-      "One-of-a-kind furniture pieces designed and crafted to your exact specifications. From statement dining tables to custom built-in units — furniture that tells your story.",
+      "One-of-a-kind furniture designed and crafted to your specs — statement tables, seating and built-ins with premium materials and artisan finish.",
     deliverables: [
       "Custom design sketches & 3D models",
       "Premium material sourcing",

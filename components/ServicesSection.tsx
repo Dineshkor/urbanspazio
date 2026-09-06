@@ -5,6 +5,88 @@ import { SERVICES } from '@/lib/site-data';
 import { BRAND } from '@/lib/constants';
 import { ArrowRight } from 'lucide-react';
 
+/* ── Service Card — static concise face, CTA appears over dimmed photo on hover ── */
+function ServiceCard({
+  service,
+  stepNum,
+  imageSrc,
+}: {
+  service: (typeof SERVICES)[0];
+  stepNum: string;
+  imageSrc: string;
+}) {
+  const href =
+    service.cta.action === 'whatsapp'
+      ? `https://wa.me/${BRAND.whatsapp}?text=Hi Urbn Spazio! I want to inquire about ${encodeURIComponent(service.title)}.`
+      : '#contact';
+  const isExternal = service.cta.action === 'whatsapp';
+
+  return (
+    <article className="group bg-[var(--color-paper)] border border-[var(--color-charcoal)]/10 flex flex-col transition-shadow duration-300 motion-reduce:transition-none hover:shadow-[0_24px_60px_-30px_rgba(28,26,24,0.35)]">
+      {/* Static face */}
+      <div className="flex flex-col text-left">
+        <span className="block px-5 pt-5 text-[11px] font-helvetica tracking-[0.25em] text-[var(--color-warm-grey)]">
+          {stepNum}
+        </span>
+        <span className="block px-5 pt-3">
+          <span className="relative block aspect-[4/3] overflow-hidden bg-[var(--color-cream)]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={imageSrc}
+              alt={service.title}
+              loading="lazy"
+              className="w-full h-full object-cover transition-transform duration-700 motion-reduce:transition-none group-hover:scale-105"
+            />
+            {/* Dim on hover */}
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 bg-[var(--color-charcoal)]/0 transition-colors duration-300 motion-reduce:transition-none group-hover:bg-[var(--color-charcoal)]/25"
+            />
+            {/* Overlay CTA — desktop hover / keyboard focus */}
+            <span className="absolute inset-0 hidden sm:flex items-center justify-center opacity-0 transition-opacity duration-300 motion-reduce:transition-none group-hover:opacity-100 group-focus-within:opacity-100">
+              <a
+                href={href}
+                target={isExternal ? '_blank' : '_self'}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
+                className="btn-outline-light text-[10px]"
+              >
+                <span>{service.cta.label}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </span>
+          </span>
+        </span>
+        <span className="block px-5 pt-4 font-serif text-xl text-[var(--color-charcoal)] uppercase tracking-[0.08em] font-semibold">
+          {service.title}
+        </span>
+        <span className="block px-5 pt-1 text-[10px] uppercase tracking-[0.2em] text-gold-metallic font-semibold">
+          {service.subtitle}
+        </span>
+        <span className="block px-5 pt-3 text-xs font-helvetica text-[var(--color-warm-grey)] leading-relaxed font-light">
+          {service.description}
+        </span>
+        <span className="flex flex-wrap gap-2 px-5 py-4">
+          {service.deliverables.slice(0, 3).map((item, i) => (
+            <span key={i} className="px-3 py-1 bg-[var(--color-cream)] text-[10px] font-helvetica text-[var(--color-charcoal)] tracking-wide">
+              {item}
+            </span>
+          ))}
+        </span>
+        {/* Mobile fallback — no hover on touch */}
+        <a
+          href={href}
+          target={isExternal ? '_blank' : '_self'}
+          rel={isExternal ? 'noopener noreferrer' : undefined}
+          className="sm:hidden mx-5 mb-5 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-semibold text-[var(--color-brass-dark)] underline underline-offset-4"
+        >
+          <span>{service.cta.label}</span>
+          <ArrowRight className="w-3.5 h-3.5" />
+        </a>
+      </div>
+    </article>
+  );
+}
+
 export default function ServicesSection() {
   const quickConsultation = SERVICES[0]; // Quick Design Consultation (₹999)
   const otherServices = SERVICES.slice(1);
@@ -50,13 +132,13 @@ export default function ServicesSection() {
                 {quickConsultation.subtitle}
               </p>
 
-              <p className="text-xs sm:text-sm font-helvetica text-[var(--color-light-grey)] leading-relaxed mb-8 font-light max-w-lg">
+              <p className="text-xs sm:text-sm font-helvetica text-[var(--color-light-grey)] leading-relaxed mb-8 font-light max-w-lg line-clamp-2">
                 {quickConsultation.description}
               </p>
 
               {/* Deliverables list */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8 w-full border-t border-white/10 pt-6">
-                {quickConsultation.deliverables.map((item, i) => (
+                {quickConsultation.deliverables.slice(0, 3).map((item, i) => (
                   <div key={i} className="flex items-center gap-2.5 text-xs font-helvetica text-[var(--color-light-grey)] font-normal">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brass)] shrink-0" />
                     <span>{item}</span>
@@ -85,11 +167,10 @@ export default function ServicesSection() {
           </div>
         </div>
 
-        {/* ── Core Services 02–05: Spacious Stacked Editorial Rows (Inspired by Audrey) ── */}
-        <div className="space-y-20">
+        {/* ── Core Services 02–05: staggered expandable cards ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 sm:[&>*:nth-child(even)]:mt-12">
           {otherServices.map((service, index) => {
             const stepNum = `0${index + 2}`;
-            const isEven = index % 2 === 1;
 
             // Pick sample images for each service
             const serviceImages: Record<string, string> = {
@@ -102,65 +183,12 @@ export default function ServicesSection() {
             const imageSrc = serviceImages[service.id] || '/images/hero-warm-premium.jpg';
 
             return (
-              <div key={service.id} className="pt-12 border-t border-[var(--color-charcoal)]/15">
-                <div className={`grid grid-cols-1 lg:grid-cols-12 gap-10 items-center ${isEven ? 'lg:flex-row-reverse' : ''}`}>
-                  
-                  {/* Text Column (7 cols) */}
-                  <div className={`lg:col-span-7 flex flex-col items-start text-left ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
-                    <span className="text-4xl sm:text-5xl font-serif text-gold-metallic mb-2 font-light">
-                      {stepNum}
-                    </span>
-
-                    <h3 className="text-2xl sm:text-3xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.08em] mb-2 font-semibold">
-                      {service.title}
-                    </h3>
-
-                    <p className="text-[11px] uppercase tracking-[0.2em] text-gold-metallic font-semibold mb-4">
-                      {service.subtitle}
-                    </p>
-
-                    <p className="text-xs sm:text-sm font-helvetica text-[var(--color-warm-grey)] leading-relaxed mb-6 font-light max-w-lg">
-                      {service.description}
-                    </p>
-
-                    {/* Key Deliverables pills */}
-                    <div className="flex flex-wrap gap-2 mb-8">
-                      {service.deliverables.map((item, i) => (
-                        <span key={i} className="px-3 py-1 bg-[var(--color-cream)] text-[10px] font-helvetica text-[var(--color-charcoal)] tracking-wide">
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-
-                    <a
-                      href={
-                        service.cta.action === 'whatsapp'
-                          ? `https://wa.me/${BRAND.whatsapp}?text=Hi Urbn Spazio! I want to inquire about ${encodeURIComponent(service.title)}.`
-                          : '#contact'
-                      }
-                      target={service.cta.action === 'whatsapp' ? '_blank' : '_self'}
-                      rel={service.cta.action === 'whatsapp' ? 'noopener noreferrer' : undefined}
-                      className="btn-outline text-[10px]"
-                    >
-                      <span>{service.cta.label}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </a>
-                  </div>
-
-                  {/* Offset Photo Column (5 cols) */}
-                  <div className={`lg:col-span-5 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
-                    <div className="aspect-[4/3] sm:aspect-[16/10] overflow-hidden border border-[var(--color-cream)] shadow-xs">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={imageSrc}
-                        alt={service.title}
-                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-103"
-                      />
-                    </div>
-                  </div>
-
-                </div>
-              </div>
+              <ServiceCard
+                key={service.id}
+                service={service}
+                stepNum={stepNum}
+                imageSrc={imageSrc}
+              />
             );
           })}
         </div>
