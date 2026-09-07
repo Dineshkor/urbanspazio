@@ -76,22 +76,14 @@ function PortfolioCard({
   )}`;
 
   return (
-    <motion.a
+    <a
       href={whatsappHref}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 35 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{
-        duration: 0.85,
-        delay: (index % 2) * 0.12,
-        ease: [0.22, 1, 0.36, 1],
-      }}
       className="group flex flex-col cursor-pointer"
       style={{ perspective: '1000px' }}
     >
-      {/* Photo Frame with Aperture Wipe & Magnetic Tilt */}
+      {/* Photo Frame with Magnetic Tilt */}
       <motion.div
         ref={frameRef}
         onMouseMove={handleMouseMove}
@@ -100,37 +92,31 @@ function PortfolioCard({
         style={{
           rotateX: smoothRotateX,
           rotateY: smoothRotateY,
-          transformStyle: 'preserve-3d',
         }}
         className="aspect-[4/3] overflow-hidden bg-[var(--color-cream)] relative mb-4 shadow-[0_16px_40px_-20px_rgba(28,26,24,0.15)] group-hover:shadow-[0_24px_50px_-20px_rgba(28,26,24,0.3)] transition-shadow duration-500"
       >
-        {/* Architectural Aperture Wipe */}
-        <motion.div
-          initial={{ clipPath: reduce ? 'inset(0% 0% 0% 0%)' : 'inset(100% 0% 0% 0%)' }}
-          whileInView={{ clipPath: 'inset(0% 0% 0% 0%)' }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{
-            duration: 1.05,
-            delay: (index % 2) * 0.1,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="w-full h-full"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <motion.img
-            src={item.image}
-            alt={item.title}
-            loading="lazy"
-            initial={{ scale: reduce ? 1 : 1.08 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true, margin: '-60px' }}
+        {/* Architectural Curtain Reveal (Desktop only — guarantees 100% instant image visibility on mobile) */}
+        {!reduce && (
+          <motion.div
+            aria-hidden="true"
+            initial={{ scaleY: 1 }}
+            whileInView={{ scaleY: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{
-              duration: 1.25,
+              duration: 0.85,
+              delay: (index % 2) * 0.1,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="pointer-events-none absolute inset-0 bg-[var(--color-cream)] origin-top z-10 hidden md:block"
           />
-        </motion.div>
+        )}
+
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        />
 
         {/* Ambient darken veil on hover */}
         <div
@@ -175,7 +161,7 @@ function PortfolioCard({
           <ArrowRight className="w-3 h-3" />
         </span>
       </div>
-    </motion.a>
+    </a>
   );
 }
 
