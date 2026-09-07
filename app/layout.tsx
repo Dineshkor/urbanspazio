@@ -102,6 +102,7 @@ export default function RootLayout({
             `,
           }}
         />
+        {/* ── Main Content ── */}
         {children}
       </body>
     </html>
