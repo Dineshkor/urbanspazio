@@ -354,9 +354,9 @@ export default function BrandStorySection() {
             <div className="relative z-10 arch-frame overflow-hidden bg-[var(--color-cream)] shadow-[0_40px_80px_-40px_rgba(28,26,24,0.5)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/brand-story.jpg"
+                src="/images/founder.jpg"
                 alt="Sonali Bachkheti — Founder &amp; Principal Designer"
-                className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full aspect-[3/4] object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
               {/* Inner keyline — single quiet brass line echoing the arch shape */}
               <div

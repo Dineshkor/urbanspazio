@@ -10,11 +10,11 @@ export default function ConsultationSection() {
 
         {/* ── Section Header ── */}
         <div className="flex flex-col items-center text-center mb-16">
-          <span className="font-script text-2xl sm:text-3xl text-[var(--color-brass-light)] mb-2">
-            a focused beginning
+          <span className="text-[10px] uppercase tracking-[0.32em] font-medium text-[var(--color-brass-light)] mb-5">
+            A Focused Beginning
           </span>
-          <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-paper)] uppercase tracking-[0.1em] font-semibold">
-            BOOK CONSULTATION
+          <h2 className="font-bodoni text-4xl sm:text-6xl lg:text-7xl text-[var(--color-paper)] font-normal tracking-tight leading-tight">
+            <span className="lowercase">book consultation</span>
           </h2>
           <div className="w-12 h-[1px] bg-[var(--color-brass)] my-4 opacity-40" />
           <p className="text-[var(--color-light-grey)] max-w-xl mx-auto text-xs sm:text-sm font-helvetica font-light">

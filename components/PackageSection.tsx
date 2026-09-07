@@ -11,11 +11,11 @@ export default function PackageSection() {
         
         {/* ── Section Header ── */}
         <div className="flex flex-col items-center text-center mb-20">
-          <span className="font-script text-2xl sm:text-3xl text-gold-metallic mb-2">
-            investment
+          <span className="text-[10px] uppercase tracking-[0.32em] font-medium text-[var(--color-brass-dark)] mb-5">
+            Investment
           </span>
-          <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] font-semibold">
-            PACKAGES
+          <h2 className="font-bodoni text-4xl sm:text-6xl lg:text-7xl text-[var(--color-charcoal)] font-normal tracking-tight leading-tight">
+            <span className="lowercase">packages</span>
           </h2>
           <div className="w-12 h-[1px] bg-[var(--color-charcoal)] opacity-20 my-4" />
           <p className="max-w-md text-xs sm:text-sm font-helvetica text-[var(--color-warm-grey)] leading-relaxed font-light">

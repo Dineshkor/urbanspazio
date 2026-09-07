@@ -95,13 +95,13 @@ export default function ServicesSection() {
     <section id="services" className="py-24 lg:py-36 bg-[var(--color-linen)] relative overflow-hidden">
       <div className="editorial-shell">
         
-        {/* ── Section Header (Cursive Accent + Serif Heading) ── */}
+        {/* ── Section Header (matches story heading: kicker + Bodoni title) ── */}
         <div className="flex flex-col items-center text-center mb-20">
-          <span className="font-script text-2xl sm:text-3xl text-gold-metallic mb-2">
-            how we can work together
+          <span className="text-[10px] uppercase tracking-[0.32em] font-medium text-[var(--color-brass-dark)] mb-5">
+            How We Can Work Together
           </span>
-          <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] font-semibold">
-            SERVICES
+          <h2 className="font-bodoni text-4xl sm:text-6xl lg:text-7xl text-[var(--color-charcoal)] font-normal tracking-tight leading-tight">
+            <span className="lowercase">our services</span>
           </h2>
           <div className="w-12 h-[1px] bg-[var(--color-brass)] my-4 opacity-40" />
           <p className="max-w-md text-xs sm:text-sm font-helvetica text-[var(--color-warm-grey)] leading-relaxed font-light">

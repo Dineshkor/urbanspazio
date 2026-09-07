@@ -17,11 +17,11 @@ export default function PortfolioSection() {
         
         {/* ── Section Header ── */}
         <div className="flex flex-col items-center text-center mb-16">
-          <span className="font-script text-2xl sm:text-3xl text-gold-metallic mb-2">
-            our recent work
+          <span className="text-[10px] uppercase tracking-[0.32em] font-medium text-[var(--color-brass-dark)] mb-5">
+            Our Recent Work
           </span>
-          <h2 className="text-3xl sm:text-5xl font-serif text-[var(--color-charcoal)] uppercase tracking-[0.1em] font-semibold">
-            SPACES THAT SPEAK
+          <h2 className="font-bodoni text-4xl sm:text-6xl lg:text-7xl text-[var(--color-charcoal)] font-normal tracking-tight leading-tight">
+            <span className="lowercase">spaces that speak</span>
           </h2>
           <div className="w-12 h-[1px] bg-[var(--color-brass)] my-4 opacity-40" />
         </div>
