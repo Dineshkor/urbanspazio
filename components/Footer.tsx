@@ -24,7 +24,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#04101C] text-[var(--color-light-grey)] py-16 border-t border-[var(--color-brass)]/40">
+    <footer className="navbar-glow-scrolled text-[var(--color-light-grey)] py-16 border-t border-[var(--navbar-border)]">
       <div className="editorial-shell flex flex-col items-center text-center">
         
         {/* Official Transparent Monogram Logo Mark */}
