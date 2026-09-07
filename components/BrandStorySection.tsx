@@ -1,24 +1,24 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   motion,
-  useMotionValueEvent,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
+  useMotionValueEvent,
+  useReducedMotion,
   type MotionValue,
 } from 'motion/react';
 import {
   ArrowRight,
-  Award,
   Compass,
   Gem,
   Heart,
   Home,
   Palette,
   Sparkles,
+  ChevronDown,
 } from 'lucide-react';
 import ConsultationModal from '@/components/ConsultationModal';
 
@@ -66,14 +66,6 @@ const MILESTONES = [
   },
   {
     step: '06',
-    year: '2023',
-    title: 'Recognition',
-    description: 'Featured in leading design publications.',
-    icon: Award,
-    stat: { value: '100+', label: 'Projects' },
-  },
-  {
-    step: '07',
     year: '2024',
     title: 'Your Story Begins',
     description: 'Your home could be our next masterpiece.',
@@ -92,153 +84,159 @@ const fadeUp = {
   },
 };
 
-/* ── Luxury Progress Rail — quiet hairline + brass draw, solid tip dot ── */
-function ProgressRail({ progress }: { progress: MotionValue<number> }) {
-  const dotTop = useTransform(progress, (v) => `${v * 100}%`);
-
-  return (
-    <div aria-hidden="true" className="absolute top-0 bottom-0 left-5 lg:left-8 w-px">
-      {/* Base hairline */}
-      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-[var(--color-charcoal)]/10" />
-      {/* Brass progress draws with scroll */}
-      <motion.div
-        className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-[var(--color-brass)]"
-        style={{ scaleY: progress, originY: 0 }}
-      />
-      {/* Solid tip dot — no glow pulse */}
-      <motion.div
-        className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--color-brass)] border border-[var(--color-paper)]"
-        style={{ top: dotTop }}
-      />
-    </div>
-  );
-}
-
-/* ── Editorial Milestone Entry ── */
-function MilestoneEntry({
+/* ── Upward Spiral Card ── */
+function SpiralUpwardCard({
   milestone,
   index,
-  isLast,
-  active,
+  total,
+  smoothProgress,
+  isMobile,
+  reduce,
 }: {
   milestone: (typeof MILESTONES)[0];
   index: number;
-  isLast: boolean;
-  active: boolean;
+  total: number;
+  smoothProgress: MotionValue<number>;
+  isMobile: boolean;
+  reduce: boolean | null;
 }) {
-  const reduce = useReducedMotion();
   const Icon = milestone.icon;
+  const isEven = index % 2 === 0;
+  // Alternate spiral spin: even cards arc left (-1), odd cards arc right (+1)
+  const spinDirection = isEven ? -1 : 1;
+
+  // diff = index - currentScrollIndex
+  const diff = useTransform(smoothProgress, (p) => {
+    const currentIdx = p * (total - 0.2);
+    return index - currentIdx;
+  });
+
+  // Spirals UPWARDS when diff < 0 (user scrolls past it)
+  const y = useTransform(diff, (d) => {
+    if (reduce) return 0;
+    if (d < 0) {
+      const exit = -d;
+      return Math.max(-800, -exit * (isMobile ? 420 : 600));
+    }
+    // Waiting beneath: rests directly in the deck beneath active card
+    return Math.min(10, d * 8);
+  });
+
+  // Lateral spiral arc: ONLY active when exiting upwards
+  const x = useTransform(diff, (d) => {
+    if (reduce) return 0;
+    if (d < 0) {
+      const exit = -d;
+      return Math.min(180, Math.max(-180, spinDirection * exit * (isMobile ? 60 : 100)));
+    }
+    // When active or waiting: perfectly centered (0), NO side displacement!
+    return 0;
+  });
+
+  // Upward spiral spin rotation: ONLY active when exiting upwards
+  const rotate = useTransform(diff, (d) => {
+    if (reduce) return 0;
+    if (d < 0) {
+      const exit = -d;
+      return Math.min(35, Math.max(-35, spinDirection * exit * (isMobile ? 18 : 25)));
+    }
+    // When active: perfectly straight (0), 100% readable!
+    return 0;
+  });
+
+  // Scale: shrink slightly as it flies upwards
+  const scale = useTransform(diff, (d) => {
+    if (reduce) return 1;
+    if (d < 0) {
+      const exit = -d;
+      return Math.max(0.78, 1 - exit * 0.18);
+    }
+    // Waiting card scale
+    return Math.max(0.96, 1 - Math.min(d, 1) * 0.04);
+  });
+
+  // Opacity:
+  // - Exiting cards stay solid opaque while lifting off (exit < 0.35), then dissolve
+  // - Active card and immediate next card are solid (1)
+  // - Cards further in queue are completely hidden (0)
+  const opacity = useTransform(diff, (d) => {
+    if (reduce) {
+      return Math.abs(d) < 0.5 ? 1 : 0;
+    }
+    if (d < 0) {
+      const exit = -d;
+      if (exit < 0.35) return 1;
+      return Math.max(0, 1 - (exit - 0.35) * 2.0);
+    }
+    if (d <= 1.0) return 1;
+    return 0;
+  });
+
+  // Z-INDEX HIERARCHY FIX:
+  // - Exiting cards fly OVER the deck (zIndex: 50), so they NEVER get sliced or covered by waiting cards!
+  // - In-deck cards have strict descending order: index 0 (top) > index 1 > index 2...
+  const zIndex = useTransform(diff, (d) => {
+    if (d < 0) {
+      return 50;
+    }
+    return Math.round(35 - index * 4);
+  });
 
   return (
     <motion.article
-      className={`relative grid gap-6 py-10 sm:py-12 lg:grid-cols-[200px_1fr_190px] lg:gap-12 lg:py-14 lg:items-start border-t border-[var(--color-charcoal)]/10 ${
-        isLast ? 'border-b' : ''
-      }`}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: '-60px' }}
-      variants={{
-        hidden: {},
-        show: { transition: { staggerChildren: reduce ? 0 : 0.1, delayChildren: 0 } },
+      style={{
+        opacity,
+        scale,
+        x,
+        y,
+        rotate,
+        zIndex,
       }}
+      className="absolute inset-0 m-auto w-full max-w-[460px] sm:max-w-[500px] h-[340px] sm:h-[360px] bg-[#FAF7F2] border border-[var(--color-brass)]/50 p-7 sm:p-9 shadow-[0_25px_60px_-15px_rgba(28,26,24,0.2)] flex flex-col justify-between select-none"
     >
-      {/* Diamond marker on the rail — fills brass when ignited */}
-      <span
-        aria-hidden="true"
-        className={`absolute -left-[34px] lg:-left-[54px] top-12 lg:top-16 w-3 h-3 rotate-45 border transition-colors duration-700 ${
-          active
-            ? 'border-[var(--color-brass)] bg-[var(--color-brass)]'
-            : 'border-[var(--color-charcoal)]/20 bg-[var(--color-linen)]'
-        }`}
-      />
+      {/* Header: Year + Chapter Badge + Icon */}
+      <div>
+        <div className="flex items-center justify-between gap-4 mb-4">
+          <div className="flex items-baseline gap-3">
+            <span className="font-bodoni text-4xl sm:text-5xl text-gold-metallic font-normal tabular-nums leading-none">
+              {milestone.year}
+            </span>
+            <span className="px-2.5 py-0.5 bg-[var(--color-brass)]/10 text-[var(--color-brass-dark)] border border-[var(--color-brass)]/30 text-[9px] uppercase tracking-[0.25em] font-semibold">
+              Chapter {milestone.step}
+            </span>
+          </div>
+          <div className="w-10 h-10 rounded-full border border-[var(--color-brass)]/40 bg-[var(--color-brass)]/10 flex items-center justify-center shrink-0">
+            <Icon size={18} strokeWidth={1.3} className="text-[var(--color-brass-dark)]" />
+          </div>
+        </div>
 
-      {/* Left — year as hero */}
-      <motion.div
-        variants={{
-          hidden: { opacity: 0, y: reduce ? 0 : 18 },
-          show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
-        }}
-        className="flex lg:flex-col lg:gap-2 items-baseline lg:items-start gap-4"
-      >
-        <span
-          className={`font-bodoni text-5xl sm:text-6xl lg:text-[4.25rem] leading-none font-normal tabular-nums transition-colors duration-700 ${
-            active ? 'text-gold-metallic' : 'text-[var(--color-charcoal)]/25'
-          }`}
-        >
-          {milestone.year}
-        </span>
-        <span className="text-[10px] uppercase tracking-[0.3em] font-medium text-[var(--color-warm-grey)]">
-          {milestone.step} — Chapter
-        </span>
-      </motion.div>
-
-      {/* Middle — title + narrative */}
-      <motion.div
-        variants={{
-          hidden: { opacity: 0, y: reduce ? 0 : 18 },
-          show: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const, delay: reduce ? 0 : 0.08 },
-          },
-        }}
-        className="max-w-xl"
-      >
-        <h3 className="font-bodoni text-2xl sm:text-3xl lg:text-[2rem] leading-tight text-[var(--color-charcoal)] font-normal">
+        {/* Title */}
+        <h3 className="font-bodoni text-2xl sm:text-3xl text-[var(--color-charcoal)] font-normal mb-2 leading-tight">
           {milestone.title}
         </h3>
-        <div
-          aria-hidden="true"
-          className={`h-px my-4 bg-[var(--color-brass)] transition-all duration-700 ${
-            active ? 'w-10 opacity-60' : 'w-6 opacity-30'
-          }`}
-        />
-        <p className="text-sm sm:text-[15px] font-helvetica text-[var(--color-warm-grey)] leading-relaxed font-light">
+
+        <div className="h-px w-10 bg-[var(--color-brass)] opacity-50 my-3" />
+
+        {/* Narrative Description */}
+        <p className="font-helvetica text-xs sm:text-sm text-[var(--color-warm-grey)] leading-relaxed font-light">
           {milestone.description}
         </p>
-      </motion.div>
+      </div>
 
-      {/* Right — quiet atelier meta */}
-      <motion.div
-        variants={{
-          hidden: { opacity: 0, y: reduce ? 0 : 14 },
-          show: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const, delay: reduce ? 0 : 0.16 },
-          },
-        }}
-        className="flex lg:flex-col lg:items-end lg:text-right items-center gap-4 lg:gap-3"
-      >
-        <div
-          className={`w-9 h-9 rounded-full border flex items-center justify-center shrink-0 transition-colors duration-700 ${
-            active
-              ? 'border-[var(--color-brass)]/50 bg-[var(--color-brass)]/[0.12]'
-              : 'border-[var(--color-brass)]/30 bg-[var(--color-brass)]/[0.07]'
-          }`}
-        >
-          <Icon size={15} strokeWidth={1.25} className="text-[var(--color-brass-dark)]" />
-        </div>
-        <div className="flex lg:flex-col lg:gap-1 items-baseline gap-2">
-          <span className="font-bodoni text-xl leading-none text-[var(--color-charcoal)]/80 tabular-nums">
+      {/* Footer: Stat Value + Chapter Watermark */}
+      <div className="mt-4 pt-4 border-t border-[var(--color-charcoal)]/10 flex items-center justify-between">
+        <div className="flex items-baseline gap-2">
+          <span className="font-bodoni text-xl sm:text-2xl text-[var(--color-charcoal)] tabular-nums">
             {milestone.stat.value}
           </span>
-          <span className="text-[9px] uppercase tracking-[0.24em] text-[var(--color-warm-grey)] font-medium">
+          <span className="text-[9px] uppercase tracking-[0.22em] text-[var(--color-warm-grey)] font-medium">
             {milestone.stat.label}
           </span>
         </div>
-        <span
-          aria-hidden="true"
-          className="hidden lg:block mt-1 font-bodoni-italic text-sm text-[var(--color-charcoal)]/30"
-        >
+        <span className="font-bodoni-italic text-sm text-[var(--color-charcoal)]/40">
           № {milestone.step}
         </span>
-      </motion.div>
-
-      {/* Index for screen readers */}
-      <span className="sr-only">
-        Chapter {index + 1}: {milestone.year} — {milestone.title}
-      </span>
+      </div>
     </motion.article>
   );
 }
@@ -247,109 +245,106 @@ function MilestoneEntry({
 export default function BrandStorySection() {
   const [consultOpen, setConsultOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const rowRefs = useRef<(HTMLElement | null)[]>([]);
-  const [activeIndex, setActiveIndex] = useState(-1);
+  const [activeChapter, setActiveChapter] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const reduce = useReducedMotion();
 
-  /* Scroll-synced progress — shared by rail, dot, and row ignition */
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  /* Scroll-synced progress across the pinned container (420vh scroll length) */
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 0.7', 'end 0.55'],
+    offset: ['start start', 'end end'],
   });
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 90, damping: 24 });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 95,
+    damping: 26,
+    restDelta: 0.001,
+  });
 
   useMotionValueEvent(smoothProgress, 'change', (v) => {
-    if (reduce) {
-      setActiveIndex(MILESTONES.length - 1);
-      return;
-    }
-    const parent = containerRef.current;
-    if (!parent || parent.offsetHeight === 0) return;
-    let idx = -1;
-    rowRefs.current.forEach((el, i) => {
-      if (!el) return;
-      // Ignite once the dot has passed ~55% of the row
-      if (v >= (el.offsetTop + el.offsetHeight * 0.55) / parent.offsetHeight) idx = i;
-    });
-    setActiveIndex((prev) => (prev !== idx ? idx : prev));
+    const idx = Math.min(
+      MILESTONES.length - 1,
+      Math.max(0, Math.round(v * (MILESTONES.length - 1)))
+    );
+    setActiveChapter((prev) => (prev !== idx ? idx : prev));
   });
 
   return (
-    <section
-      id="story"
-      className="py-24 lg:py-36 text-[var(--color-charcoal)] relative overflow-hidden bg-[var(--color-linen)]"
-    >
-      <div className="editorial-shell">
-        <motion.div
-          className="flex flex-col items-center text-center mb-14 lg:mb-20"
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: '-60px' }}
-          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
-        >
-          <motion.span
-            className="text-[10px] uppercase tracking-[0.32em] font-medium text-[var(--color-brass-dark)] mb-5"
-            variants={fadeUp}
-          >
-            Our Journey — 2018 to 2024
-          </motion.span>
-          <motion.h2
-            className="font-bodoni text-4xl sm:text-6xl lg:text-7xl text-[var(--color-charcoal)] font-normal tracking-tight leading-tight flex items-baseline justify-center gap-2 sm:gap-3.5"
-            variants={fadeUp}
-          >
-            <span className="lowercase">the</span>
-            <span className="relative inline-flex flex-col items-center">
-              <span className="text-gold-metallic font-medium uppercase tracking-normal">
-                US
-              </span>
-              <span className="text-[8px] sm:text-[9px] font-sans font-medium uppercase tracking-[0.25em] text-[var(--color-brass-dark)] -mt-1 sm:-mt-1.5 opacity-90">
-                Urbn Spazio
-              </span>
+    <section id="story" className="relative bg-[var(--color-linen)] text-[var(--color-charcoal)]">
+      {/* ── Pinned Spiral Scroll Container ── */}
+      <div ref={containerRef} className="relative h-[420vh]">
+        <div className="sticky top-0 h-screen w-full flex flex-col justify-between items-center overflow-hidden py-8 sm:py-12">
+          
+          {/* Header & Chapter Indicator */}
+          <div className="flex flex-col items-center text-center z-30 px-4 mt-2">
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] font-medium text-[var(--color-brass-dark)] mb-2">
+              Our Journey — 2018 to 2024
             </span>
-            <span className="lowercase">story</span>
-          </motion.h2>
-
-          <motion.div
-            className="w-12 h-[1px] bg-[var(--color-charcoal)] opacity-20 my-4"
-            variants={fadeUp}
-          />
-          <motion.p
-            className="max-w-xl text-xs sm:text-sm font-helvetica text-[var(--color-warm-grey)] leading-relaxed font-light"
-            variants={fadeUp}
-          >
-            Urbn Spazio reflects &ldquo;New Age Spaces&rdquo; designed for a modern, fast-paced world. For US, true luxury is not just visual elegance — it is how calm, welcoming, and mentally peaceful your home makes you feel.
-          </motion.p>
-        </motion.div>
-
-        <div ref={containerRef} className="relative max-w-5xl mx-auto pl-12 lg:pl-20">
-          <ProgressRail progress={smoothProgress} />
-          <div className="flex flex-col">
-            {MILESTONES.map((milestone, index) => (
-              <div
-                key={milestone.step}
-                ref={(el) => {
-                  rowRefs.current[index] = el;
-                }}
-              >
-                <MilestoneEntry
-                  milestone={milestone}
-                  index={index}
-                  isLast={index === MILESTONES.length - 1}
-                  active={reduce ? true : index <= activeIndex}
+            <h2 className="font-bodoni text-3xl sm:text-5xl text-[var(--color-charcoal)] font-normal tracking-tight leading-tight flex items-baseline justify-center gap-2">
+              <span className="lowercase">the</span>
+              <span className="text-gold-metallic font-medium uppercase tracking-normal">US</span>
+              <span className="lowercase">story</span>
+            </h2>
+            <div className="flex items-center gap-1.5 sm:gap-2 mt-4">
+              {MILESTONES.map((m, i) => (
+                <div
+                  key={m.step}
+                  className={`transition-all duration-300 rounded-full ${
+                    i === activeChapter
+                      ? 'w-7 sm:w-9 h-1.5 bg-[var(--color-brass)]'
+                      : i < activeChapter
+                      ? 'w-2 h-1.5 bg-[var(--color-brass)]/40'
+                      : 'w-2 h-1.5 bg-[var(--color-charcoal)]/15'
+                  }`}
                 />
-              </div>
+              ))}
+            </div>
+            <span className="text-[9px] sm:text-[10px] font-helvetica uppercase tracking-[0.25em] text-[var(--color-warm-grey)] mt-2">
+              Chapter {MILESTONES[activeChapter]?.step} of 06 · {MILESTONES[activeChapter]?.year}
+            </span>
+          </div>
+
+          {/* Stage where cards exit spirally upwards one after another */}
+          <div className="relative w-full max-w-lg sm:max-w-xl mx-auto px-4 h-[360px] sm:h-[390px] flex items-center justify-center my-auto">
+            {MILESTONES.map((milestone, idx) => (
+              <SpiralUpwardCard
+                key={milestone.step}
+                milestone={milestone}
+                index={idx}
+                total={MILESTONES.length}
+                smoothProgress={smoothProgress}
+                isMobile={isMobile}
+                reduce={reduce}
+              />
             ))}
           </div>
-        </div>
 
+          {/* Scroll cue prompt */}
+          <div className="flex items-center gap-2 text-[9px] uppercase tracking-[0.25em] text-[var(--color-warm-grey)] opacity-60 z-30 mb-2">
+            <span>Scroll to advance journey</span>
+            <ChevronDown className="w-3 h-3 animate-bounce" />
+          </div>
+
+        </div>
+      </div>
+
+      {/* ── Founder Section: portrait + quote + consultation CTA ── */}
+      <div className="editorial-shell py-24 sm:py-32">
         <motion.div
-          className="mt-20 pt-10 border-t border-[var(--color-charcoal)]/10 flex flex-col items-center text-center"
+          className="pt-12 border-t border-[var(--color-charcoal)]/10 flex flex-col items-center text-center relative z-20"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-40px' }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
         >
-          {/* ── Founder portrait: arch frame with inner brass keyline ── */}
+          {/* Founder portrait: arch frame with inner brass keyline */}
           <motion.div className="group relative w-60 sm:w-72 mx-auto" variants={fadeUp}>
             <div className="relative z-10 arch-frame overflow-hidden bg-[var(--color-cream)] shadow-[0_40px_80px_-40px_rgba(28,26,24,0.5)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -366,7 +361,7 @@ export default function BrandStorySection() {
             </div>
           </motion.div>
 
-          {/* ── Founder caption — centered, editorial ── */}
+          {/* Founder caption — centered, editorial */}
           <motion.div className="mt-7 flex flex-col items-center" variants={fadeUp}>
             <span className="font-bodoni-italic text-2xl sm:text-3xl text-[var(--color-charcoal)] leading-none">
               Sonali Bachkheti
