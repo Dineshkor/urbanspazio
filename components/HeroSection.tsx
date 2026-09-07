@@ -86,7 +86,19 @@ export default function HeroSection() {
       {/* ── Base legibility dim ── */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-black/45 pointer-events-none"
+        className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/60 pointer-events-none"
+      />
+
+      {/* ── Focal Vignette & Text Scrim (Prevents busy wood paneling from overshadowing the text on mobile & desktop) ── */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-transparent pointer-events-none"
+      />
+
+      {/* ── Soft Radial Spotlight behind the brand title on mobile ── */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_35%,rgba(0,0,0,0.65)_0%,rgba(0,0,0,0.2)_65%,transparent_100%)] pointer-events-none sm:hidden"
       />
 
       {/* ── Fluid Inertia Cursor Spotlight ── */}
@@ -108,9 +120,9 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 35 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-bodoni text-4xl sm:text-6xl lg:text-7xl xl:text-8xl text-[var(--color-paper)] uppercase tracking-[0.04em] leading-[1.02] mb-3 font-normal"
+            className="font-bodoni text-4xl sm:text-6xl lg:text-7xl xl:text-8xl text-[var(--color-paper)] uppercase tracking-[0.04em] leading-[1.02] mb-3 font-normal drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]"
           >
-            URBN <span className="text-gold-metallic font-normal">SPAZIO</span>
+            URBN <span className="text-gold-hero font-normal drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">SPAZIO</span>
           </motion.h1>
 
           {/* Cursive Subheading */}
@@ -118,9 +130,9 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="font-script text-lg sm:text-2xl mb-4"
+            className="font-script text-lg sm:text-2xl mb-4 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
           >
-            <span className="text-gold-metallic">defining spaces,</span>{' '}
+            <span className="text-gold-hero font-medium">defining spaces,</span>{' '}
             <span className="text-[var(--color-paper)]">defining lifestyles</span>
           </motion.p>
 

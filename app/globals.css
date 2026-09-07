@@ -202,6 +202,24 @@
   display: inline-block;
 }
 
+/* Luminous High-Contrast Champagne Gold for Hero on Dark/Wood Backdrops */
+.text-gold-hero {
+  background: linear-gradient(
+    135deg,
+    #E8CF94 0%,
+    #FFF4DC 25%,
+    #F0D69A 50%,
+    #FFF9E8 75%,
+    #D4AF5F 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  font-weight: 500;
+}
+
 /* Warm Champagne / Bronze Gold Foil */
 .text-gold-champagne {
   background: linear-gradient(
