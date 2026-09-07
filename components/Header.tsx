@@ -73,20 +73,35 @@ export default function Header() {
         </a>
 
         {/* ── Desktop Nav Links ── */}
-        <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.href;
             return (
               <a
                 key={link.name}
                 href={link.href}
-                className={`text-[10px] xl:text-[11px] font-medium tracking-[0.16em] uppercase transition-all duration-200 whitespace-nowrap ${
-                  isActive
-                    ? 'text-[var(--navbar-text-accent)] border-b-2 border-[var(--navbar-border)] pb-1 font-semibold'
-                    : 'text-[var(--navbar-text)]/85 hover:text-[var(--navbar-text-accent)]'
-                }`}
+                className="relative py-1.5 px-0.5 group inline-flex flex-col items-center justify-center whitespace-nowrap"
               >
-                {link.name}
+                {/* Link Label with subtle micro-lift and color transition */}
+                <span
+                  className={`text-[10px] xl:text-[11px] uppercase tracking-[0.18em] transition-all duration-300 ease-out group-hover:-translate-y-0.5 ${
+                    isActive
+                      ? 'text-[var(--navbar-text-accent)] font-semibold'
+                      : 'text-[var(--navbar-text)]/80 font-medium group-hover:text-[var(--navbar-text-accent)]'
+                  }`}
+                >
+                  {link.name}
+                </span>
+
+                {/* Expanding Architectural Gold Line with Soft Gradient */}
+                <span
+                  aria-hidden="true"
+                  className={`absolute -bottom-1 left-0 right-0 h-[1.5px] rounded-full transition-all duration-300 ease-out origin-center ${
+                    isActive
+                      ? 'scale-x-100 opacity-100 bg-gradient-to-r from-[var(--navbar-accent)]/20 via-[var(--navbar-accent)] to-[var(--navbar-accent)]/20 shadow-[0_0_8px_rgba(192,165,126,0.5)]'
+                      : 'scale-x-0 opacity-0 bg-gradient-to-r from-transparent via-[var(--navbar-accent)] to-transparent group-hover:scale-x-100 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(192,165,126,0.4)]'
+                  }`}
+                />
               </a>
             );
           })}
@@ -96,9 +111,16 @@ export default function Header() {
         <div className="hidden lg:block shrink-0">
           <a
             href="#consultation"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-[var(--navbar-accent)] text-[var(--navbar-accent)] hover:bg-[var(--navbar-bg-dark)] hover:border-[var(--navbar-border)] font-helvetica text-[10px] uppercase tracking-[0.2em] font-semibold transition-all duration-300"
+            className="group relative isolate overflow-hidden inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-[var(--navbar-accent)] text-[var(--navbar-accent)] font-helvetica text-[10px] uppercase tracking-[0.2em] font-semibold transition-all duration-300 hover:border-[var(--navbar-text-accent)] shadow-sm"
           >
-            Book Consultation
+            {/* Elegant upward gold fill on hover */}
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 bg-[var(--navbar-accent)] translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0 -z-10"
+            />
+            <span className="relative z-10 transition-colors duration-300 group-hover:text-[var(--navbar-bg)]">
+              Book Consultation
+            </span>
           </a>
         </div>
 
@@ -114,22 +136,28 @@ export default function Header() {
 
       {/* ── Mobile Navigation Drawer ── */}
       {mobileOpen && (
-        <div className="lg:hidden navbar-glow border-t border-[var(--navbar-border)]/35 px-6 py-8 shadow-2xl">
-          <nav className="flex flex-col space-y-4">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className={`text-xs tracking-[0.2em] uppercase font-medium transition-colors hover:text-[var(--navbar-text-accent)] ${
-                  activeSection === link.href
-                    ? 'text-[var(--navbar-text-accent)]'
-                    : 'text-[var(--navbar-text)]'
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
+        <div className="lg:hidden navbar-glow border-t border-[var(--navbar-border)]/35 px-6 py-6 shadow-2xl">
+          <nav className="flex flex-col space-y-1.5">
+            {NAV_LINKS.map((link) => {
+              const isActive = activeSection === link.href;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={`text-xs tracking-[0.2em] uppercase font-medium transition-all duration-200 py-2.5 px-3 border-l-2 flex items-center justify-between ${
+                    isActive
+                      ? 'text-[var(--navbar-text-accent)] border-[var(--navbar-accent)] bg-[var(--navbar-accent)]/10 font-semibold'
+                      : 'text-[var(--navbar-text)]/85 border-transparent hover:text-[var(--navbar-text-accent)] hover:border-[var(--navbar-accent)]/50 hover:bg-[var(--navbar-accent)]/5'
+                  }`}
+                >
+                  <span>{link.name}</span>
+                  {isActive && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--navbar-accent)] shadow-[0_0_6px_rgba(192,165,126,0.6)]" />
+                  )}
+                </a>
+              );
+            })}
             <div className="pt-4 border-t border-[var(--navbar-border)]/20">
               <a
                 href="#consultation"
