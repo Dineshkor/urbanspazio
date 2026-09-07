@@ -109,12 +109,12 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        {/* ── Featured Service 01: Quick Consultation (Dark Charcoal Contrast Box like Style Coached by Eve) ── */}
+        {/* ── Featured Service 01: Quick Consultation (Dark Charcoal Contrast Box) ── */}
         <div className="mb-24 panel-glow text-[var(--color-paper)] p-8 sm:p-14 border border-[var(--color-brass)]/25 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
-            {/* Left: Text Content (7 cols) */}
-            <div className="lg:col-span-7 flex flex-col items-start text-left">
+          <div className="max-w-2xl">
+
+            {/* Text Content */}
+            <div className="flex flex-col items-start text-left">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-3xl sm:text-4xl font-serif text-gold-metallic-light font-light">
                   01
@@ -150,18 +150,6 @@ export default function ServicesSection() {
                 <span>Book Session for {quickConsultation.price}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
-            </div>
-
-            {/* Right: Single Offset Photo (5 cols) */}
-            <div className="lg:col-span-5 relative">
-              <div className="aspect-[4/5] overflow-hidden border border-white/10 relative">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/projects/signature-kitchen-1.jpg"
-                  alt="Quick Consultation Room"
-                  className="w-full h-full object-cover"
-                />
-              </div>
             </div>
 
           </div>
