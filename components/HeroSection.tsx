@@ -164,11 +164,11 @@ export default function HeroSection() {
           >
             <a
               href="#consultation"
-              className="group/btn inline-flex items-center justify-center gap-[0.6rem] px-[2.25rem] py-[0.85rem] bg-[var(--color-brass)] border border-[var(--color-brass)] text-white font-helvetica text-[11px] font-medium uppercase tracking-[0.2em] transition-all duration-300 hover:bg-[var(--color-brass-dark)] hover:border-[var(--color-brass-dark)] cursor-pointer"
+              className="group/btn inline-flex items-center justify-center gap-[0.65rem] px-[2.25rem] py-[0.85rem] bg-[var(--color-brass)] border border-[var(--color-brass)] text-[#1C1A18] font-helvetica text-[11px] font-semibold uppercase tracking-[0.2em] transition-all duration-300 hover:bg-[#D4B36D] hover:border-[#D4B36D] hover:shadow-[0_8px_25px_rgba(197,162,93,0.35)] cursor-pointer"
             >
               <span>Book Consultation</span>
-              <span className="opacity-75 font-normal">₹999</span>
-              <ArrowRight className="w-3.5 h-3.5 ml-1 transition-transform duration-300 group-hover/btn:translate-x-1" />
+              <span className="text-[#1C1A18]/80 font-medium">₹999</span>
+              <ArrowRight className="w-3.5 h-3.5 ml-0.5 text-[#1C1A18] transition-transform duration-300 group-hover/btn:translate-x-1" />
             </a>
             <a
               href="#portfolio"
