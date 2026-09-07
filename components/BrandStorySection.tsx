@@ -19,6 +19,7 @@ import {
   Palette,
   Sparkles,
   ChevronDown,
+  Quote,
 } from 'lucide-react';
 import ConsultationModal from '@/components/ConsultationModal';
 
@@ -335,59 +336,128 @@ export default function BrandStorySection() {
         </div>
       </div>
 
-      {/* ── Founder Section: portrait + quote + consultation CTA ── */}
-      <div className="editorial-shell py-24 sm:py-32">
-        <motion.div
-          className="pt-12 border-t border-[var(--color-charcoal)]/10 flex flex-col items-center text-center relative z-20"
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: '-40px' }}
-          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
-        >
-          {/* Founder portrait: arch frame with inner brass keyline */}
-          <motion.div className="group relative w-60 sm:w-72 mx-auto" variants={fadeUp}>
-            <div className="relative z-10 arch-frame overflow-hidden bg-[var(--color-cream)] shadow-[0_40px_80px_-40px_rgba(28,26,24,0.5)]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/founder.jpg"
-                alt="Sonali Bachkheti — Founder &amp; Principal Designer"
-                className="w-full aspect-[3/4] object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              />
-              {/* Inner keyline — single quiet brass line echoing the arch shape */}
+      {/* ── Founder Section: 2-Column Luxury Editorial Spread ── */}
+      <div className="editorial-shell py-24 sm:py-36">
+        <div className="pt-16 sm:pt-20 border-t border-[var(--color-charcoal)]/10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            {/* ── Left Column: Architectural Portrait with offset frame & hover motion ── */}
+            <motion.div
+              className="lg:col-span-5 relative group mx-auto w-full max-w-[320px] sm:max-w-[360px] lg:max-w-none"
+              initial={{ opacity: 0, x: -28, y: 16 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {/* Architectural offset backplate frame (responds on hover) */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-2.5 border border-[var(--color-brass)]/50 arch-frame"
+                className="absolute -bottom-4 -right-4 w-full h-full arch-frame border border-[var(--color-brass)]/40 -z-10 transition-transform duration-700 ease-out group-hover:translate-x-2 group-hover:translate-y-2 group-hover:border-[var(--color-brass)]/70"
               />
-            </div>
-          </motion.div>
 
-          {/* Founder caption — centered, editorial */}
-          <motion.div className="mt-7 flex flex-col items-center" variants={fadeUp}>
-            <span className="font-bodoni-italic text-2xl sm:text-3xl text-[var(--color-charcoal)] leading-none">
-              Sonali Bachkheti
-            </span>
-            <span className="mt-3 h-px w-10 bg-[var(--color-brass)] opacity-70" aria-hidden="true" />
-            <span className="mt-2.5 text-[9px] uppercase tracking-[0.32em] text-[var(--color-warm-grey)] font-medium">
-              Founder &amp; Principal Designer
-            </span>
-            <blockquote className="mt-6 max-w-md text-center">
-              <p className="font-serif italic text-sm sm:text-base leading-relaxed text-[var(--color-charcoal)]/85">
-                &ldquo;A home should not impress your guests — it should quiet your mind the moment you walk in.&rdquo;
-              </p>
-            </blockquote>
-          </motion.div>
+              {/* Main portrait arch container */}
+              <div className="relative z-10 arch-frame overflow-hidden bg-[var(--color-cream)] shadow-[0_30px_70px_-25px_rgba(28,26,24,0.35)]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/founder.jpg"
+                  alt="Sonali Bachkheti — Founder &amp; Principal Designer"
+                  className="w-full aspect-[3/4] object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                />
 
-          <motion.div variants={fadeUp}>
-            <button
-              type="button"
-              onClick={() => setConsultOpen(true)}
-              className="btn-filled text-[10px] mt-9 cursor-pointer"
+                {/* Inner architectural brass keyline */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-3 border border-[var(--color-brass)]/45 arch-frame transition-colors duration-500 group-hover:border-[var(--color-brass)]/75"
+                />
+
+                {/* Subtle studio badge overlay */}
+                <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-20 bg-[var(--color-paper)]/95 backdrop-blur-md border border-[var(--color-brass)]/30 px-3 py-1.5 shadow-[0_10px_25px_-5px_rgba(28,26,24,0.15)] flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brass)] animate-pulse" />
+                  <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] text-[var(--color-charcoal)] font-medium">
+                    Urbn Spazio · Studio
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* ── Right Column: Editorial Narrative, Quote & Philosophy ── */}
+            <motion.div
+              className="lg:col-span-7 flex flex-col justify-center text-left"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], staggerChildren: 0.1 }}
             >
-              <span>Begin Your Story</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </motion.div>
-        </motion.div>
+              {/* Section Kicker */}
+              <div className="flex items-center gap-3 mb-3">
+                <span className="h-px w-8 bg-[var(--color-brass)] opacity-80" aria-hidden="true" />
+                <span className="text-[10px] uppercase tracking-[0.32em] font-medium text-[var(--color-brass-dark)]">
+                  Meet The Founder &amp; Principal Designer
+                </span>
+              </div>
+
+              {/* Founder Name & Title */}
+              <h2 className="font-bodoni text-3xl sm:text-4xl lg:text-5xl text-[var(--color-charcoal)] font-normal tracking-tight leading-tight">
+                Sonali Bachkheti
+              </h2>
+              <span className="font-bodoni-italic text-sm sm:text-base text-[var(--color-brass-dark)] mt-1.5">
+                Founder &amp; Principal Designer
+              </span>
+
+              {/* Featured Pull Quote */}
+              <div className="relative mt-7 mb-5 pl-5 sm:pl-6 border-l-2 border-[var(--color-brass)] bg-[var(--color-paper)]/60 py-4 pr-5 sm:pr-6 border border-l-2 border-r-0 border-t-0 border-b-0">
+                <Quote className="w-5 h-5 text-[var(--color-brass)]/50 mb-2 rotate-180" />
+                <blockquote className="font-serif italic text-base sm:text-lg lg:text-xl leading-relaxed text-[var(--color-charcoal)]/90">
+                  &ldquo;A home should not impress your guests — it should quiet your mind the moment you walk in.&rdquo;
+                </blockquote>
+              </div>
+
+              {/* Studio Credentials Strip */}
+              <div className="mt-7 pt-6 border-t border-[var(--color-charcoal)]/10 grid grid-cols-3 gap-4 max-w-lg">
+                <div className="group/stat cursor-default">
+                  <span className="block font-bodoni text-2xl sm:text-3xl text-[var(--color-charcoal)] tabular-nums transition-colors duration-300 group-hover/stat:text-gold-metallic">
+                    100+
+                  </span>
+                  <span className="block text-[9px] uppercase tracking-[0.22em] text-[var(--color-warm-grey)] font-medium mt-1">
+                    Homes Shaped
+                  </span>
+                </div>
+                <div className="group/stat cursor-default">
+                  <span className="block font-bodoni text-2xl sm:text-3xl text-[var(--color-charcoal)] tabular-nums transition-colors duration-300 group-hover/stat:text-gold-metallic">
+                    100%
+                  </span>
+                  <span className="block text-[9px] uppercase tracking-[0.22em] text-[var(--color-warm-grey)] font-medium mt-1">
+                    Custom Artisanal
+                  </span>
+                </div>
+                <div className="group/stat cursor-default">
+                  <span className="block font-bodoni text-2xl sm:text-3xl text-[var(--color-charcoal)] transition-colors duration-300 group-hover/stat:text-gold-metallic">
+                    NCR
+                  </span>
+                  <span className="block text-[9px] uppercase tracking-[0.22em] text-[var(--color-warm-grey)] font-medium mt-1">
+                    &amp; Pan-India
+                  </span>
+                </div>
+              </div>
+
+              {/* Consultation CTA Button */}
+              <div className="mt-8 pt-2 flex flex-col sm:flex-row sm:items-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => setConsultOpen(true)}
+                  className="btn-filled text-[10px] cursor-pointer inline-flex items-center justify-center gap-3 group w-fit"
+                >
+                  <span>Begin Your Story</span>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1.5" />
+                </button>
+                <span className="text-[10px] font-helvetica uppercase tracking-[0.2em] text-[var(--color-warm-grey)] font-light">
+                  ✦ Direct consultation with principal designer
+                </span>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
       </div>
       {consultOpen && <ConsultationModal onClose={() => setConsultOpen(false)} />}
     </section>
